@@ -41,6 +41,10 @@ endorsement, and must not use their logos.
 ## 4. Main screen
 
 Single screen, portrait only, dark high-contrast theme, large touch targets usable with gloves.
+Visual direction: the ChatGPT concept in `design/chatgpt/design_v1.png` (blue / purple / amber
+palette); interaction detail and sizes: the Claude Design prototype in `design/claude-handoff/`
+(START/STOP 160 dp tall, 30-tick ring, GET READY zone, breath marks, SWITCH RESCUER banner).
+Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 
 ```
 ┌──────────────────────────────┐
@@ -65,6 +69,9 @@ Single screen, portrait only, dark high-contrast theme, large touch targets usab
 
 - START begins the metronome immediately with the current on-screen rate and mode and
   starts the countdown. The button becomes STOP.
+- Tapping the beat circle while idle also starts: it is the largest element on screen and the
+  natural target. While running, the circle is inert; only the STOP button stops, so a stray
+  touch during CPR cannot silence the metronome.
 - STOP silences everything, resets the counter and the countdown.
 - While running, the screen does not turn off (`FLAG_KEEP_SCREEN_ON`).
 - Leaving the app (Home, lock button, incoming call) stops the metronome. No foreground
@@ -95,11 +102,15 @@ Single screen, portrait only, dark high-contrast theme, large touch targets usab
 - No sound is attached to the countdown. The only sounds in the app are the metronome
   clicks and the 30:2 breath cues.
 
-### 5.5 Session vs. settings
+### 5.5 Settings persist, main-screen taps do not
 
-- Every START uses the defaults stored in Settings.
-- Rate, mode and countdown changed on the main screen apply to the current session only
-  and are not persisted.
+- Settings are stored permanently on the device. The user configures the app once (rate,
+  countdown, breath pause, auto volume) and every later launch starts with exactly those values.
+  Nothing has to be re-selected at launch.
+- Rate and mode buttons on the main screen are a per-session override: they take effect at
+  once and last until STOP. They never change the stored Settings, so an accidental tap during
+  CPR cannot alter the next launch.
+- README explains this distinction to users in one paragraph.
 
 ### 5.6 Sound
 
@@ -188,7 +199,73 @@ Package `dev.alcini.cprbeat`:
 - Repository files: `README.md`, `LICENSE`, `SPEC.md`, `THIRD_PARTY_NOTICES.md`,
   `.github/workflows/build.yml`.
 
-## 11. Decision log
+## 11. Publishing requirements (verified 2026-10-06)
+
+Findings of the license and store-policy audit. None of them blocks a free release; all are
+process or wording requirements.
+
+### 11.1 Licenses
+
+- Everything compiled into the APK is permissively licensed: Kotlin stdlib and
+  kotlinx-coroutines (Apache-2.0; the stdlib embeds small BSD-3-Clause and Boost-licensed
+  parts), AndroidX core / activity / lifecycle / datastore, Jetpack Compose, Material 3 and
+  Material Icons (Apache-2.0), and `androidx.datastore:datastore-preferences-external-protobuf`
+  (BSD-3-Clause, a repackaged protobuf-lite pulled in by DataStore).
+- Apache-2.0 section 4(a) requires giving APK recipients a copy of the license:
+  `THIRD_PARTY_NOTICES.md` in the repo and the same text in the in-app "Third-party licenses"
+  screen. None of the shipped artifacts carries a NOTICE file, so no NOTICE propagation is due.
+- Build-only tools (Gradle, AGP, Kotlin compiler, OpenJDK 17, Homebrew, gh) leave nothing in the
+  APK and impose nothing on it. The Android SDK license is royalty-free, Google claims no rights
+  in apps built with it, and the SDK itself must never be committed or redistributed.
+- Only stable SDK packages may be used for builds: anything under the preview license forbids
+  shipping apps built with it.
+- MIT for the app is compatible with all of the above.
+
+### 11.2 Google Play
+
+- Health Content and Services policy applies. Complete the Health apps declaration and declare
+  "Emergency and First Aid"; do not declare "Medical Device Apps".
+- Store description must say the app is not a medical device and does not diagnose, treat,
+  cure or prevent any condition, and must tell users to consult a healthcare professional.
+  No outcome claims ("saves lives", "improves survival") and no compression-measurement claims.
+- Privacy policy is mandatory even with zero data collection: a public HTML page (GitHub
+  Pages) plus a link or text inside the app. Data safety form: "no data collected or shared".
+- Target API: apps submitted after 2026-08-31 must target API 36 or higher. We target 36.
+- Personal developer account: one-time US$25 fee, government-ID verification, and a closed
+  test with at least 12 testers opted in for 14 consecutive days before production access.
+  Google shows the account holder's legal name, country and developer e-mail publicly.
+- An organization account needs a D-U-N-S number.
+
+### 11.3 F-Droid
+
+- Eligible: MIT app, Apache/BSD dependencies from Google Maven and Maven Central, Android SDK
+  builds are explicitly allowed. No Play Services, Firebase, ads or analytics, ever.
+- Add `fastlane/metadata/android/en-US` (title, descriptions, icon, screenshots) and tag
+  releases with versionCode/versionName bumps in the tagged commit.
+- Aim for reproducible builds: pinned tool versions, deterministic R8, no baseline-profile
+  generation.
+
+### 11.4 Brand and trademarks
+
+- Quoting the 100–120 per minute rate and naming AHA/ERC as the source is factual, nominative
+  use. Required wording in README, listing and About: "CPR Beat is an independent open-source
+  project. It is not affiliated with, sponsored by, or endorsed by the American Heart
+  Association or the European Resuscitation Council."
+- Never use AHA/ERC logos, course artwork, the phrase "AHA-approved" or the AHA slogan
+  "Be the Beat"; keep AHA/ERC out of the title, icon, package name and store keywords.
+- No exact "CPR Beat" mark was found on Google Play, the App Store, or in the TMview
+  aggregate (USPTO/EUIPO/WIPO), but the register check could not be repeated by an independent
+  verifier. A live US mark "ONE BEAT CPR" exists for CPR training services. Mitigation: present
+  the app as software, never as training, avoid "One Beat" wording, and make the icon
+  distinctive rather than a generic heart-with-pulse-line.
+
+### 11.5 GitHub
+
+- Public repositories get free Actions minutes; private ones get 2,000 minutes and 500 MB of
+  artifact storage per month. Releases can host the signed APK, SHA-256 sums and changelog.
+- Keep the signing keystore and passwords out of the repository.
+
+## 12. Decision log
 
 | Date | Decision | Why |
 |---|---|---|
@@ -205,3 +282,7 @@ Package `dev.alcini.cprbeat`:
 | 2026-10-06 | compileSdk 37, targetSdk stays 36 | Compose 1.12 / core 1.19 / lifecycle 2.11 require API 37 to compile; behaviour is still defined by targetSdk 36 (Android 16) |
 | 2026-10-06 | Only stable SDK packages; preview tokens removed | Packages under `android-sdk-preview-license` forbid shipping apps built with them |
 | 2026-10-06 | AGP 9.4.1 with built-in Kotlin, Gradle 9.7.1, JDK 17 | Latest stable set that runs on JDK 17; Gradle 9.7.x is inside Kotlin 2.4.20's tested range |
+| 2026-10-06 | Visuals from the ChatGPT concept, behaviour and sizes from the Claude Design prototype | Owner preference; the Claude prototype encodes shape-based state changes and a 160 dp START |
+| 2026-10-06 | System font only, no bundled font | Smaller APK, no font-loading risk on odd devices |
+| 2026-10-06 | Main-screen rate/mode taps are per session; Settings are the persistent defaults | Settings persist so nothing is re-selected at launch; a stray tap during CPR must not change the next launch |
+| 2026-10-06 | Beat circle starts the metronome when idle; only STOP stops | Biggest target on screen gets tapped first; accidental stop during CPR must be impossible |
