@@ -78,7 +78,7 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
   layout: the same spot is the pulsing beat indicator; a smaller outlined red STOP (64 dp high,
   about 220 dp wide) sits under it; under STOP a single line shows `CPR mm:ss · started HH:MM`.
 - Beat pulse: on every click the disk flashes amber and squeezes to 93 % for 240 ms while a ring
-  expands and fades. At 120 bpm that is 2 Hz, within the 3 Hz limit of 5.7.
+  expands and fades. At 120 bpm that is 2 Hz, within the 3 Hz limit of 5.8.
 - While running, the screen does not turn off (`FLAG_KEEP_SCREEN_ON`).
 - Leaving the app (Home, lock button, incoming call) stops the metronome. No foreground
   service in 0.1.0.
@@ -105,7 +105,11 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 ### 5.4 Rescuer-switch countdown
 
 - Counts down from the default set in Settings. Options: Off, 1, 2, 3, 5 minutes.
-  Factory default 2 minutes.
+  Factory default 2 minutes. With Off, the digits are replaced by the word OFF; the block keeps
+  its place so the layout never shifts.
+- Tapping the countdown block cycles Off → 1 → 2 → 3 → 5 → Off. This is a per-session override
+  like rate and mode (section 5.5). While running, the new value applies at once and the
+  countdown restarts from it.
 - At 00:00: one single screen flash (about 300 ms), the banner **SWITCH RESCUER** is shown
   for 10 seconds, and the countdown restarts immediately. The metronome is not affected.
 - No sound is attached to the countdown. The only sounds in the app are the metronome
@@ -116,7 +120,7 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 - Settings are stored permanently on the device. The user configures the app once (rate,
   countdown, breath pause, auto volume) and every later launch starts with exactly those values.
   Nothing has to be re-selected at launch.
-- Rate and mode buttons on the main screen are a per-session override: they take effect at
+- Rate and mode buttons and the countdown tap on the main screen are a per-session override: they take effect at
   once and last until STOP. They never change the stored Settings, so an accidental tap during
   CPR cannot alter the next launch.
 - README explains this distinction to users in one paragraph.
@@ -133,7 +137,17 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
   `AudioTrack`. Zero drift, sample-accurate. The buffer is regenerated on rate change.
   Handler- or coroutine-driven scheduling is not acceptable for the beat itself.
 
-### 5.7 Visual safety
+### 5.7 First-launch hints
+
+- On the very first launch the main screen shows three short on-screen labels with pointers:
+  "Tap to start" at the circle, "Tap to change the switch interval" at the countdown, and
+  "Compression rate" at the rate buttons.
+- They never block anything: START and every other control work underneath them. Any tap, or
+  the first START, dismisses them for good (flag stored in Settings).
+- About contains a short "How to use" section with the same information for later reading.
+- No modal onboarding, no multi-step wizard: the first launch may be the emergency itself.
+
+### 5.8 Visual safety
 
 - The beat indicator is a smooth pulse animation, not a strobe.
 - Nothing on screen flashes faster than 3 Hz. The countdown expiry is a single flash.
@@ -312,3 +326,5 @@ process or wording requirements.
 | 2026-10-06 | Warning zone = last 5 compressions: five solid-red ticks, red outline, label GET READY only | Owner: the rescuer must see "five left before breaths"; the zone lasts a couple of seconds, so no counting text |
 | 2026-10-06 | Mock variants A (idle START circle) and B (outlined STOP) accepted as final layout | Owner decision |
 | 2026-10-06 | Launcher icon v2 (heart + monitor-style pulse line, amber/black/white) | Owner choice; reads best at 32 px among four candidates |
+| 2026-10-07 | Countdown Off shows OFF in place; tapping the countdown cycles Off/1/2/3/5 per session | Layout must never shift; quick change without opening Settings |
+| 2026-10-07 | First-launch hints as non-blocking on-screen labels, dismissed by any tap; "How to use" in About | Owner: hidden taps need a tutorial; a modal would stand between the user and START in an emergency |
