@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Launcher icon foreground (variant v2, see design/icon/): black heart, white pulse line. -->
+<!-- Themed-icon layer: the system recolors this silhouette; only its alpha matters. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
     <path
-        android:fillColor="#FF1A1300"
+        android:fillColor="#FF000000"
         android:pathData="M54,80 C54,80 26,63 26,44 C26,35.5 32.5,29 40.5,29 C46,29 51.2,32.3 54,37.5 C56.8,32.3 62,29 67.5,29 C75.5,29 82,35.5 82,44 C82,63 54,80 54,80 Z" />
     <path
-        android:strokeColor="#FFFFFFFF"
+        android:strokeColor="#FF000000"
         android:strokeWidth="5"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"

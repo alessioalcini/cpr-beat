@@ -54,10 +54,11 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 │                              │
 │ [ Compressions ] [  30:2  ]  │  ← mode selector
 │                              │
-│          ●                   │  ← beat pulse (and 1…30 counter in 30:2)
-│      ┌────────┐              │
-│      │ START  │              │  ← start / stop
-│      └────────┘              │
+│        ╭──────╮              │  ← idle: big amber START circle
+│        │ START│              │     running: pulsing beat disk
+│        ╰──────╯              │     (1…30 counter in 30:2)
+│        ( STOP )              │  ← running only: outlined red STOP
+│   CPR 04:12 · started 14:32  │  ← running/after stop: elapsed + start time
 │                              │
 │ [ 100 ]  [ 110 ]  [ 120 ]    │  ← rate selector, default highlighted
 └──────────────────────────────┘
@@ -69,10 +70,15 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 
 - START begins the metronome immediately with the current on-screen rate and mode and
   starts the countdown. The button becomes STOP.
-- Tapping the beat circle while idle also starts: it is the largest element on screen and the
-  natural target. While running, the circle is inert; only the STOP button stops, so a stray
-  touch during CPR cannot silence the metronome.
-- STOP silences everything, resets the counter and the countdown.
+- While running the circle is inert; only the STOP button stops, so a stray touch during CPR
+  cannot silence the metronome.
+- STOP silences everything, resets the counter and the countdown. The CPR elapsed time and the
+  START clock time stay on screen until the next START (handover to paramedics).
+- Idle layout: the beat circle itself is one large amber START button (about 300 dp). Running
+  layout: the same spot is the pulsing beat indicator; a smaller outlined red STOP (64 dp high,
+  about 220 dp wide) sits under it; under STOP a single line shows `CPR mm:ss · started HH:MM`.
+- Beat pulse: on every click the disk flashes amber and squeezes to 93 % for 240 ms while a ring
+  expands and fades. At 120 bpm that is 2 Hz, within the 3 Hz limit of 5.7.
 - While running, the screen does not turn off (`FLAG_KEEP_SCREEN_ON`).
 - Leaving the app (Home, lock button, incoming call) stops the metronome. No foreground
   service in 0.1.0.
@@ -86,8 +92,11 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 
 - **Compressions only** (hands-only CPR). Continuous clicks. Factory default.
 - **30:2.** Clicks 1–30, then a breath pause, then clicks 1–30 again.
-  - A large counter shows the current compression number 1…30.
-  - Clicks 26–30 use a higher pitch to warn that the pause is coming.
+  - A large counter shows the current compression number 1…30 inside the disk, with a ring of
+    30 ticks around it that fill as compressions are counted.
+  - The last five compressions (26–30) are the warning zone: their five ticks are longer and
+    one solid red from the start of the cycle, the disk outline and the label "GET READY" turn
+    red while in the zone, and the clicks use a higher pitch.
   - Breath pause length: default 5 s, adjustable 3–8 s in Settings. Within the pause:
     a long "breath" tone at 0.5 s, a second long "breath" tone at 2.0 s, a short "resume"
     tone 0.5 s before the pause ends, then click 1 at the end of the pause.
@@ -137,10 +146,21 @@ Opened via the gear icon. Items:
 2. Default countdown: Off / 1 / 2 / 3 / 5 min (factory 2).
 3. Breath pause in 30:2: 3–8 s (factory 5).
 4. Auto max volume: on / off (factory on).
-5. About: app version, MIT license, third-party notices (Apache-2.0 NOTICE texts),
-   disclaimer ("pacing aid, not training or medical advice; call emergency services").
+5. About: app version, MIT license, disclaimer ("pacing aid, not training or medical advice;
+   call emergency services first"), the affiliation disclaimer from section 11.4, a link to the
+   source repository, and the third-party licenses as an expandable section inside About
+   (text shipped in assets from `THIRD_PARTY_NOTICES.md`). No separate licenses screen:
+   the app has three screens, Main, Settings, About.
 
 Storage: AndroidX DataStore Preferences.
+
+### 6.1 Launcher icon
+
+Adaptive icon, variant v2 chosen on 2026-10-06: amber background (`#FFC233`), black heart
+(`#1A1300`), white pulse line that runs beyond the heart like a monitor trace. Source SVGs and
+the launcher-mask preview are in `design/icon/`; the vector drawables live in `app/src/main/res`.
+Monochrome layer reuses the foreground. Must stay distinctive enough not to resemble the
+"One Beat CPR" training brand (section 11.4).
 
 ## 7. Out of scope for 0.1.0 (backlog)
 
@@ -150,6 +170,8 @@ Storage: AndroidX DataStore Preferences.
 - Voice prompts; emergency call button (112/911 by locale); home-screen widget and
   Quick Settings tile; Wear OS; Russian and Italian localization; signed release builds
   and store listings (Google Play, F-Droid).
+- Light theme or a theme switch. 0.1.0 is dark only by design (contrast outdoors, no
+  surprises in an emergency); dynamic (Material You) colors are disabled for the same reason.
 
 ## 8. Technical stack
 
@@ -286,3 +308,7 @@ process or wording requirements.
 | 2026-10-06 | System font only, no bundled font | Smaller APK, no font-loading risk on odd devices |
 | 2026-10-06 | Main-screen rate/mode taps are per session; Settings are the persistent defaults | Settings persist so nothing is re-selected at launch; a stray tap during CPR must not change the next launch |
 | 2026-10-06 | Beat circle starts the metronome when idle; only STOP stops | Biggest target on screen gets tapped first; accidental stop during CPR must be impossible |
+| 2026-10-06 | Idle: circle is the START button; running: pulsing disk + small outlined STOP; CPR elapsed time and START clock time under STOP, kept after STOP | Owner: STOP too loud, circle must be the tap target; elapsed and start time are what paramedics ask at handover |
+| 2026-10-06 | Warning zone = last 5 compressions: five solid-red ticks, red outline, label GET READY only | Owner: the rescuer must see "five left before breaths"; the zone lasts a couple of seconds, so no counting text |
+| 2026-10-06 | Mock variants A (idle START circle) and B (outlined STOP) accepted as final layout | Owner decision |
+| 2026-10-06 | Launcher icon v2 (heart + monitor-style pulse line, amber/black/white) | Owner choice; reads best at 32 px among four candidates |
