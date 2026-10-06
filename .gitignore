@@ -16,3 +16,7 @@ local.properties
 
 # OS
 .DS_Store
+
+# Design sources that are not ours to redistribute (Claude Design runtime, ChatGPT concept)
+design/claude-handoff/
+design/chatgpt/

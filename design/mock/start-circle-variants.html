@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CPR Beat — START circle variants</title>
+<style>
+  body { margin: 0; background: #141518; color: #F5F6F7; font-family: system-ui, Roboto, sans-serif; padding: 40px; }
+  h1 { font-size: 28px; margin: 0 0 6px; }
+  p.lead { color: #A9AEB7; margin: 0 0 32px; max-width: 900px; line-height: 1.5; }
+  .row { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+  .col { width: 412px; }
+  .cap { font-weight: 700; margin: 0 0 10px; }
+  .note { color: #A9AEB7; font-size: 14px; line-height: 1.5; margin-top: 10px; }
+  .phone { width: 412px; height: 915px; background: #0A0B0D; border-radius: 32px; box-shadow: 0 0 0 1px #2C2F35, 0 24px 60px rgba(0,0,0,.5);
+           display: flex; flex-direction: column; box-sizing: border-box; padding: 0 24px 16px; font-variant-numeric: tabular-nums; }
+  .status { height: 40px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; font-weight: 600; margin: 0 4px; }
+  .timer { position: relative; height: 128px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .timer .lbl { font-size: 15px; font-weight: 700; letter-spacing: .12em; color: #A9AEB7; }
+  .timer .val { font-size: 88px; font-weight: 600; line-height: 1; letter-spacing: -.02em; }
+  .gear { position: absolute; right: -10px; top: 0; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; color: #A9AEB7; font-size: 26px; }
+  .modes { display: grid; grid-template-columns: 1fr 1fr; height: 64px; border: 2px solid #5A606B; border-radius: 32px; overflow: hidden; box-sizing: border-box; }
+  .modes div { display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; }
+  .modes .on { background: #F5F6F7; color: #0A0B0D; }
+  .modes .off { color: #F5F6F7; border-left: 2px solid #5A606B; }
+  .mid { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
+  .bigstart { width: 300px; height: 300px; border-radius: 50%; background: #FFC233; color: #1A1300; display: flex; align-items: center; justify-content: center;
+              font-size: 56px; font-weight: 800; letter-spacing: .08em; box-shadow: 0 0 0 10px rgba(255,194,51,.18); }
+  .beat { position: relative; width: 272px; height: 272px; display: flex; align-items: center; justify-content: center; }
+  .disk { width: 216px; height: 216px; border-radius: 50%; background: #FFC233; border: 4px solid #3A3E46; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .disk.quiet { background: #1B1D21; }
+  .disk .cnt { font-size: 120px; font-weight: 700; line-height: .9; color: #F5F6F7; letter-spacing: -.03em; }
+  .disk .of { font-size: 15px; font-weight: 700; letter-spacing: .12em; color: #A9AEB7; margin-top: 8px; }
+  .halo { position: absolute; inset: 18px; border-radius: 50%; border: 8px solid #FFC233; opacity: .5; }
+  .tick { position: absolute; left: 50%; top: 50%; width: 5px; height: 14px; margin: -7px 0 0 -2.5px; border-radius: 3px; background: #2E3137; }
+  .tick.done { background: #F5F6F7; }
+  .stop-small { height: 64px; width: 220px; border-radius: 32px; border: 2px solid #D32F2F; color: #D32F2F; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 800; letter-spacing: .08em; }
+  .stop-fill { height: 64px; width: 220px; border-radius: 32px; background: #D32F2F; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 800; letter-spacing: .08em; }
+  .rates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .rates div { height: 80px; border-radius: 24px; border: 2px solid #5A606B; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; }
+  .rates div span { font-size: 13px; font-weight: 700; letter-spacing: .12em; margin-top: 4px; }
+  .rates .on { background: #F5F6F7; color: #0A0B0D; border-color: #F5F6F7; }
+  .bar { height: 24px; display: flex; align-items: center; justify-content: center; }
+  .bar div { width: 108px; height: 4px; border-radius: 2px; background: #A9AEB7; }
+  @keyframes beatDisk { 0% { background:#FFC233; transform:scale(.93);} 45% { background:#1B1D21; transform:scale(1);} 100% { background:#1B1D21; transform:scale(1);} }
+  @keyframes beatHalo { 0% { opacity:.9; transform:scale(.95);} 55% { opacity:0; transform:scale(1.12);} 100% { opacity:0; transform:scale(1.12);} }
+  .disk.live { animation: beatDisk 545ms ease-out infinite; }
+  .halo.live { animation: beatHalo 545ms ease-out infinite; }
+  .elapsed { display:flex; gap:14px; align-items:baseline; justify-content:center; font-size:17px; color:#A9AEB7; font-weight:600; letter-spacing:.02em; }
+  .elapsed b { color:#F5F6F7; font-weight:700; font-size:22px; }
+  .elapsed i { font-style:normal; color:#5A606B; }
+</style>
+</head>
+<body>
+<h1>START circle variants</h1>
+<p class="lead">Idle: one big amber circle is the START button (300 dp). Running: the same spot becomes the pulsing beat indicator, a smaller outlined STOP sits under it, and the CPR elapsed time with the START clock time sits under STOP. Rate buttons and the countdown do not move, so hands know where everything is.</p>
+
+<div class="row">
+  <div class="col">
+    <p class="cap">A · Idle — circle is START</p>
+    <div class="phone">
+      <div class="status"><span>9:41</span><span>▮</span></div>
+      <div class="timer"><div class="lbl">SWITCH IN</div><div class="val">02:00</div><div class="gear">⚙</div></div>
+      <div class="modes"><div class="on">Compressions</div><div class="off">30:2</div></div>
+      <div class="mid"><div class="bigstart">START</div></div>
+      <div class="rates"><div>100<span>BPM</span></div><div class="on">110<span>BPM</span></div><div>120<span>BPM</span></div></div>
+      <div class="bar"><div></div></div>
+    </div>
+    <p class="note">Whole circle is the tap target, 300 dp. Nothing else on screen competes with it.</p>
+  </div>
+
+  <div class="col">
+    <p class="cap">B · Running, compressions (disk pulses at 110 bpm)</p>
+    <div class="phone">
+      <div class="status"><span>9:41</span><span>▮</span></div>
+      <div class="timer"><div class="lbl">SWITCH IN</div><div class="val">01:23</div><div class="gear">⚙</div></div>
+      <div class="modes"><div class="on">Compressions</div><div class="off">30:2</div></div>
+      <div class="mid">
+        <div class="beat"><div class="halo live"></div><div class="disk live"></div></div>
+        <div class="stop-small">STOP</div>
+        <div class="elapsed">CPR <b>04:12</b> <i>·</i> started <b>14:32</b></div>
+      </div>
+      <div class="rates"><div>100<span>BPM</span></div><div class="on">110<span>BPM</span></div><div>120<span>BPM</span></div></div>
+      <div class="bar"><div></div></div>
+    </div>
+    <p class="note">Disk flashes amber and squeezes on every click (240 ms), a ring expands and fades. STOP is 64 × 220 dp, outlined red. Under it: time since START and the clock time of START.</p>
+  </div>
+
+  <div class="col">
+    <p class="cap">C · Running, 30:2 (27 / 30)</p>
+    <div class="phone">
+      <div class="status"><span>9:41</span><span>▮</span></div>
+      <div class="timer"><div class="lbl">SWITCH IN</div><div class="val">01:04</div><div class="gear">⚙</div></div>
+      <div class="modes"><div class="off" style="border-left:0">Compressions</div><div class="on">30:2</div></div>
+      <div class="mid">
+        <div class="beat" id="ring"><div class="disk quiet" style="border-color:#FF3B30"><div class="cnt">27</div><div class="of" style="color:#FF3B30">GET READY</div></div></div>
+        <div class="stop-small">STOP</div>
+        <div class="elapsed">CPR <b>06:48</b> <i>·</i> started <b>14:32</b></div>
+      </div>
+      <div class="rates"><div>100<span>BPM</span></div><div class="on">110<span>BPM</span></div><div>120<span>BPM</span></div></div>
+      <div class="bar"><div></div></div>
+    </div>
+    <p class="note">Same STOP everywhere. Ticks around the disk count 1…30. The last five (26–30) are longer and all one red from the start; disk outline and the GET READY label turn red in that zone, click pitch rises. Elapsed CPR time and clock time of START stay visible after STOP until the next START, for handover to paramedics.</p>
+  </div>
+</div>
+
+<script>
+  // ticks for the 30:2 ring (27 done)
+  const ring = document.getElementById('ring');
+  for (let i = 0; i < 30; i++) {
+    const t = document.createElement('div');
+    t.className = 'tick' + (i < 27 ? ' done' : '');
+    const zone = i >= 25;
+    if (zone) { t.style.width = '8px'; t.style.height = '24px'; t.style.margin = '-12px 0 0 -4px'; t.style.background = '#FF3B30'; }
+    t.style.transform = `rotate(${i * 12 + 6}deg) translateY(-124px)`;
+    ring.appendChild(t);
+  }
+</script>
+</body>
+</html>
