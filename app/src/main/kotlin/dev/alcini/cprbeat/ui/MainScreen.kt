@@ -40,7 +40,11 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.foundation.Canvas
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -234,16 +238,22 @@ private fun lerp(a: Color, b: Color, t: Float) = Color(
 private fun TickRing(position: Position?) {
     val done = when (position) { is Position.Compression -> position.number; is Position.BreathPause -> CycleSpec.COMPRESSIONS_PER_CYCLE; null -> 0 }
     val zoneStart = CycleSpec.COMPRESSIONS_PER_CYCLE - CycleSpec.WARNING_ZONE_SIZE
-    for (i in 0 until CycleSpec.COMPRESSIONS_PER_CYCLE) {
-        val zone = i >= zoneStart
-        val color = when { zone -> CprColor.Warning; i < done -> CprColor.TickDone; else -> CprColor.TickIdle }
-        Box(
-            Modifier
-                .graphicsLayer { rotationZ = i * 12f + 6f; translationY = -124.dp.toPx() }
-                .size(width = if (zone) 8.dp else 5.dp, height = if (zone) 24.dp else 14.dp)
-                .clip(RoundedCornerShape(3.dp))
-                .background(color),
-        )
+    Canvas(Modifier.size(CprSize.BeatArea)) {
+        val radius = 124.dp.toPx()
+        for (i in 0 until CycleSpec.COMPRESSIONS_PER_CYCLE) {
+            val zone = i >= zoneStart
+            val color = when { i >= done -> CprColor.TickIdle; zone -> CprColor.Warning; else -> CprColor.TickDone }
+            val w = (if (zone) 8.dp else 5.dp).toPx()
+            val h = (if (zone) 24.dp else 14.dp).toPx()
+            rotate(degrees = i * 12f + 6f, pivot = center) {
+                drawRoundRect(
+                    color = color,
+                    topLeft = Offset(center.x - w / 2, center.y - radius - h / 2),
+                    size = Size(w, h),
+                    cornerRadius = CornerRadius(3.dp.toPx()),
+                )
+            }
+        }
     }
 }
 

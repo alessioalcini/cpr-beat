@@ -95,7 +95,7 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
   - A large counter shows the current compression number 1…30 inside the disk, with a ring of
     30 ticks around it that fill as compressions are counted.
   - The last five compressions (26–30) are the warning zone: their five ticks are longer and
-    one solid red from the start of the cycle, the disk outline and the label "GET READY" turn
+    turn solid red as each is reached (dim like the others before that), the disk outline and the label "GET READY" turn
     red while in the zone, and the clicks use a higher pitch.
   - Breath pause length: default 5 s, adjustable 3–8 s in Settings. The pause is split into two
     equal halves, one per breath: a "breath" tone opens each half, a short "resume" tone sounds
