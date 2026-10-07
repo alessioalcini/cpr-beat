@@ -28,7 +28,6 @@ class SettingsRepository(context: Context) {
                 .coerceIn(CycleSpec.MIN_BREATH_PAUSE_MILLIS, CycleSpec.MAX_BREATH_PAUSE_MILLIS),
             autoMaxVolume = p[KEY_AUTO_MAX_VOLUME] ?: true,
             tonePreset = p[KEY_TONE_PRESET] ?: Settings().tonePreset,
-            hintsDismissed = p[KEY_HINTS_DISMISSED] ?: false,
         )
     }
 
@@ -37,7 +36,6 @@ class SettingsRepository(context: Context) {
     suspend fun setBreathPauseMillis(millis: Int) = store.edit { it[KEY_BREATH_PAUSE_MS] = millis }
     suspend fun setAutoMaxVolume(on: Boolean) = store.edit { it[KEY_AUTO_MAX_VOLUME] = on }
     suspend fun setTonePreset(name: String) = store.edit { it[KEY_TONE_PRESET] = name }
-    suspend fun setHintsDismissed() = store.edit { it[KEY_HINTS_DISMISSED] = true }
 
     private companion object {
         val KEY_BPM = intPreferencesKey("default_bpm")
@@ -45,6 +43,5 @@ class SettingsRepository(context: Context) {
         val KEY_BREATH_PAUSE_MS = intPreferencesKey("breath_pause_millis")
         val KEY_AUTO_MAX_VOLUME = booleanPreferencesKey("auto_max_volume")
         val KEY_TONE_PRESET = stringPreferencesKey("tone_preset")
-        val KEY_HINTS_DISMISSED = booleanPreferencesKey("hints_dismissed")
     }
 }

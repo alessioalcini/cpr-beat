@@ -15,9 +15,7 @@
     <string name="cpr_elapsed">CPR</string>
     <string name="started_at">started</string>
     <string name="volume_low">Volume is low — turn it up</string>
-    <string name="hint_start">Tap to start</string>
-    <string name="hint_countdown">Tap to change the switch interval</string>
-    <string name="hint_rate">Compression rate</string>
+    <string name="main_disclaimer">Pacing aid, not a medical device.\nIn an emergency, call your local emergency number first.</string>
     <string name="settings">Settings</string>
     <string name="back">Back</string>
     <string name="default_rate">DEFAULT RATE · BPM</string>

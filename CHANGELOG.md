@@ -10,6 +10,8 @@ matching entry at release time.
 
 ### Added
 
+- The main screen shows a short note under the rate buttons: pacing aid, not a medical device,
+  call the emergency number first. It stays visible while the metronome runs.
 - About shows a privacy statement (no data collected, no internet permission), a link to
   the privacy policy and the developer's contact e-mail.
 
@@ -22,6 +24,18 @@ matching entry at release time.
   the 100–120 per minute rate is unchanged.
 - License: GPL-3.0-or-later instead of MIT. About shows the copyright, the no-warranty notice
   and a link to the license; the name and icon are reserved (README, section 7 terms).
+
+### Fixed
+
+- Nothing on the main screen moves on START or STOP any more: the mode buttons used to jump up
+  and the CPR time line down. START turns into the beat indicator in place.
+- The main screen fits short screens: old 16:9 phones, a larger display size or font, a
+  three-button navigation bar. The circle shrinks instead of squashing the rate buttons or
+  pushing the disclaimer off screen; on very small screens the screen scrolls.
+
+### Removed
+
+- The yellow first-launch hints on the main screen. "How to use" in About stays.
 
 ## [0.1.0] - 2026-10-06
 

@@ -78,6 +78,18 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 - Idle layout: the beat circle itself is one large amber START button (about 300 dp). Running
   layout: the same spot is the pulsing beat indicator; a smaller outlined red STOP (64 dp high,
   about 220 dp wide) sits under it; under STOP a single line shows `CPR mm:ss · started HH:MM`.
+- Fixed slots: the circle, the STOP slot under it and the handover line keep their places in
+  both states. START turns into the beat indicator in place, STOP appears in a slot left empty
+  while stopped, so nothing on screen moves on START or STOP.
+- Short screens: the START circle and the beat indicator (with the text inside them) shrink to
+  fit the free height and width, down to 55 % of their size. Everything else keeps its size:
+  countdown, mode selector, rate buttons, STOP, the handover line and the disclaimer. On ordinary
+  phones nothing changes. If even 55 % does not fit (720p, split screen), the screen scrolls.
+  Short means old 16:9 phones and any phone with a larger display size, larger font or a
+  three-button navigation bar.
+- Under the rate buttons a small muted two-line note reads "Pacing aid, not a medical device. In
+  an emergency, call your local emergency number first." It stays on screen while running too:
+  a rescuer who joins mid-CPR sees it as well.
 - Beat pulse: on every click the disk flashes amber and squeezes to 93 % for 240 ms while a ring
   expands and fades. At 120 bpm that is 2 Hz, within the 3 Hz limit of 5.8.
 - While running, the screen does not turn off (`FLAG_KEEP_SCREEN_ON`).
@@ -144,14 +156,12 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
   `AudioTrack`. Zero drift, sample-accurate. The buffer is regenerated on rate change.
   Handler- or coroutine-driven scheduling is not acceptable for the beat itself.
 
-### 5.7 First-launch hints
+### 5.7 First-launch hints (removed 2026-10-07)
 
-- On the very first launch the main screen shows three short on-screen labels with pointers:
-  "Tap to start" at the circle, "Tap to change the switch interval" at the countdown, and
-  "Compression rate" at the rate buttons.
-- They never block anything: START and every other control work underneath them. Any tap, or
-  the first START, dismisses them for good (flag stored in Settings).
-- About contains a short "How to use" section with the same information for later reading.
+- 0.1.0 showed three yellow labels on the first launch ("Tap to start", "Tap to change the
+  switch interval", "Compression rate"). Removed in 0.2.0: the owner finds the screen obvious
+  without them, and the closed test will show whether that holds. A fuller tutorial is issue #3.
+- About keeps the short "How to use" section.
 - No modal onboarding, no multi-step wizard: the first launch may be the emergency itself.
 
 ### 5.8 Visual safety
@@ -361,5 +371,9 @@ process or wording requirements.
 | 2026-10-07 | Click timbre is a setting (Clean 1000 default; Wood 880, Low 660) | All three passed the phone listening test; owner wants the choice persistent |
 | 2026-10-07 | Mode/rate switch: build the new track first, read the playback position last | Review measured 30–200 ms of rendering and allocation between reading the position and starting the new track, which shifted the beat grid on every Compressions → 30:2 switch |
 | 2026-10-07 | Release signing: PKCS12 keystore outside the repo (`~/.cprbeat/release.jks`), `keystore.properties` git-ignored, same key for every store; Play App Signing on top | One certificate for RuStore, Galaxy Store and AppGallery; losing the key would orphan the app id |
+| 2026-10-07 | Disclaimer line under the rate buttons on the main screen, always visible, running too | Owner chose it from four emulator mockups: the About-only disclaimer was easy to miss; a hint line shows once, an OK card hides the rate buttons, a modal blocks START. Kept while running because rescuers who take over mid-CPR never saw the start screen |
+| 2026-10-07 | Circle and beat indicator shrink to fit short screens (down to 55 %), screen scrolls below that | Emulator check: at 16:9, with a larger display size and at 720p the running screen squashed the rate buttons and hid the disclaimer, already in 0.1.0. Smaller fixed sizes (260, 220 dp) still failed somewhere and shrank the circle on ordinary phones for nothing |
+| 2026-10-07 | Idle and running share one layout with fixed slots for the circle, STOP and the handover line | Owner: on START the mode buttons jumped up and the handover line down (since 0.1.0); a moving control during CPR invites a missed tap. Cost: an empty STOP slot under START while stopped |
+| 2026-10-07 | First-launch hints removed | Owner: the screen is obvious without them and they get in the way; the closed test will tell. The "Tap to change the switch interval" label was also clipped on 1080×2400 screens |
 | 2026-10-07 | License MIT → GPL-3.0-or-later; section 7 terms reserve the name and icon | Owner: no closed paid clones, the app stays free. GPL keeps it open source and F-Droid-eligible and forces any clone to publish its source, which rules out closed paid or ad-SDK clones; non-commercial licenses were rejected as not open source |
 | 2026-10-07 | Privacy policy on GitHub Pages (`docs/privacy/`, https://alessioalcini.github.io/cpr-beat/privacy/); About carries the statement, the link and the contact e-mail | Play Health apps policy wants policy text or link in the app; AppGallery 7.1 and 11.2 want an in-app privacy link and contact information |

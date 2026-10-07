@@ -12,7 +12,6 @@ data class Settings(
     val breathPauseMillis: Int = CycleSpec.DEFAULT_BREATH_PAUSE_MILLIS,
     val autoMaxVolume: Boolean = true,
     val tonePreset: String = ToneBank.DEFAULT.name,
-    val hintsDismissed: Boolean = false,
 ) {
     val toneBank: ToneBank get() = ToneBank.byName(tonePreset)
 }

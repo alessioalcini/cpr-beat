@@ -26,8 +26,6 @@ data class SessionState(
     val startedAtEpochMillis: Long? = null,
     /** Alarm volume is low and auto-max is off: show the volume warning. */
     val volumeLow: Boolean = false,
-    /** Hints for the first launch are still to be shown. */
-    val showHints: Boolean = false,
 )
 
 /** What the UI reads at frame rate while running; cheap to produce, not part of the state flow. */

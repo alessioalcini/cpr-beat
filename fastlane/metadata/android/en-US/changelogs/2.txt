@@ -1,4 +1,6 @@
 Version 0.2.0
-• The SWITCH RESCUER banner now appears over the countdown for 5 seconds instead of hiding the mode buttons for 10 seconds. Mode can be switched while it is shown.
+• The main screen now carries a short safety note: pacing aid, not a medical device, call emergency services first.
+• The SWITCH RESCUER banner now covers the countdown for 5 seconds and no longer hides the mode buttons.
+• The main screen fits smaller screens and a larger display size or font.
 • About screen now cites the ERC 2025 resuscitation guidelines.
 • About now shows the privacy statement, a privacy policy link and a contact e-mail.

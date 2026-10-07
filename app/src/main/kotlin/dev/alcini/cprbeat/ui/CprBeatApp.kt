@@ -30,7 +30,6 @@ fun CprBeatApp(vm: SessionViewModel) {
             onMode = vm::setMode,
             onCycleCountdown = vm::cycleCountdown,
             onOpenSettings = { screen = Screen.SETTINGS },
-            onAnyTap = { if (state.showHints) vm.dismissHints() },
         )
         Screen.SETTINGS -> SettingsScreen(
             settings = settings,

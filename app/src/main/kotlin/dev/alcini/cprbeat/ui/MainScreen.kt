@@ -9,18 +9,22 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
@@ -45,8 +49,13 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.foundation.Canvas
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.alcini.cprbeat.R
 import dev.alcini.cprbeat.engine.CycleSpec
@@ -62,6 +71,15 @@ import kotlinx.coroutines.launch
 
 private const val TABULAR = "tnum"
 
+/** The circle never shrinks below this share of its size; past it the screen scrolls (SPEC 5.1). */
+private const val MIN_CIRCLE_FIT = 0.55f
+private val PadTop = 24.dp
+private val PadBottom = 32.dp
+private val MinGap = 8.dp
+private val UnderCircle = 18.dp
+private val UnderStop = 14.dp
+private val AboveDisclaimer = 12.dp
+
 @Composable
 fun MainScreen(
     state: SessionState,
@@ -72,7 +90,6 @@ fun MainScreen(
     onMode: (Mode) -> Unit,
     onCycleCountdown: () -> Unit,
     onOpenSettings: () -> Unit,
-    onAnyTap: () -> Unit,
 ) {
     var beat by remember { mutableStateOf(BeatSnapshot(null, 0)) }
     LaunchedEffect(state.running) {
@@ -86,38 +103,82 @@ fun MainScreen(
     }
 
     Box(Modifier.fillMaxSize().background(CprColor.Background)) {
-        Column(
-            modifier = Modifier.fillMaxSize().safeDrawingPadding().padding(horizontal = CprSize.Edge).padding(top = 24.dp, bottom = 32.dp),
-            verticalArrangement = Arrangement.SpaceBetween,
-        ) {
-            CountdownBlock(state, onTap = { onAnyTap(); onCycleCountdown() }, onOpenSettings = { onAnyTap(); onOpenSettings() })
+        BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding()) {
+            val fit = rememberMainFit(state.volumeLow, maxWidth, maxHeight)
+            Column(
+                modifier = Modifier.fillMaxWidth()
+                    .verticalScroll(rememberScrollState(), enabled = fit.scroll)
+                    .heightIn(min = maxHeight)
+                    .padding(horizontal = CprSize.Edge).padding(top = PadTop, bottom = PadBottom),
+                verticalArrangement = Arrangement.SpaceBetween,
+            ) {
+                CountdownBlock(state, onTap = onCycleCountdown, onOpenSettings = onOpenSettings)
 
-            ModeSelector(state.mode) { onAnyTap(); onMode(it) }
+                ModeSelector(state.mode, onMode)
 
-            Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-                if (state.running) {
-                    BeatArea(state, beat)
-                    Spacer(Modifier.height(18.dp))
-                    StopButton(onStop)
-                    Spacer(Modifier.height(14.dp))
-                    HandoverLine(state)
-                    if (state.volumeLow) Text(stringResource(R.string.volume_low), color = CprColor.Warning, style = MaterialTheme.typography.bodyMedium)
-                } else {
-                    StartCircle(onStart = { onAnyTap(); onStart() })
-                    Spacer(Modifier.height(18.dp))
-                    if (state.showHints) Text(stringResource(R.string.hint_start), color = CprColor.Beat, style = MaterialTheme.typography.bodyLarge)
-                    else if (state.startedAtEpochMillis != null) HandoverLine(state)
+                // Fixed slots: START turns into the beat indicator in place and STOP appears in a slot
+                // kept free for it, so nothing on screen moves on START or STOP (SPEC 5.1).
+                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
+                    Box(Modifier.size(CprSize.StartCircle * fit.circle), contentAlignment = Alignment.Center) {
+                        if (state.running) BeatArea(state, beat, fit.circle) else StartCircle(onStart, fit.circle)
+                    }
+                    Spacer(Modifier.height(UnderCircle))
+                    Box(Modifier.height(CprSize.StopHeight)) { if (state.running) StopButton(onStop) }
+                    Spacer(Modifier.height(UnderStop))
+                    Box(Modifier.heightIn(min = fit.handoverHeight), contentAlignment = Alignment.Center) { HandoverLine(state) }
+                    if (state.volumeLow) Text(
+                        stringResource(R.string.volume_low), color = CprColor.Warning, style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.alpha(if (state.running) 1f else 0f),
+                    )
                 }
-            }
 
-            Column {
-                if (state.showHints && !state.running) {
-                    Text(stringResource(R.string.hint_rate), color = CprColor.Beat, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(bottom = 6.dp))
+                Column {
+                    RateRow(state.bpm, onRate)
+                    // Always on screen, running too: a rescuer who joins later sees it as well (SPEC 5.1).
+                    Text(
+                        stringResource(R.string.main_disclaimer),
+                        style = MaterialTheme.typography.bodySmall, color = CprColor.OnMuted, textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth().padding(top = AboveDisclaimer),
+                    )
                 }
-                RateRow(state.bpm) { onAnyTap(); onRate(it) }
             }
         }
         if (flash.value > 0f) Box(Modifier.fillMaxSize().alpha(flash.value).background(CprColor.OnBackground))
+    }
+}
+
+/** How far the circle shrinks ([circle], 1 on ordinary phones) and the height kept for the handover line. */
+private class MainFit(raw: Float, val handoverHeight: Dp) {
+    val circle = raw.coerceIn(MIN_CIRCLE_FIT, 1f)
+    /** Even the smallest circle does not fit: let the screen scroll. */
+    val scroll = raw < MIN_CIRCLE_FIT
+}
+
+/**
+ * Sizes the circle so the whole screen fits: full size on ordinary phones, smaller on short screens
+ * and with a larger display size or font (SPEC 5.1). Every other element keeps its size. Idle and
+ * running share one layout, so the result does not depend on the session state.
+ */
+@Composable
+private fun rememberMainFit(volumeLow: Boolean, maxWidth: Dp, maxHeight: Dp): MainFit {
+    val measurer = rememberTextMeasurer()
+    val density = LocalDensity.current
+    val type = MaterialTheme.typography
+    val disclaimer = stringResource(R.string.main_disclaimer)
+    val warning = stringResource(R.string.volume_low)
+    return remember(volumeLow, maxWidth, maxHeight, density, disclaimer) {
+        with(density) {
+            val width = maxWidth - CprSize.Edge * 2
+            fun textHeight(text: String, style: TextStyle) =
+                measurer.measure(text, style, constraints = Constraints(maxWidth = width.roundToPx())).size.height.toDp()
+            val handoverHeight = textHeight("00:00", type.titleLarge)
+            val fixed = PadTop + CprSize.TimerBlock + CprSize.Segmented + CprSize.RateButton + AboveDisclaimer +
+                textHeight(disclaimer, type.bodySmall) + PadBottom + MinGap * 3
+            val below = UnderCircle + CprSize.StopHeight + UnderStop + handoverHeight +
+                (if (volumeLow) textHeight(warning, type.bodyMedium) else 0.dp)
+            val raw = minOf((maxHeight - fixed - below) / CprSize.StartCircle, width / CprSize.StartCircle)
+            MainFit(raw, handoverHeight)
+        }
     }
 }
 
@@ -139,7 +200,6 @@ private fun CountdownBlock(state: SessionState, onTap: () -> Unit, onOpenSetting
                 style = MaterialTheme.typography.displayMedium.copy(fontFeatureSettings = TABULAR),
                 color = if (off) CprColor.OnMuted else CprColor.OnBackground,
             )
-            if (state.showHints && !state.running) Text(stringResource(R.string.hint_countdown), color = CprColor.Beat, style = MaterialTheme.typography.bodyMedium)
         }
         IconButton(onClick = onOpenSettings, modifier = Modifier.align(Alignment.TopEnd).size(CprSize.Gear)) {
             Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings), tint = CprColor.OnMuted, modifier = Modifier.size(28.dp))
@@ -183,15 +243,15 @@ private fun SwitchBanner(remainingMillis: Long, modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun StartCircle(onStart: () -> Unit) {
+private fun StartCircle(onStart: () -> Unit, fit: Float) {
     Box(
-        Modifier.size(CprSize.StartCircle).clip(CircleShape).background(CprColor.Beat).clickable(onClick = onStart),
+        Modifier.size(CprSize.StartCircle * fit).clip(CircleShape).background(CprColor.Beat).clickable(onClick = onStart),
         contentAlignment = Alignment.Center,
-    ) { Text(stringResource(R.string.start), style = MaterialTheme.typography.displaySmall, color = CprColor.OnBeat) }
+    ) { Text(stringResource(R.string.start), style = MaterialTheme.typography.displaySmall.shrink(fit), color = CprColor.OnBeat) }
 }
 
 @Composable
-private fun BeatArea(state: SessionState, beat: BeatSnapshot) {
+private fun BeatArea(state: SessionState, beat: BeatSnapshot, fit: Float) {
     val position = beat.position
     val scale = remember { Animatable(1f) }
     val fill = remember { Animatable(0f) }
@@ -204,21 +264,21 @@ private fun BeatArea(state: SessionState, beat: BeatSnapshot) {
     val breathing = position is Position.BreathPause
     val warning = (position as? Position.Compression)?.warning == true
     val outline = when { breathing -> CprColor.Breathe; warning -> CprColor.Warning; else -> CprColor.OutlineSubtle }
-    Box(Modifier.size(CprSize.BeatArea), contentAlignment = Alignment.Center) {
-        if (state.mode == Mode.THIRTY_TWO) TickRing(position)
+    Box(Modifier.size(CprSize.BeatArea * fit), contentAlignment = Alignment.Center) {
+        if (state.mode == Mode.THIRTY_TWO) TickRing(position, fit)
         val diskColor = if (state.mode == Mode.COMPRESSIONS) lerp(CprColor.SurfaceHigh, CprColor.Beat, fill.value) else CprColor.SurfaceHigh
         Box(
-            Modifier.size(CprSize.BeatDisk).scale(scale.value).clip(CircleShape).background(diskColor).border(BorderStroke(4.dp, outline), CircleShape),
+            Modifier.size(CprSize.BeatDisk * fit).scale(scale.value).clip(CircleShape).background(diskColor).border(BorderStroke(4.dp, outline), CircleShape),
             contentAlignment = Alignment.Center,
         ) {
             when (position) {
                 is Position.Compression -> if (state.mode == Mode.THIRTY_TWO) Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("${position.number}", style = MaterialTheme.typography.displayLarge.copy(fontFeatureSettings = TABULAR), color = CprColor.OnBackground)
+                    Text("${position.number}", style = MaterialTheme.typography.displayLarge.shrink(fit).copy(fontFeatureSettings = TABULAR), color = CprColor.OnBackground)
                     if (position.warning) Text(stringResource(R.string.get_ready), style = MaterialTheme.typography.labelLarge, color = CprColor.Warning)
                     else Text("OF ${position.total}", style = MaterialTheme.typography.labelLarge, color = CprColor.OnMuted)
                 }
                 is Position.BreathPause -> Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(stringResource(R.string.breathe), style = MaterialTheme.typography.headlineMedium, color = CprColor.Breathe)
+                    Text(stringResource(R.string.breathe), style = MaterialTheme.typography.headlineMedium.shrink(fit), color = CprColor.Breathe)
                     Spacer(Modifier.height(14.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                         repeat(2) { i ->
@@ -233,21 +293,25 @@ private fun BeatArea(state: SessionState, beat: BeatSnapshot) {
     }
 }
 
+/** Scales a style down with the circle so text keeps its proportion inside it. */
+private fun TextStyle.shrink(fit: Float) =
+    if (fit >= 1f) this else copy(fontSize = fontSize * fit, lineHeight = if (lineHeight.isSp) lineHeight * fit else lineHeight)
+
 private fun lerp(a: Color, b: Color, t: Float) = Color(
     a.red + (b.red - a.red) * t, a.green + (b.green - a.green) * t, a.blue + (b.blue - a.blue) * t, 1f,
 )
 
 @Composable
-private fun TickRing(position: Position?) {
+private fun TickRing(position: Position?, fit: Float) {
     val done = when (position) { is Position.Compression -> position.number; is Position.BreathPause -> CycleSpec.COMPRESSIONS_PER_CYCLE; null -> 0 }
     val zoneStart = CycleSpec.COMPRESSIONS_PER_CYCLE - CycleSpec.WARNING_ZONE_SIZE
-    Canvas(Modifier.size(CprSize.BeatArea)) {
-        val radius = 124.dp.toPx()
+    Canvas(Modifier.size(CprSize.BeatArea * fit)) {
+        val radius = 124.dp.toPx() * fit
         for (i in 0 until CycleSpec.COMPRESSIONS_PER_CYCLE) {
             val zone = i >= zoneStart
             val color = when { i >= done -> CprColor.TickIdle; zone -> CprColor.Warning; else -> CprColor.TickDone }
-            val w = (if (zone) 8.dp else 5.dp).toPx()
-            val h = (if (zone) 24.dp else 14.dp).toPx()
+            val w = (if (zone) 8.dp else 5.dp).toPx() * fit
+            val h = (if (zone) 24.dp else 14.dp).toPx() * fit
             rotate(degrees = i * 12f + 6f, pivot = center) {
                 drawRoundRect(
                     color = color,

@@ -62,7 +62,6 @@ class SessionViewModel(app: Application) : AndroidViewModel(app) {
                             countdown = s.defaultCountdown,
                             countdownRemainingMillis = s.defaultCountdown.millis.takeIf { s.defaultCountdown != CountdownOption.OFF },
                             breathPauseMillis = s.breathPauseMillis,
-                            showHints = !s.hintsDismissed,
                             volumeLow = !s.autoMaxVolume && volume.level() < VolumeController.THRESHOLD,
                         )
                     }
@@ -89,11 +88,9 @@ class SessionViewModel(app: Application) : AndroidViewModel(app) {
                 startedAtEpochMillis = System.currentTimeMillis(),
                 bannerRemainingMillis = 0,
                 countdownRemainingMillis = timer?.remaining(now),
-                showHints = false,
                 volumeLow = !settings.autoMaxVolume && volume.level() < VolumeController.THRESHOLD,
             )
         }
-        if (!settings.hintsDismissed) viewModelScope.launch { settingsRepo.setHintsDismissed() }
         viewModelScope.launch(audio) {
             player.start(specOf(st))
             prewarm(st)
@@ -184,11 +181,6 @@ class SessionViewModel(app: Application) : AndroidViewModel(app) {
     fun setTonePreset(name: String) {
         viewModelScope.launch { settingsRepo.setTonePreset(name) }
         viewModelScope.launch(audio) { player.preview(ToneBank.byName(name), Tempo.DEFAULT_BPM, beats = 4, sampleRateHz = player.nativeSampleRateHz) }
-    }
-
-    fun dismissHints() {
-        _state.update { it.copy(showHints = false) }
-        viewModelScope.launch { settingsRepo.setHintsDismissed() }
     }
 
     /** Read by the UI on every frame while running; drives the counter and the pulse. */
