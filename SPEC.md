@@ -227,6 +227,15 @@ Monochrome layer reuses the foreground. Must stay distinctive enough not to rese
   - Dark theme, one `contentDescription` per panel for TalkBack.
   - The tutorial item above teaches the app, the comic teaches CPR. Decide whether first launch
     offers both or neither.
+- Store badges and a QR code in the README, once the app is live (owner, 2026-10-07). The README
+  gets the official badge of every store that carries the app (Google Play, RuStore, Galaxy
+  Store, AppGallery; F-Droid later), each linking to the app page. One QR code points to the
+  GitHub Pages landing page (`docs/index.html`), which shows the same badges, so a printed QR
+  keeps working when a store link changes or a store is added. Generate the QR offline as an SVG
+  with a white quiet zone so it scans on GitHub's dark theme; no online QR services. Use the
+  stores' badge files unmodified and follow their badge rules (Google Play asks for its
+  trademark attribution line). The AppGallery link carries a numeric app id known only after
+  publication.
 - Light theme or a theme switch. 0.1.0 is dark only by design (contrast outdoors, no
   surprises in an emergency); dynamic (Material You) colors are disabled for the same reason.
 
