@@ -185,115 +185,27 @@ the launcher-mask preview are in `design/icon/`; the vector drawables live in `a
 Monochrome layer reuses the foreground. Must stay distinctive enough not to resemble the
 "One Beat CPR" training brand (section 11.4).
 
-## 7. Out of scope for 0.1.0 (backlog)
+## 7. Backlog
 
-- Vibration with on/off toggle (planned 0.2.0; off by default because the phone may lie on
-  the patient).
-- "Keep running in background" setting (off by default). When on, the metronome keeps
-  clicking after the app is minimised or the screen locks, so the rescuer can dial emergency
-  services from the same phone while the ticks continue. Needs a foreground service with a
-  persistent notification (Android 14+ requires a declared service type, likely
-  `mediaPlayback`), plus a decision on what happens to the clicks during the call itself
-  (audio focus, `USAGE_ALARM` vs in-call routing, speaker vs earpiece). Research how reliably
-  this works on real phones before committing (owner, 2026-10-07).
-- Voice prompts; emergency call button (112/911 by locale); home-screen widget and
-  Quick Settings tile; Wear OS; UI localization (7.2); signed release builds
-  and store listings (Google Play, F-Droid).
-- A proper first-launch tutorial. 0.1.0 ships only the non-blocking hints of 5.7; how a fuller
-  tutorial should look is undecided (owner, 2026-10-07).
-- Short CPR comic: 5–6 illustrated panels on adult CPR, inside the app (owner, 2026-10-07).
-  Draft panels: (1) scene is safe, check response, shout for help; (2) not breathing normally
-  (gasping counts as not breathing): call 112 on speaker, send someone for an AED; (3) heel of
-  the hand on the centre of the chest, other hand on top, arms straight; (4) push 5–6 cm in time
-  with the app's clicks, let the chest rise fully; (5) 30:2 if trained in rescue breaths,
-  otherwise compressions only; (6) do not stop until help arrives, an AED is ready or the person
-  breathes normally; switch rescuers about every 2 minutes. Constraints:
-  - Reached from the idle screen and About as a "How to do CPR" link. Never placed between START
-    and the first click: in an emergency nobody reads a comic, the clicks come first.
-  - Content follows the guideline basis of section 3, says it is for adults, and a certified CPR
-    instructor reviews every panel before release.
-  - Own artwork under a licence compatible with MIT and F-Droid (e.g. CC BY 4.0), as vector
-    drawables. No AHA/ERC posters or course artwork (11.4). AI-generated drawings only if the
-    instructor checks hand position and posture in each panel.
-  - Captions live in `strings.xml`, not inside the images, so the comic follows the UI
-    localization (7.2). The Russian version is checked against the national first-aid rules.
-  - Framing is a quick reminder, not training. Section 11.4 keeps the app "software, never
-    training" because of the "ONE BEAT CPR" mark for training services, so the disclaimer "not a
-    substitute for certified CPR training" sits next to the comic and no store text calls it a
-    course or a lesson.
-  - Dark theme, one `contentDescription` per panel for TalkBack.
-  - The tutorial item above teaches the app, the comic teaches CPR. Decide whether first launch
-    offers both or neither.
-- Store badges and a QR code in the README, once the app is live (owner, 2026-10-07). The README
-  gets the official badge of every store that carries the app (Google Play, RuStore, Galaxy
-  Store, AppGallery; F-Droid later), each linking to the app page. One QR code points to the
-  GitHub Pages landing page (`docs/index.html`), which shows the same badges, so a printed QR
-  keeps working when a store link changes or a store is added. Generate the QR offline as an SVG
-  with a white quiet zone so it scans on GitHub's dark theme; no online QR services. Use the
-  stores' badge files unmodified and follow their badge rules (Google Play asks for its
-  trademark attribution line). The AppGallery link carries a numeric app id known only after
-  publication.
-- Light theme or a theme switch. 0.1.0 is dark only by design (contrast outdoors, no
-  surprises in an emergency); dynamic (Material You) colors are disabled for the same reason.
+The backlog lives in GitHub Issues since 2026-10-07:
+https://github.com/alessioalcini/cpr-beat/issues. Each item moved from this section keeps its
+full text there.
 
-### 7.1 User feedback under observation
+| Label | Meaning |
+|---|---|
+| `enhancement` | Accepted, will be built; no milestone means "after 0.2.0" |
+| `idea` | Kept for later, not planned |
+| `question` | The owner has not decided whether it is wanted |
+| `feedback` | A user report under observation |
 
-Single reports from early users. Policy: collect feedback and act only on what repeats; one
-opinion is not a reason to redesign (owner, 2026-10-07). Each item records the current
-behavior, what the user expected, and the open question.
+Feedback policy: single reports from users are recorded, not acted on; act only on what repeats.
+One opinion is not a reason to redesign (owner, 2026-10-07). Repeats are counted as reactions,
+comments and duplicates on the issue.
 
-- **Switching Compressions → 30:2 restarts the ring from zero.** Current behavior is by design
-  (5.3: the counter restarts at 1 on a mode switch). The user had already been compressing for a
-  while and expected the ring to credit the clicks already made. Open question: what should the
-  ring show when the number of compressions before the switch is unknown to the user, e.g. count
-  the clicks of the current session modulo 30, or start at 1 as now. Reported once, 2026-10-07.
+0.2.0 ships only the work already merged: the SWITCH RESCUER banner over the countdown, the
+ERC 2025 reference and the privacy statement in About (owner, 2026-10-07).
 
-### 7.2 UI localization
-
-The interface is English only, and the Russian store cards say so. Proposed language order
-(owner, 2026-10-07; to be confirmed):
-
-- **Tier 1, next: Russian (`values-ru`) and Italian (`values-it`).** Russian has the only live
-  users and a Russian card on all four stores. Italian is the owner's language, so review costs
-  nothing. Both carry the longest labels (СМЕНА СПАСАТЕЛЯ, ПРИГОТОВЬТЕСЬ, CAMBIO SOCCORRITORE),
-  so they force the layout work every later language reuses.
-- **Tier 2, after the first store feedback round, only with a native reviewer who knows CPR:**
-  Spanish (`values-es`, one translation for the es-ES and es-419 Play cards), German
-  (`values-de`, fixed GRC terminology), Ukrainian (`values-uk`, Cyrillic, reuses the Russian
-  layout).
-- **Tier 3, on demand only:** Brazilian Portuguese, French, Polish, Indonesian (`values-in`,
-  Android's legacy code), Turkish, Kazakh, Belarusian (most speakers in KZ/BY read Russian).
-  Arabic (RTL) and Hindi or CJK are separate projects. Trigger: a country reaches about 10 % of
-  installs in Play Console, two independent user requests, or a store questions the English UI
-  for that market.
-- **No machine translation of the prompts or the disclaimer without a reviewer.** Terms come
-  from the national resuscitation council texts (ERC translations, IRC, GRC, NRC). The review
-  happens on a running phone, not in a spreadsheet.
-
-Work before the first translation:
-
-1. Fix the English source. Hard-coded text moves to resources:
-   "OF 30" (MainScreen), "N min", "3 s", "8 s" (SettingsScreen), and "started" + time becomes
-   one format string. `app_name`, `mode_thirty_two` and `about_source_url` get
-   `translatable="false"`. Decide whether BPM becomes a language-neutral "/min".
-2. Locale-safe code. `"%02d".format(...)` in `Format.kt` takes `Locale.ROOT` (an Arabic system
-   locale would print Eastern Arabic digits in the timers). Capitals are written literally in
-   each `strings.xml`, never produced by `uppercase()`/`lowercase()` at runtime (Turkish dotless
-   i; SettingsScreen lowercases `off` today).
-3. Language selection follows the system. `generateLocaleConfig = true` plus
-   `res/resources.properties` gives the per-app language entry in Android 13+ settings; no
-   in-app picker. `androidResources.localeFilters` keeps only shipped languages in the APK.
-4. Pseudolocale pass (en-XA, ar-XB) and `@Preview(locale = "ru")`/`"it"` on the ring and the
-   big buttons at 360 dp; labels autosize on one line before any real translation lands.
-5. Glossary per language for the emergency prompts (CPR, compressions, BREATHE, GET READY,
-   SWITCH RESCUER, START, STOP) and the rate unit. Russian draft: СЛР, 2 ВДОХА, ПРИГОТОВЬТЕСЬ,
-   СМЕНА СПАСАТЕЛЯ, /мин (not «уд/мин», that means heartbeats).
-6. CI runs `lintDebug` with `MissingTranslation` and `ExtraTranslation` as errors; today it runs
-   only `test assembleDebug`.
-7. Store side, per shipped language: drop the "interface is English" line from that language's
-   cards, and only then add the language to AppGallery "Language" and Galaxy Store "Supported
-   Languages". Re-check the AppGallery 1.13 note in `store/listings/README.md`: the guideline
-   text found asks for localized listing info, not a localized UI.
+F-Droid and store submissions stay in section 11 and `store/STORE_GUIDE.md`, not in Issues.
 
 ## 8. Technical stack
 
