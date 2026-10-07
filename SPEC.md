@@ -13,8 +13,9 @@ not CPR training and not medical advice.
 
 ## 2. Non-negotiable requirements
 
-1. **Free to use and free to redistribute.** App code is MIT-licensed. Every dependency
-   must be under a permissive license (Apache-2.0, MIT, BSD). No proprietary SDKs:
+1. **Free to use and free to redistribute.** App code is GPL-3.0-or-later (MIT until
+   2026-10-07). Every dependency must be under a permissive, GPLv3-compatible license
+   (Apache-2.0, MIT, BSD). No proprietary SDKs:
    no Google Play Services, no Firebase, no ad or analytics SDKs.
 2. **Fully offline.** No network code. The manifest must not declare the `INTERNET`
    permission, so the OS blocks any network access. Works identically in airplane mode,
@@ -168,7 +169,8 @@ Opened via the gear icon. Items:
 4. Auto max volume: on / off (factory on).
 5. Click sound: Clean 1000 (factory default), Wood 880, Low 660. Three timbres that all passed
    the owner's listening test on a Samsung A52; the choice is persistent like the other settings.
-6. About: app version, MIT license, disclaimer ("pacing aid, not training or medical advice;
+6. About: app version, license (GPL-3.0-or-later, linked) with the copyright and no-warranty
+   notice, disclaimer ("pacing aid, not training or medical advice;
    call emergency services first"), the affiliation disclaimer from section 11.4, a link to the
    source repository, a privacy policy link and the contact e-mail (card at the top), a short
    PRIVACY statement, and the third-party licenses as an expandable section inside About
@@ -251,7 +253,10 @@ Package `dev.alcini.cprbeat`:
 
 - GitHub: https://github.com/alessioalcini/cpr-beat
 - Author of commits: Alessio Alcini <alessio.alcini.it@gmail.com>, set per repository.
-- License: MIT, copyright Alessio Alcini.
+- License: GPL-3.0-or-later, copyright Alessio Alcini, since 2026-10-07 (MIT before). README
+  carries the section 7 additional terms: no trademark rights to the name "CPR Beat" or the
+  icon, and modified versions must use a different name and icon. Code published before the
+  switch, release v0.1.0 included, stays available under MIT to whoever obtained it.
 - Repository files: `README.md`, `LICENSE`, `SPEC.md`, `THIRD_PARTY_NOTICES.md`,
   `.github/workflows/build.yml`.
 
@@ -275,7 +280,8 @@ process or wording requirements.
   in apps built with it, and the SDK itself must never be committed or redistributed.
 - Only stable SDK packages may be used for builds: anything under the preview license forbids
   shipping apps built with it.
-- MIT for the app is compatible with all of the above.
+- GPL-3.0-or-later for the app is compatible with all of the above: Apache-2.0, MIT and
+  BSD code may be combined into a GPLv3 work (Apache-2.0 is incompatible with GPLv2 only).
 
 ### 11.2 Google Play
 
@@ -294,7 +300,7 @@ process or wording requirements.
 
 ### 11.3 F-Droid
 
-- Eligible: MIT app, Apache/BSD dependencies from Google Maven and Maven Central, Android SDK
+- Eligible: GPL-3.0-or-later app, Apache/BSD dependencies from Google Maven and Maven Central, Android SDK
   builds are explicitly allowed. No Play Services, Firebase, ads or analytics, ever.
 - Add `fastlane/metadata/android/en-US` (title, descriptions, icon, screenshots) and tag
   releases with versionCode/versionName bumps in the tagged commit.
@@ -355,4 +361,5 @@ process or wording requirements.
 | 2026-10-07 | Click timbre is a setting (Clean 1000 default; Wood 880, Low 660) | All three passed the phone listening test; owner wants the choice persistent |
 | 2026-10-07 | Mode/rate switch: build the new track first, read the playback position last | Review measured 30–200 ms of rendering and allocation between reading the position and starting the new track, which shifted the beat grid on every Compressions → 30:2 switch |
 | 2026-10-07 | Release signing: PKCS12 keystore outside the repo (`~/.cprbeat/release.jks`), `keystore.properties` git-ignored, same key for every store; Play App Signing on top | One certificate for RuStore, Galaxy Store and AppGallery; losing the key would orphan the app id |
+| 2026-10-07 | License MIT → GPL-3.0-or-later; section 7 terms reserve the name and icon | Owner: no closed paid clones, the app stays free. GPL keeps it open source and F-Droid-eligible and forces any clone to publish its source, which rules out closed paid or ad-SDK clones; non-commercial licenses were rejected as not open source |
 | 2026-10-07 | Privacy policy on GitHub Pages (`docs/privacy/`, https://alessioalcini.github.io/cpr-beat/privacy/); About carries the statement, the link and the contact e-mail | Play Health apps policy wants policy text or link in the app; AppGallery 7.1 and 11.2 want an in-app privacy link and contact information |

@@ -20,6 +20,8 @@ matching entry at release time.
   on screen while the banner is shown, and the countdown keeps running underneath it.
 - About screen and store descriptions cite the ERC 2025 guidelines instead of ERC 2021;
   the 100–120 per minute rate is unchanged.
+- License: GPL-3.0-or-later instead of MIT. About shows the copyright, the no-warranty notice
+  and a link to the license; the name and icon are reserved (README, section 7 terms).
 
 ## [0.1.0] - 2026-10-06
 

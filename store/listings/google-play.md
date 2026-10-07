@@ -29,12 +29,12 @@ CPR Beat
 Offline CPR metronome: 100–120 bpm, 30:2 mode, rescuer-switch timer.
 ```
 
-**Full description** (1704 chars / 1722 bytes, limit 4000 chars)
+**Full description** (1708 chars / 1726 bytes, limit 4000 chars)
 
 ```text
 CPR Beat keeps your chest compressions at the right pace when it matters. One big button starts a loud, steady click at 100, 110 or 120 compressions per minute. Switch to 30:2 and the app counts thirty compressions, warns before the last five, then paces two breaths. A countdown reminds the team to switch rescuers, and the elapsed CPR time with the start time stays on screen for handover to paramedics.
 
-Works fully offline. No account, no ads, no analytics, no network permission, no data collected. Free and open source (MIT).
+Works fully offline. No account, no ads, no analytics, no network permission, no data collected. Free and open source (GPL-3.0).
 
 Features
 • Rates 100 / 110 / 120 bpm, changeable mid-session without losing the beat
@@ -78,12 +78,12 @@ CPR Beat
 Офлайн-метроном для СЛР: 100–120 в минуту, режим 30:2, таймер смены.
 ```
 
-**Full description** (1737 chars / 3028 bytes, limit 4000 chars)
+**Full description** (1741 chars / 3032 bytes, limit 4000 chars)
 
 ```text
 CPR Beat задаёт правильный темп непрямого массажа сердца, когда счёт идёт на секунды. Одна большая кнопка запускает громкий ровный щелчок с частотой 100, 110 или 120 компрессий в минуту. В режиме 30:2 приложение считает тридцать компрессий, предупреждает перед последними пятью и задаёт паузу на два вдоха. Таймер напоминает команде о смене реаниматора, а время с начала СЛР и время старта остаются на экране для передачи медикам.
 
-Работает полностью офлайн. Без аккаунта, рекламы и аналитики, без разрешения на интернет, данные не собираются. Бесплатно, открытый исходный код (MIT).
+Работает полностью офлайн. Без аккаунта, рекламы и аналитики, без разрешения на интернет, данные не собираются. Бесплатно, открытый исходный код (GPL-3.0).
 
 Возможности
 • Темп 100 / 110 / 120 в минуту, смена на ходу без сбоя ритма

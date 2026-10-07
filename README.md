@@ -46,4 +46,18 @@ Requires JDK 17 and the Android SDK (platform 37). The APK lands in
 
 ## License
 
-[MIT](LICENSE). Third-party components are listed in `THIRD_PARTY_NOTICES.md`.
+Copyright (C) 2026 Alessio Alcini
+
+CPR Beat is free software: you can redistribute it and/or modify it under the terms of the
+[GNU General Public License](LICENSE) as published by the Free Software Foundation, either
+version 3 of the License, or (at your option) any later version. It is distributed WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
+
+Additional terms under section 7 of the GPL:
+
+- (e) The license grants no rights to use the name "CPR Beat" or the app icon as trademarks.
+- (c) Modified versions you distribute must be marked as different from the original: give them
+  a different name and icon, and do not present them as CPR Beat.
+
+Third-party components are listed in `THIRD_PARTY_NOTICES.md`.

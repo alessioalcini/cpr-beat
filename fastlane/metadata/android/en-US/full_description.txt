@@ -1,6 +1,6 @@
 CPR Beat keeps your chest compressions at the right pace when it matters. One big button starts a loud, steady click at 100, 110 or 120 compressions per minute. Switch to 30:2 and the app counts thirty compressions, warns before the last five, then paces two breaths. A countdown reminds the team to switch rescuers, and the elapsed CPR time with the start time stays on screen for handover to paramedics.
 
-Works fully offline. No account, no ads, no analytics, no network permission, no data collected. Free and open source (MIT).
+Works fully offline. No account, no ads, no analytics, no network permission, no data collected. Free and open source (GPL-3.0).
 
 Features
 • Rates 100 / 110 / 120 bpm, changeable mid-session without losing the beat

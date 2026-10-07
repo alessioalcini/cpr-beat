@@ -32,6 +32,9 @@
     <string name="about">About</string>
     <string name="about_version">Version</string>
     <string name="about_license">License</string>
+    <string name="about_license_name">GNU GPL v3 or later</string>
+    <string name="about_license_url" translatable="false">https://www.gnu.org/licenses/gpl-3.0.html</string>
+    <string name="about_copyright">Copyright © 2026 Alessio Alcini. CPR Beat is free software: you can share and change it under the GNU General Public License, version 3 or later. It comes with no warranty.</string>
     <string name="about_source">Source code on GitHub</string>
     <string name="about_source_url">https://github.com/alessioalcini/cpr-beat</string>
     <string name="about_disclaimer">Pacing aid only. CPR Beat is not a medical device, does not diagnose, treat, cure or prevent any condition, and is not a substitute for certified CPR training. In an emergency, call your local emergency number first.</string>

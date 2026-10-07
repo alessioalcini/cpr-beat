@@ -48,6 +48,7 @@ fun AboutScreen(onBack: () -> Unit) {
         }
     }
     val sourceUrl = stringResource(R.string.about_source_url)
+    val licenseUrl = stringResource(R.string.about_license_url)
     val privacyUrl = stringResource(R.string.privacy_policy_url)
     val email = stringResource(R.string.contact_email)
 
@@ -59,7 +60,9 @@ fun AboutScreen(onBack: () -> Unit) {
         ) {
             Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(20.dp)).background(CprColor.Surface)) {
                 AboutRow(stringResource(R.string.app_name), version)
-                AboutRow(stringResource(R.string.about_license), "MIT · Alessio Alcini")
+                LinkRow(stringResource(R.string.about_license_name), label = stringResource(R.string.about_license)) {
+                    context.open(Intent(Intent.ACTION_VIEW, licenseUrl.toUri()))
+                }
                 LinkRow(stringResource(R.string.about_source)) { context.open(Intent(Intent.ACTION_VIEW, sourceUrl.toUri())) }
                 LinkRow(stringResource(R.string.privacy_policy)) { context.open(Intent(Intent.ACTION_VIEW, privacyUrl.toUri())) }
                 LinkRow(email, label = stringResource(R.string.contact)) {
@@ -68,6 +71,7 @@ fun AboutScreen(onBack: () -> Unit) {
             }
             Text(stringResource(R.string.about_disclaimer), style = MaterialTheme.typography.bodyLarge, color = CprColor.OnBackground)
             Text(stringResource(R.string.about_guidelines), style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
+            Text(stringResource(R.string.about_copyright), style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
             SectionLabel(stringResource(R.string.how_to_use))
             Text(stringResource(R.string.how_to_use_text), style = MaterialTheme.typography.bodyLarge, color = CprColor.OnBackground)
             SectionLabel(stringResource(R.string.privacy))
