@@ -7,6 +7,8 @@ import android.media.AudioTrack
 import dev.alcini.cprbeat.engine.CycleLayout
 import dev.alcini.cprbeat.engine.CycleSpec
 import dev.alcini.cprbeat.engine.PcmRenderer
+import dev.alcini.cprbeat.engine.ToneBank
+import dev.alcini.cprbeat.engine.entryFrameForModeChange
 import dev.alcini.cprbeat.engine.mapFrameBetween
 
 /**
@@ -22,6 +24,7 @@ import dev.alcini.cprbeat.engine.mapFrameBetween
 class ClickPlayer {
     private var track: AudioTrack? = null
     private var layout: CycleLayout? = null
+    var bank: ToneBank = ToneBank.DEFAULT
 
     val current: CycleLayout? get() = layout
     val isPlaying: Boolean get() = track?.playState == AudioTrack.PLAYSTATE_PLAYING
@@ -34,7 +37,7 @@ class ClickPlayer {
     /** Starts looping the cycle described by [spec] from frame [startFrameInCycle]. */
     fun start(spec: CycleSpec, startFrameInCycle: Int = 0) {
         val newLayout = CycleLayout.of(spec)
-        val pcm = PcmRenderer.render(newLayout)
+        val pcm = PcmRenderer.render(newLayout, bank)
         val newTrack = AudioTrack.Builder()
             .setAudioAttributes(
                 AudioAttributes.Builder()
@@ -68,16 +71,17 @@ class ClickPlayer {
     }
 
     /**
-     * Switches to a new cycle while keeping the rescuer's place in it: the same compression
-     * number and the same fraction of the beat. Used for rate changes. A mode change passes
-     * `keepPlace = false` and restarts the new cycle at its first click.
+     * Switches to a new cycle without breaking the rhythm. A rate change keeps the rescuer's
+     * place (same compression number, same fraction of the beat). A mode change keeps the phase
+     * of the beat so the next click stays on the grid, and restarts the count at 1.
      */
-    fun switchTo(spec: CycleSpec, keepPlace: Boolean) {
+    fun switchTo(spec: CycleSpec) {
         val old = layout
-        val startFrame = if (keepPlace && old != null && old.spec.mode == spec.mode) {
-            mapFrameBetween(frameInCycle(), old, CycleLayout.of(spec))
-        } else {
-            0
+        val target = CycleLayout.of(spec)
+        val startFrame = when {
+            old == null -> 0
+            old.spec.mode == spec.mode -> mapFrameBetween(frameInCycle(), old, target)
+            else -> entryFrameForModeChange(frameInCycle(), old, target)
         }
         start(spec, startFrame)
     }

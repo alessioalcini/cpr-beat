@@ -33,6 +33,7 @@ import dev.alcini.cprbeat.audio.VolumeController
 import dev.alcini.cprbeat.engine.CycleSpec
 import dev.alcini.cprbeat.engine.Mode
 import dev.alcini.cprbeat.engine.Position
+import dev.alcini.cprbeat.engine.ToneBank
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -54,6 +55,7 @@ fun AuditionScreen() {
     var playing by remember { mutableStateOf(false) }
     var position by remember { mutableStateOf<Position?>(null) }
     var frame by remember { mutableIntStateOf(0) }
+    var bank by remember { mutableStateOf(ToneBank.DEFAULT) }
 
     fun spec() = CycleSpec(mode, bpm, pauseSec * 1_000, player.nativeSampleRateHz)
 
@@ -77,9 +79,17 @@ fun AuditionScreen() {
             Text("Native rate: ${player.nativeSampleRateHz} Hz · alarm volume ${(volume.level() * 100).toInt()} %")
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                for (b in ToneBank.presets) {
+                    Button(
+                        onClick = { bank = b; player.bank = b; if (playing) scope.launch(Dispatchers.Default) { player.switchTo(spec()) } },
+                        colors = if (bank == b) ButtonDefaults.buttonColors() else ButtonDefaults.outlinedButtonColors(),
+                    ) { Text(b.name) }
+                }
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 for (m in Mode.entries) {
                     Button(
-                        onClick = { mode = m; if (playing) scope.launch(Dispatchers.Default) { player.switchTo(spec(), keepPlace = false) } },
+                        onClick = { mode = m; if (playing) scope.launch(Dispatchers.Default) { player.switchTo(spec()) } },
                         colors = if (mode == m) ButtonDefaults.buttonColors() else ButtonDefaults.outlinedButtonColors(),
                     ) { Text(if (m == Mode.COMPRESSIONS) "Compressions" else "30:2") }
                 }
@@ -87,7 +97,7 @@ fun AuditionScreen() {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 for (b in listOf(100, 110, 120)) {
                     Button(
-                        onClick = { bpm = b; if (playing) scope.launch(Dispatchers.Default) { player.switchTo(spec(), keepPlace = true) } },
+                        onClick = { bpm = b; if (playing) scope.launch(Dispatchers.Default) { player.switchTo(spec()) } },
                         colors = if (bpm == b) ButtonDefaults.buttonColors() else ButtonDefaults.outlinedButtonColors(),
                     ) { Text("$b") }
                 }
@@ -96,7 +106,7 @@ fun AuditionScreen() {
             Slider(
                 value = pauseSec.toFloat(),
                 onValueChange = { pauseSec = it.toInt() },
-                onValueChangeFinished = { if (playing) scope.launch(Dispatchers.Default) { player.switchTo(spec(), keepPlace = true) } },
+                onValueChangeFinished = { if (playing) scope.launch(Dispatchers.Default) { player.switchTo(spec()) } },
                 valueRange = 3f..8f,
                 steps = 4,
             )

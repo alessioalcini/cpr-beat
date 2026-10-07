@@ -17,3 +17,15 @@ fun mapFrameBetween(frame: Int, from: CycleLayout, to: CycleLayout): Int {
     }
     return mapped.coerceIn(0, to.totalFrames - 1)
 }
+
+/**
+ * Entry frame of [to] when the mode changes mid-cycle: keeps the phase of the current beat so
+ * the next click lands on the same grid as before, and starts the count at compression 1.
+ * Inside a breath pause there is no beat phase to keep, so the new cycle starts at its first click.
+ */
+fun entryFrameForModeChange(frame: Int, from: CycleLayout, to: CycleLayout): Int {
+    require(frame in 0 until from.totalFrames) { "frame must be in 0 until ${from.totalFrames}, was $frame" }
+    if (frame >= from.pauseStartFrame) return 0
+    val fraction = (frame % from.spec.beatFrames).toDouble() / from.spec.beatFrames
+    return (fraction * to.spec.beatFrames).toInt().coerceIn(0, to.totalFrames - 1)
+}

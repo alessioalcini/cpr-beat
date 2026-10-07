@@ -1,8 +1,8 @@
 package dev.alcini.cprbeat.engine
 
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.exp
-import kotlin.math.min
 import kotlin.math.roundToInt
 import kotlin.math.sin
 
@@ -12,36 +12,43 @@ import kotlin.math.sin
  */
 object PcmRenderer {
     private const val PEAK = Short.MAX_VALUE.toDouble()
-    private const val FADE_MILLIS = 5
 
-    fun render(layout: CycleLayout): ShortArray {
+    fun render(layout: CycleLayout, bank: ToneBank = ToneBank.DEFAULT): ShortArray {
         val out = ShortArray(layout.totalFrames)
         for (event in layout.events) {
-            mix(out, event.frame, synthesize(ToneBank.forEvent(event.kind), layout.spec.sampleRateHz))
+            mix(out, event.frame, synthesize(bank.forEvent(event.kind), layout.spec.sampleRateHz))
         }
         return out
     }
 
-    /** One tone as PCM, envelope applied. */
+    /**
+     * One tone as PCM. Partials are summed, the envelope applied, then the whole thing is scaled
+     * so that its true peak equals [Tone.amplitude] of full scale.
+     */
     fun synthesize(tone: Tone, sampleRateHz: Int): ShortArray {
-        val frames = (sampleRateHz * tone.durationMillis / 1000.0).roundToInt()
-        val fadeFrames = min(frames / 2, (sampleRateHz * FADE_MILLIS / 1000.0).roundToInt())
-        val tau = frames / 4.0 // percussive decay constant: about -35 dB by the end
+        val frames = framesOf(tone.durationMillis.toDouble(), sampleRateHz)
+        val attack = framesOf(tone.attackMillis, sampleRateHz).coerceAtMost(frames / 2)
+        val release = framesOf(tone.releaseMillis, sampleRateHz).coerceAtMost(frames / 2)
+        val tau = tone.decayMillis?.let { it * sampleRateHz / 1000.0 }
         val omega = 2 * PI * tone.frequencyHz / sampleRateHz
-        val out = ShortArray(frames)
+        val raw = DoubleArray(frames)
+        var peak = 0.0
         for (i in 0 until frames) {
-            val envelope = if (tone.percussive) {
-                exp(-i / tau) * fadeIn(i, fadeFrames)
-            } else {
-                fadeIn(i, fadeFrames) * fadeIn(frames - 1 - i, fadeFrames)
-            }
-            out[i] = (sin(omega * i) * envelope * tone.amplitude * PEAK).roundToInt().toShort()
+            var sample = 0.0
+            for (p in tone.partials) sample += p.level * sin(omega * p.harmonic * i)
+            var envelope = 1.0
+            if (attack > 0 && i < attack) envelope *= i / attack.toDouble()
+            if (tau != null) envelope *= exp(-i / tau)
+            val remaining = frames - 1 - i
+            if (release > 0 && remaining < release) envelope *= remaining / release.toDouble()
+            raw[i] = sample * envelope
+            if (abs(raw[i]) > peak) peak = abs(raw[i])
         }
-        return out
+        val scale = if (peak > 0) tone.amplitude * PEAK / peak else 0.0
+        return ShortArray(frames) { (raw[it] * scale).roundToInt().toShort() }
     }
 
-    private fun fadeIn(i: Int, fadeFrames: Int): Double =
-        if (fadeFrames <= 0 || i >= fadeFrames) 1.0 else i / fadeFrames.toDouble()
+    private fun framesOf(millis: Double, sampleRateHz: Int): Int = (sampleRateHz * millis / 1000.0).roundToInt()
 
     private fun mix(into: ShortArray, startFrame: Int, tone: ShortArray) {
         val n = into.size

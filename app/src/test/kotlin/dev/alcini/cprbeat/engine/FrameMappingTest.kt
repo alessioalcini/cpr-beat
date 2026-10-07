@@ -36,3 +36,35 @@ class FrameMappingTest {
         assertEquals(b.totalFrames / 2, mapFrameBetween(a.totalFrames / 2, a, b))
     }
 }
+
+class ModeChangeEntryTest {
+    private val comp = CycleLayout.of(CycleSpec(Mode.COMPRESSIONS, bpm = 110))
+    private val thirtyTwo = CycleLayout.of(CycleSpec(Mode.THIRTY_TWO, bpm = 110, breathPauseMillis = 5_000))
+
+    @Test
+    fun `compressions to thirty-two keeps the beat phase and starts at compression one`() {
+        val frame = comp.spec.beatFrames * 3 / 4
+        val entry = entryFrameForModeChange(frame, comp, thirtyTwo)
+        assertEquals(frame, entry)
+        assertEquals(Position.Compression(1, 30, false), thirtyTwo.positionAt(entry))
+    }
+
+    @Test
+    fun `thirty-two to compressions keeps the beat phase`() {
+        val frame = 17 * thirtyTwo.spec.beatFrames + thirtyTwo.spec.beatFrames / 3
+        assertEquals(comp.spec.beatFrames / 3, entryFrameForModeChange(frame, thirtyTwo, comp))
+    }
+
+    @Test
+    fun `leaving thirty-two during the pause starts the new cycle at its first click`() {
+        val frame = thirtyTwo.pauseStartFrame + 1_000
+        assertEquals(0, entryFrameForModeChange(frame, thirtyTwo, comp))
+    }
+
+    @Test
+    fun `phase is kept across different rates too`() {
+        val fast = CycleLayout.of(CycleSpec(Mode.THIRTY_TWO, bpm = 120))
+        val frame = comp.spec.beatFrames / 2
+        assertEquals(fast.spec.beatFrames / 2, entryFrameForModeChange(frame, comp, fast))
+    }
+}
