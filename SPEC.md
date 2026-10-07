@@ -196,7 +196,7 @@ Monochrome layer reuses the foreground. Must stay distinctive enough not to rese
   (audio focus, `USAGE_ALARM` vs in-call routing, speaker vs earpiece). Research how reliably
   this works on real phones before committing (owner, 2026-10-07).
 - Voice prompts; emergency call button (112/911 by locale); home-screen widget and
-  Quick Settings tile; Wear OS; Russian and Italian localization; signed release builds
+  Quick Settings tile; Wear OS; UI localization (7.2); signed release builds
   and store listings (Google Play, F-Droid).
 - Privacy statement and contact inside the app (About screen): "collects no data, no network
   permission" plus the support e-mail. Google Play's Health apps policy wants a privacy policy
@@ -218,6 +218,53 @@ behavior, what the user expected, and the open question.
   while and expected the ring to credit the clicks already made. Open question: what should the
   ring show when the number of compressions before the switch is unknown to the user, e.g. count
   the clicks of the current session modulo 30, or start at 1 as now. Reported once, 2026-10-07.
+
+### 7.2 UI localization
+
+The interface is English only, and the Russian store cards say so. Proposed language order
+(owner, 2026-10-07; to be confirmed):
+
+- **Tier 1, next: Russian (`values-ru`) and Italian (`values-it`).** Russian has the only live
+  users and a Russian card on all four stores. Italian is the owner's language, so review costs
+  nothing. Both carry the longest labels (СМЕНА СПАСАТЕЛЯ, ПРИГОТОВЬТЕСЬ, CAMBIO SOCCORRITORE),
+  so they force the layout work every later language reuses.
+- **Tier 2, after the first store feedback round, only with a native reviewer who knows CPR:**
+  Spanish (`values-es`, one translation for the es-ES and es-419 Play cards), German
+  (`values-de`, fixed GRC terminology), Ukrainian (`values-uk`, Cyrillic, reuses the Russian
+  layout).
+- **Tier 3, on demand only:** Brazilian Portuguese, French, Polish, Indonesian (`values-in`,
+  Android's legacy code), Turkish, Kazakh, Belarusian (most speakers in KZ/BY read Russian).
+  Arabic (RTL) and Hindi or CJK are separate projects. Trigger: a country reaches about 10 % of
+  installs in Play Console, two independent user requests, or a store questions the English UI
+  for that market.
+- **No machine translation of the prompts or the disclaimer without a reviewer.** Terms come
+  from the national resuscitation council texts (ERC translations, IRC, GRC, NRC). The review
+  happens on a running phone, not in a spreadsheet.
+
+Work before the first translation:
+
+1. Fix the English source. Hard-coded text moves to resources:
+   "OF 30" (MainScreen), "N min", "3 s", "8 s" (SettingsScreen), and "started" + time becomes
+   one format string. `app_name`, `mode_thirty_two` and `about_source_url` get
+   `translatable="false"`. Decide whether BPM becomes a language-neutral "/min".
+2. Locale-safe code. `"%02d".format(...)` in `Format.kt` takes `Locale.ROOT` (an Arabic system
+   locale would print Eastern Arabic digits in the timers). Capitals are written literally in
+   each `strings.xml`, never produced by `uppercase()`/`lowercase()` at runtime (Turkish dotless
+   i; SettingsScreen lowercases `off` today).
+3. Language selection follows the system. `generateLocaleConfig = true` plus
+   `res/resources.properties` gives the per-app language entry in Android 13+ settings; no
+   in-app picker. `androidResources.localeFilters` keeps only shipped languages in the APK.
+4. Pseudolocale pass (en-XA, ar-XB) and `@Preview(locale = "ru")`/`"it"` on the ring and the
+   big buttons at 360 dp; labels autosize on one line before any real translation lands.
+5. Glossary per language for the emergency prompts (CPR, compressions, BREATHE, GET READY,
+   SWITCH RESCUER, START, STOP) and the rate unit. Russian draft: СЛР, 2 ВДОХА, ПРИГОТОВЬТЕСЬ,
+   СМЕНА СПАСАТЕЛЯ, /мин (not «уд/мин», that means heartbeats).
+6. CI runs `lintDebug` with `MissingTranslation` and `ExtraTranslation` as errors; today it runs
+   only `test assembleDebug`.
+7. Store side, per shipped language: drop the "interface is English" line from that language's
+   cards, and only then add the language to AppGallery "Language" and Galaxy Store "Supported
+   Languages". Re-check the AppGallery 1.13 note in `store/listings/README.md`: the guideline
+   text found asks for localized listing info, not a localized UI.
 
 ## 8. Technical stack
 
