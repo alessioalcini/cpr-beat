@@ -187,6 +187,8 @@ Monochrome layer reuses the foreground. Must stay distinctive enough not to rese
 - Voice prompts; emergency call button (112/911 by locale); home-screen widget and
   Quick Settings tile; Wear OS; Russian and Italian localization; signed release builds
   and store listings (Google Play, F-Droid).
+- A proper first-launch tutorial. 0.1.0 ships only the non-blocking hints of 5.7; how a fuller
+  tutorial should look is undecided (owner, 2026-10-07).
 - Light theme or a theme switch. 0.1.0 is dark only by design (contrast outdoors, no
   surprises in an emergency); dynamic (Material You) colors are disabled for the same reason.
 
@@ -334,3 +336,4 @@ process or wording requirements.
 | 2026-10-07 | Breath cues open each half of the pause instead of fixed 0.5 s / 2.0 s offsets | Owner: with an 8 s pause the two cues came back to back and then silence; halves pace the breaths |
 | 2026-10-07 | Click timbre is a setting (Clean 1000 default; Wood 880, Low 660) | All three passed the phone listening test; owner wants the choice persistent |
 | 2026-10-07 | Mode/rate switch: build the new track first, read the playback position last | Review measured 30–200 ms of rendering and allocation between reading the position and starting the new track, which shifted the beat grid on every Compressions → 30:2 switch |
+| 2026-10-07 | Release signing: PKCS12 keystore outside the repo (`~/.cprbeat/release.jks`), `keystore.properties` git-ignored, same key for every store; Play App Signing on top | One certificate for RuStore, Galaxy Store and AppGallery; losing the key would orphan the app id |

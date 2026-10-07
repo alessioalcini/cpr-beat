@@ -20,3 +20,6 @@ local.properties
 # Design sources that are not ours to redistribute (Claude Design runtime, ChatGPT concept)
 design/claude-handoff/
 design/chatgpt/
+
+# Release signing (never commit)
+keystore.properties
