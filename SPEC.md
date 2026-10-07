@@ -198,6 +198,10 @@ Monochrome layer reuses the foreground. Must stay distinctive enough not to rese
 - Voice prompts; emergency call button (112/911 by locale); home-screen widget and
   Quick Settings tile; Wear OS; Russian and Italian localization; signed release builds
   and store listings (Google Play, F-Droid).
+- Privacy statement and contact inside the app (About screen): "collects no data, no network
+  permission" plus the support e-mail. Google Play's Health apps policy wants a privacy policy
+  link or text in the app, AppGallery guidelines 7.1 and 11.2 want an in-app privacy link and
+  contact information. Needed before the Play and AppGallery submissions (owner, 2026-10-07).
 - A proper first-launch tutorial. 0.1.0 ships only the non-blocking hints of 5.7; how a fuller
   tutorial should look is undecided (owner, 2026-10-07).
 - Light theme or a theme switch. 0.1.0 is dark only by design (contrast outdoors, no
@@ -347,6 +351,7 @@ process or wording requirements.
 | 2026-10-06 | Only stable SDK packages; preview tokens removed | Packages under `android-sdk-preview-license` forbid shipping apps built with them |
 | 2026-10-07 | SWITCH RESCUER banner moved into the countdown block, 5 s instead of 10 s | User report: the banner hid the mode buttons; 5 s matches the guideline switch window, and the covered digits had just reset |
 | 2026-10-07 | `CHANGELOG.md` in Keep a Changelog format from 0.2.0 on; fastlane `changelogs/<versionCode>.txt` written at release from its entry | Store listings need per-version notes; one source of truth in the repo |
+| 2026-10-07 | Store listings in English (default) and Russian on Play, Galaxy Store and AppGallery; Russian only on RuStore; both texts state that the interface is English; fastlane texts are the source, `store/listings/build.py` generates per-store files | All four stores accept a Russian card and show it by device language; a Russian card over an English UI is allowed everywhere if declared |
 | 2026-10-06 | AGP 9.4.1 with built-in Kotlin, Gradle 9.7.1, JDK 17 | Latest stable set that runs on JDK 17; Gradle 9.7.x is inside Kotlin 2.4.20's tested range |
 | 2026-10-06 | Visuals from the ChatGPT concept, behaviour and sizes from the Claude Design prototype | Owner preference; the Claude prototype encodes shape-based state changes and a 160 dp START |
 | 2026-10-06 | System font only, no bundled font | Smaller APK, no font-loading risk on odd devices |
