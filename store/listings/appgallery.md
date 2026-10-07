@@ -15,8 +15,8 @@ Policy notes: name without special characters, price or promo words (1.1–1.5);
 authoritative" claims (1.14); no names or logos of other platforms or device brands (1.16); no
 beta/test wording unless "Version for open testing" is used; guideline 1.13 expects localized
 listings to match a localized app, so the Russian text states that the interface is English.
-Guideline 7.1 also wants an in-app privacy policy link, and 11.2 in-app contact information: both
-are backlog items for the app.
+Guideline 7.1 also wants an in-app privacy policy link, and 11.2 in-app contact information: About
+has both from 0.2.0 (privacy policy https://alessioalcini.github.io/cpr-beat/privacy/).
 
 ## English (US, default)
 
@@ -59,12 +59,13 @@ Important: CPR Beat is a pacing aid only. It is not a medical device and does no
 CPR Beat is an independent open-source project. It is not affiliated with, sponsored by, or endorsed by the American Heart Association or the European Resuscitation Council.
 ```
 
-**New features** (241 chars / 245 bytes, limit 500 chars)
+**New features** (326 chars / 332 bytes, limit 500 chars)
 
 ```text
 Version 0.2.0
 • The SWITCH RESCUER banner now appears over the countdown for 5 seconds instead of hiding the mode buttons for 10 seconds. Mode can be switched while it is shown.
 • About screen now cites the ERC 2025 resuscitation guidelines.
+• About now shows the privacy statement, a privacy policy link and a contact e-mail.
 ```
 
 ## Russian
@@ -106,10 +107,11 @@ CPR Beat задаёт правильный темп непрямого масс�
 CPR Beat — независимый проект с открытым кодом. Не связан с American Heart Association и European Resuscitation Council и не поддерживается ими.
 ```
 
-**New features** (225 chars / 384 bytes, limit 500 chars)
+**New features** (333 chars / 577 bytes, limit 500 chars)
 
 ```text
 Версия 0.2.0
 • Баннер SWITCH RESCUER теперь появляется поверх таймера на 5 секунд, а не закрывает кнопки режима на 10 секунд. Режим можно переключать, пока он показан.
 • В разделе «О приложении» указаны рекомендации ERC 2025.
+• В разделе «О приложении» появились заявление о конфиденциальности, ссылка на политику и e-mail для связи.
 ```

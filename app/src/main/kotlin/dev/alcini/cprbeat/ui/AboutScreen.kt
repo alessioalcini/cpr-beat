@@ -1,5 +1,6 @@
 package dev.alcini.cprbeat.ui
 
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -47,6 +48,8 @@ fun AboutScreen(onBack: () -> Unit) {
         }
     }
     val sourceUrl = stringResource(R.string.about_source_url)
+    val privacyUrl = stringResource(R.string.privacy_policy_url)
+    val email = stringResource(R.string.contact_email)
 
     Column(Modifier.fillMaxSize().background(CprColor.Background).safeDrawingPadding()) {
         ScreenHeader(stringResource(R.string.about), onBack)
@@ -57,15 +60,18 @@ fun AboutScreen(onBack: () -> Unit) {
             Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(20.dp)).background(CprColor.Surface)) {
                 AboutRow(stringResource(R.string.app_name), version)
                 AboutRow(stringResource(R.string.about_license), "MIT · Alessio Alcini")
-                Row(
-                    Modifier.fillMaxWidth().heightIn(min = 64.dp).clickable { context.startActivity(Intent(Intent.ACTION_VIEW, sourceUrl.toUri())) }.padding(horizontal = 20.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) { Text(stringResource(R.string.about_source), style = MaterialTheme.typography.bodyLarge, color = CprColor.Beat) }
+                LinkRow(stringResource(R.string.about_source)) { context.open(Intent(Intent.ACTION_VIEW, sourceUrl.toUri())) }
+                LinkRow(stringResource(R.string.privacy_policy)) { context.open(Intent(Intent.ACTION_VIEW, privacyUrl.toUri())) }
+                LinkRow(email, label = stringResource(R.string.contact)) {
+                    context.open(Intent(Intent.ACTION_SENDTO, "mailto:$email".toUri()).putExtra(Intent.EXTRA_SUBJECT, "CPR Beat $version"))
+                }
             }
             Text(stringResource(R.string.about_disclaimer), style = MaterialTheme.typography.bodyLarge, color = CprColor.OnBackground)
             Text(stringResource(R.string.about_guidelines), style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
             SectionLabel(stringResource(R.string.how_to_use))
             Text(stringResource(R.string.how_to_use_text), style = MaterialTheme.typography.bodyLarge, color = CprColor.OnBackground)
+            SectionLabel(stringResource(R.string.privacy))
+            Text(stringResource(R.string.privacy_text), style = MaterialTheme.typography.bodyLarge, color = CprColor.OnBackground)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                 SectionLabel(stringResource(R.string.third_party))
                 Text(
@@ -89,4 +95,20 @@ private fun AboutRow(label: String, value: String) {
         Text(label, style = MaterialTheme.typography.bodyLarge, color = CprColor.OnBackground)
         Text(value, style = MaterialTheme.typography.bodyLarge, color = CprColor.OnMuted)
     }
+}
+
+@Composable
+private fun LinkRow(text: String, label: String? = null, onClick: () -> Unit) {
+    Column(
+        Modifier.fillMaxWidth().heightIn(min = 64.dp).clickable(onClick = onClick).padding(horizontal = 20.dp, vertical = 10.dp),
+        verticalArrangement = Arrangement.Center,
+    ) {
+        if (label != null) Text(label, style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
+        Text(text, style = MaterialTheme.typography.bodyLarge, color = CprColor.Beat)
+    }
+}
+
+/** No browser or mail app installed: do nothing rather than crash; the address is on screen. */
+private fun Context.open(intent: Intent) {
+    runCatching { startActivity(intent) }
 }

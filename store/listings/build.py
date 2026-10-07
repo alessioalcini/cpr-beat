@@ -96,7 +96,7 @@ Store settings: type App, category **Medical**, up to 5 tags from Google's list 
 First aid, Medical, Health, Emergency, Safety; take whatever the list offers). App content:
 Health apps declaration → Medical → **Emergency and First Aid**; Data safety → no data collected
 or shared; Content rating → IARC questionnaire, expect Everyone / PEGI 3 / 3+; Ads → no;
-privacy policy URL required (the app itself must also carry a privacy statement, see backlog).
+privacy policy URL https://alessioalcini.github.io/cpr-beat/privacy/ (About carries the statement and the link from 0.2.0).
 
 Policy notes: no emoji, no ALL CAPS beyond the brand and acronyms, no "best / #1 / new / free for
 a limited time", no unattributed testimonials, no competitor names. Short description: one line,
@@ -215,8 +215,8 @@ Policy notes: name without special characters, price or promo words (1.1–1.5);
 authoritative" claims (1.14); no names or logos of other platforms or device brands (1.16); no
 beta/test wording unless "Version for open testing" is used; guideline 1.13 expects localized
 listings to match a localized app, so the Russian text states that the interface is English.
-Guideline 7.1 also wants an in-app privacy policy link, and 11.2 in-app contact information: both
-are backlog items for the app.
+Guideline 7.1 also wants an in-app privacy policy link, and 11.2 in-app contact information: About
+has both from 0.2.0 (privacy policy https://alessioalcini.github.io/cpr-beat/privacy/).
 
 ## English (US, default)
 

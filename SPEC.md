@@ -170,7 +170,8 @@ Opened via the gear icon. Items:
    the owner's listening test on a Samsung A52; the choice is persistent like the other settings.
 6. About: app version, MIT license, disclaimer ("pacing aid, not training or medical advice;
    call emergency services first"), the affiliation disclaimer from section 11.4, a link to the
-   source repository, and the third-party licenses as an expandable section inside About
+   source repository, a privacy policy link and the contact e-mail (card at the top), a short
+   PRIVACY statement, and the third-party licenses as an expandable section inside About
    (text shipped in assets from `THIRD_PARTY_NOTICES.md`). No separate licenses screen:
    the app has three screens, Main, Settings, About.
 
@@ -198,10 +199,6 @@ Monochrome layer reuses the foreground. Must stay distinctive enough not to rese
 - Voice prompts; emergency call button (112/911 by locale); home-screen widget and
   Quick Settings tile; Wear OS; UI localization (7.2); signed release builds
   and store listings (Google Play, F-Droid).
-- Privacy statement and contact inside the app (About screen): "collects no data, no network
-  permission" plus the support e-mail. Google Play's Health apps policy wants a privacy policy
-  link or text in the app, AppGallery guidelines 7.1 and 11.2 want an in-app privacy link and
-  contact information. Needed before the Play and AppGallery submissions (owner, 2026-10-07).
 - A proper first-launch tutorial. 0.1.0 ships only the non-blocking hints of 5.7; how a fuller
   tutorial should look is undecided (owner, 2026-10-07).
 - Short CPR comic: 5–6 illustrated panels on adult CPR, inside the app (owner, 2026-10-07).

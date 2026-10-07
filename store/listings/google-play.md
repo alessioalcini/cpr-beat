@@ -9,7 +9,7 @@ Store settings: type App, category **Medical**, up to 5 tags from Google's list 
 First aid, Medical, Health, Emergency, Safety; take whatever the list offers). App content:
 Health apps declaration → Medical → **Emergency and First Aid**; Data safety → no data collected
 or shared; Content rating → IARC questionnaire, expect Everyone / PEGI 3 / 3+; Ads → no;
-privacy policy URL required (the app itself must also carry a privacy statement, see backlog).
+privacy policy URL https://alessioalcini.github.io/cpr-beat/privacy/ (About carries the statement and the link from 0.2.0).
 
 Policy notes: no emoji, no ALL CAPS beyond the brand and acronyms, no "best / #1 / new / free for
 a limited time", no unattributed testimonials, no competitor names. Short description: one line,
@@ -54,13 +54,14 @@ Important: CPR Beat is a pacing aid only. It is not a medical device and does no
 CPR Beat is an independent open-source project. It is not affiliated with, sponsored by, or endorsed by the American Heart Association or the European Resuscitation Council.
 ```
 
-**Release notes** (241 chars / 245 bytes, limit 500 chars)  
+**Release notes** (326 chars / 332 bytes, limit 500 chars)  
 _Enter inside <en-US> … </en-US> tags in the release form._
 
 ```text
 Version 0.2.0
 • The SWITCH RESCUER banner now appears over the countdown for 5 seconds instead of hiding the mode buttons for 10 seconds. Mode can be switched while it is shown.
 • About screen now cites the ERC 2025 resuscitation guidelines.
+• About now shows the privacy statement, a privacy policy link and a contact e-mail.
 ```
 
 ## Russian (ru-RU)
@@ -102,11 +103,12 @@ CPR Beat задаёт правильный темп непрямого масс�
 CPR Beat — независимый проект с открытым кодом. Не связан с American Heart Association и European Resuscitation Council и не поддерживается ими.
 ```
 
-**Release notes** (225 chars / 384 bytes, limit 500 chars)  
+**Release notes** (333 chars / 577 bytes, limit 500 chars)  
 _Enter inside <ru-RU> … </ru-RU> tags in the release form._
 
 ```text
 Версия 0.2.0
 • Баннер SWITCH RESCUER теперь появляется поверх таймера на 5 секунд, а не закрывает кнопки режима на 10 секунд. Режим можно переключать, пока он показан.
 • В разделе «О приложении» указаны рекомендации ERC 2025.
+• В разделе «О приложении» появились заявление о конфиденциальности, ссылка на политику и e-mail для связи.
 ```

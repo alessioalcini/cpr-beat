@@ -60,12 +60,13 @@ Important: CPR Beat is a pacing aid only. It is not a medical device and does no
 CPR Beat is an independent open-source project. It is not affiliated with, sponsored by, or endorsed by the American Heart Association or the European Resuscitation Council.
 ```
 
-**New feature** (241 chars / 245 bytes, limit 4000 bytes)
+**New feature** (326 chars / 332 bytes, limit 4000 bytes)
 
 ```text
 Version 0.2.0
 • The SWITCH RESCUER banner now appears over the countdown for 5 seconds instead of hiding the mode buttons for 10 seconds. Mode can be switched while it is shown.
 • About screen now cites the ERC 2025 resuscitation guidelines.
+• About now shows the privacy statement, a privacy policy link and a contact e-mail.
 ```
 
 ## Russian (added language)
@@ -108,10 +109,11 @@ CPR Beat задаёт правильный темп непрямого масс�
 CPR Beat — независимый проект с открытым кодом. Не связан с American Heart Association и European Resuscitation Council и не поддерживается ими.
 ```
 
-**New feature** (225 chars / 384 bytes, limit 4000 bytes)
+**New feature** (333 chars / 577 bytes, limit 4000 bytes)
 
 ```text
 Версия 0.2.0
 • Баннер SWITCH RESCUER теперь появляется поверх таймера на 5 секунд, а не закрывает кнопки режима на 10 секунд. Режим можно переключать, пока он показан.
 • В разделе «О приложении» указаны рекомендации ERC 2025.
+• В разделе «О приложении» появились заявление о конфиденциальности, ссылка на политику и e-mail для связи.
 ```

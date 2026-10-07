@@ -8,6 +8,11 @@ matching entry at release time.
 
 ## [Unreleased]
 
+### Added
+
+- About shows a privacy statement (no data collected, no internet permission), a link to
+  the privacy policy and the developer's contact e-mail.
+
 ### Changed
 
 - The SWITCH RESCUER banner now appears in the countdown block, covering the digits for

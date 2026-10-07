@@ -36,6 +36,12 @@
     <string name="about_source_url">https://github.com/alessioalcini/cpr-beat</string>
     <string name="about_disclaimer">Pacing aid only. CPR Beat is not a medical device, does not diagnose, treat, cure or prevent any condition, and is not a substitute for certified CPR training. In an emergency, call your local emergency number first.</string>
     <string name="about_guidelines">The 100, 110 and 120 bpm options cover the 100–120 compressions per minute recommended by current resuscitation guidelines (AHA 2025, ERC 2025). CPR Beat is an independent open-source project. It is not affiliated with, sponsored by, or endorsed by the American Heart Association or the European Resuscitation Council.</string>
+    <string name="privacy">PRIVACY</string>
+    <string name="privacy_text">CPR Beat collects, stores and shares no personal data. It has no internet permission, no ads, no analytics and no accounts. Settings stay on this phone, are not backed up to the cloud, and are deleted when you uninstall the app.</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="privacy_policy_url" translatable="false">https://alessioalcini.github.io/cpr-beat/privacy/</string>
+    <string name="contact">Contact</string>
+    <string name="contact_email" translatable="false">alessio.alcini.it@gmail.com</string>
     <string name="how_to_use">HOW TO USE</string>
     <string name="how_to_use_text">Tap the big circle or START to begin. The clicks set the compression rate; 30:2 counts thirty compressions, then pauses for two breaths. Tap the countdown to change the rescuer-switch interval for this session. Rate and mode taps last until STOP; Settings holds the defaults every start uses.</string>
     <string name="third_party">THIRD-PARTY LICENSES</string>
