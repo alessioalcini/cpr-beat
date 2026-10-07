@@ -52,6 +52,7 @@ import dev.alcini.cprbeat.R
 import dev.alcini.cprbeat.engine.CycleSpec
 import dev.alcini.cprbeat.engine.Mode
 import dev.alcini.cprbeat.engine.Position
+import dev.alcini.cprbeat.session.BANNER_MILLIS
 import dev.alcini.cprbeat.session.BeatSnapshot
 import dev.alcini.cprbeat.session.CountdownOption
 import dev.alcini.cprbeat.session.SessionState
@@ -91,8 +92,7 @@ fun MainScreen(
         ) {
             CountdownBlock(state, onTap = { onAnyTap(); onCycleCountdown() }, onOpenSettings = { onAnyTap(); onOpenSettings() })
 
-            if (state.bannerRemainingMillis > 0) SwitchBanner(state.bannerRemainingMillis)
-            else ModeSelector(state.mode, enabled = true) { onAnyTap(); onMode(it) }
+            ModeSelector(state.mode) { onAnyTap(); onMode(it) }
 
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
                 if (state.running) {
@@ -125,7 +125,10 @@ fun MainScreen(
 private fun CountdownBlock(state: SessionState, onTap: () -> Unit, onOpenSettings: () -> Unit) {
     val off = state.countdown == CountdownOption.OFF
     Box(Modifier.fillMaxWidth().height(CprSize.TimerBlock)) {
-        Column(
+        // The banner covers the digits for BANNER_MILLIS; the countdown keeps running underneath
+        // and taps are ignored so the interval cannot be changed by accident (SPEC 5.4).
+        if (state.bannerRemainingMillis > 0) SwitchBanner(state.bannerRemainingMillis, Modifier.align(Alignment.Center))
+        else Column(
             modifier = Modifier.fillMaxSize().clickable(interactionSource = remember { MutableInteractionSource() }, indication = null, onClick = onTap),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -145,7 +148,7 @@ private fun CountdownBlock(state: SessionState, onTap: () -> Unit, onOpenSetting
 }
 
 @Composable
-private fun ModeSelector(mode: Mode, enabled: Boolean, onMode: (Mode) -> Unit) {
+private fun ModeSelector(mode: Mode, onMode: (Mode) -> Unit) {
     val shape = RoundedCornerShape(32.dp)
     Row(
         Modifier.fillMaxWidth().height(CprSize.Segmented).clip(shape).border(BorderStroke(2.dp, CprColor.Outline), shape),
@@ -165,16 +168,16 @@ private fun Segment(label: String, selected: Boolean, modifier: Modifier, onClic
 }
 
 @Composable
-private fun SwitchBanner(remainingMillis: Long) {
+private fun SwitchBanner(remainingMillis: Long, modifier: Modifier = Modifier) {
     Column(
-        Modifier.fillMaxWidth().height(CprSize.SwitchBanner).clip(RoundedCornerShape(24.dp)).background(CprColor.Beat),
+        modifier.fillMaxWidth().height(CprSize.SwitchBanner).clip(RoundedCornerShape(24.dp)).background(CprColor.Beat),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
         Text(stringResource(R.string.switch_rescuer), style = MaterialTheme.typography.headlineMedium, color = CprColor.OnBeat)
         Spacer(Modifier.height(8.dp))
         Box(Modifier.width(240.dp).height(6.dp).clip(RoundedCornerShape(3.dp)).background(CprColor.OnBeat.copy(alpha = 0.25f))) {
-            Box(Modifier.fillMaxWidth(remainingMillis / 10_000f).height(6.dp).background(CprColor.OnBeat))
+            Box(Modifier.fillMaxWidth(remainingMillis / BANNER_MILLIS.toFloat()).height(6.dp).background(CprColor.OnBeat))
         }
     }
 }

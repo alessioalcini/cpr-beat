@@ -210,7 +210,6 @@ class SessionViewModel(app: Application) : AndroidViewModel(app) {
 
     private companion object {
         const val TICK_MILLIS = 100L
-        const val BANNER_MILLIS = 10_000L
         val RATES = listOf(100, 110, 120)
     }
 }

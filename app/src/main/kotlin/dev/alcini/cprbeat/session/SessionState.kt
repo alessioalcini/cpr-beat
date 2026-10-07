@@ -4,6 +4,9 @@ import dev.alcini.cprbeat.engine.Mode
 import dev.alcini.cprbeat.engine.Position
 import dev.alcini.cprbeat.engine.Tempo
 
+/** How long the SWITCH RESCUER banner covers the countdown digits after an expiry (SPEC 5.4). */
+const val BANNER_MILLIS = 5_000L
+
 /** Everything the main screen shows. Produced by [SessionViewModel]. */
 data class SessionState(
     val running: Boolean = false,

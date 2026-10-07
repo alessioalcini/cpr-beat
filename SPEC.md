@@ -111,8 +111,13 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 - Tapping the countdown block cycles Off → 1 → 2 → 3 → 5 → Off. This is a per-session override
   like rate and mode (section 5.5). While running, the new value applies at once and the
   countdown restarts from it.
-- At 00:00: one single screen flash (about 300 ms), the banner **SWITCH RESCUER** is shown
-  for 10 seconds, and the countdown restarts immediately. The metronome is not affected.
+- At 00:00: one single screen flash (about 300 ms) and the countdown restarts immediately. The
+  banner **SWITCH RESCUER** covers the countdown digits for 5 seconds, then the running countdown
+  shows through again. Taps on the banner are ignored. The mode buttons stay on screen and
+  usable. 5 s matches the guideline window for a rescuer switch (ERC/AHA: change over within
+  about 5 s) and gives a rescuer who looked up after the flash time to read it; the covered
+  digits carry no information because the countdown has just restarted. The metronome is not
+  affected.
 - No sound is attached to the countdown. The only sounds in the app are the metronome
   clicks and the 30:2 breath cues.
 
@@ -340,6 +345,7 @@ process or wording requirements.
 | 2026-10-06 | English only | Owner decision for 0.1.0 |
 | 2026-10-06 | compileSdk 37, targetSdk stays 36 | Compose 1.12 / core 1.19 / lifecycle 2.11 require API 37 to compile; behaviour is still defined by targetSdk 36 (Android 16) |
 | 2026-10-06 | Only stable SDK packages; preview tokens removed | Packages under `android-sdk-preview-license` forbid shipping apps built with them |
+| 2026-10-07 | SWITCH RESCUER banner moved into the countdown block, 5 s instead of 10 s | User report: the banner hid the mode buttons; 5 s matches the guideline switch window, and the covered digits had just reset |
 | 2026-10-06 | AGP 9.4.1 with built-in Kotlin, Gradle 9.7.1, JDK 17 | Latest stable set that runs on JDK 17; Gradle 9.7.x is inside Kotlin 2.4.20's tested range |
 | 2026-10-06 | Visuals from the ChatGPT concept, behaviour and sizes from the Claude Design prototype | Owner preference; the Claude prototype encodes shape-based state changes and a 160 dp START |
 | 2026-10-06 | System font only, no bundled font | Smaller APK, no font-loading risk on odd devices |
