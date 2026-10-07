@@ -198,6 +198,18 @@ Monochrome layer reuses the foreground. Must stay distinctive enough not to rese
 - Light theme or a theme switch. 0.1.0 is dark only by design (contrast outdoors, no
   surprises in an emergency); dynamic (Material You) colors are disabled for the same reason.
 
+### 7.1 User feedback under observation
+
+Single reports from early users. Policy: collect feedback and act only on what repeats; one
+opinion is not a reason to redesign (owner, 2026-10-07). Each item records the current
+behavior, what the user expected, and the open question.
+
+- **Switching Compressions → 30:2 restarts the ring from zero.** Current behavior is by design
+  (5.3: the counter restarts at 1 on a mode switch). The user had already been compressing for a
+  while and expected the ring to credit the clicks already made. Open question: what should the
+  ring show when the number of compressions before the switch is unknown to the user, e.g. count
+  the clicks of the current session modulo 30, or start at 1 as now. Reported once, 2026-10-07.
+
 ## 8. Technical stack
 
 | Item | Choice |
