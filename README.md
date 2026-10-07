@@ -24,8 +24,8 @@ American Heart Association or the European Resuscitation Council.
 
 ## Status
 
-v0.1.0 is out as a signed APK in [GitHub Releases](https://github.com/alessioalcini/cpr-beat/releases).
-Version 0.2.0 is being prepared for the app stores. [SPEC.md](SPEC.md) holds the agreed scope and
+Version 0.2.0 is being prepared for the app stores, starting with a closed test on Google Play;
+testers are recruited in the Telegram channel below. [SPEC.md](SPEC.md) holds the agreed scope and
 decisions, [Issues](https://github.com/alessioalcini/cpr-beat/issues) hold the backlog.
 
 ## News and feedback
