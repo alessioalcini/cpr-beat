@@ -123,7 +123,13 @@ fun AuditionScreen() {
                         scope.launch(Dispatchers.Default) { player.stop(); volume.restore() }
                     } else {
                         if (autoMax) volume.raiseIfQuiet()
-                        scope.launch(Dispatchers.Default) { player.start(spec()) }
+                        scope.launch(Dispatchers.Default) {
+                            player.start(spec())
+                            // pre-render what a switch is likely to need so switching never waits
+                            val other = if (mode == Mode.COMPRESSIONS) Mode.THIRTY_TWO else Mode.COMPRESSIONS
+                            player.prepare(CycleSpec(other, bpm, pauseSec * 1_000, player.nativeSampleRateHz))
+                            for (b in listOf(100, 110, 120)) if (b != bpm) player.prepare(CycleSpec(mode, b, pauseSec * 1_000, player.nativeSampleRateHz))
+                        }
                         playing = true
                     }
                 },

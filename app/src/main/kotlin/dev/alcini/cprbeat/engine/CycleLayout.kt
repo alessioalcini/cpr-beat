@@ -45,8 +45,8 @@ class CycleLayout private constructor(
         if (frameInCycle >= pauseStartFrame) {
             val elapsed = frameInCycle - pauseStartFrame
             val cued = when {
-                elapsed >= spec.millisToFrames(BREATH_2_OFFSET_MILLIS) -> 2
-                elapsed >= spec.millisToFrames(BREATH_1_OFFSET_MILLIS) -> 1
+                elapsed >= breathFrame(2) - pauseStartFrame -> 2
+                elapsed >= breathFrame(1) - pauseStartFrame -> 1
                 else -> 0
             }
             return Position.BreathPause(elapsedFrames = elapsed, totalFrames = pauseFrames, breathsCued = cued)
@@ -59,9 +59,11 @@ class CycleLayout private constructor(
         )
     }
 
+    /** Frame of the n-th breath tone (1 or 2): the start of the n-th half of the pause. */
+    fun breathFrame(n: Int): Int = pauseStartFrame + (n - 1) * (pauseFrames / BREATHS_PER_PAUSE)
+
     companion object {
-        const val BREATH_1_OFFSET_MILLIS = 500
-        const val BREATH_2_OFFSET_MILLIS = 2_000
+        const val BREATHS_PER_PAUSE = 2
         const val RESUME_BEFORE_END_MILLIS = 500
 
         fun of(spec: CycleSpec): CycleLayout {
@@ -81,9 +83,10 @@ class CycleLayout private constructor(
                         val kind = if (c > n - CycleSpec.WARNING_ZONE_SIZE) EventKind.WARNING_CLICK else EventKind.CLICK
                         CycleEvent(kind, frame = (c - 1) * beat, compression = c)
                     }
+                    val half = spec.pauseFrames / BREATHS_PER_PAUSE
                     val cues = listOf(
-                        CycleEvent(EventKind.BREATH_TONE, frame = pauseStart + spec.millisToFrames(BREATH_1_OFFSET_MILLIS)),
-                        CycleEvent(EventKind.BREATH_TONE, frame = pauseStart + spec.millisToFrames(BREATH_2_OFFSET_MILLIS)),
+                        CycleEvent(EventKind.BREATH_TONE, frame = pauseStart),
+                        CycleEvent(EventKind.BREATH_TONE, frame = pauseStart + half),
                         CycleEvent(EventKind.RESUME_TONE, frame = total - spec.millisToFrames(RESUME_BEFORE_END_MILLIS)),
                     )
                     CycleLayout(spec = spec, events = clicks + cues, totalFrames = total, pauseStartFrame = pauseStart)

@@ -39,15 +39,18 @@ class CycleLayoutTest {
     }
 
     @Test
-    fun `breath and resume tones sit inside the pause at the specified offsets`() {
-        val layout = CycleLayout.of(CycleSpec(Mode.THIRTY_TWO, bpm = 100, breathPauseMillis = 3_000))
-        val pauseStart = layout.pauseStartFrame
-        val breaths = layout.events.filter { it.kind == EventKind.BREATH_TONE }.map { it.frame }
-        val resume = layout.events.single { it.kind == EventKind.RESUME_TONE }.frame
-        assertEquals(listOf(pauseStart + sr / 2, pauseStart + 2 * sr), breaths)
-        assertEquals(layout.totalFrames - sr / 2, resume)
-        // the shortest allowed pause still orders the cues: breath 1 < breath 2 < resume < end
-        assertTrue(breaths[0] < breaths[1] && breaths[1] < resume && resume < layout.totalFrames)
+    fun `breath tones open each half of the pause and the resume tone precedes its end`() {
+        for (pause in listOf(3_000, 4_000, 5_000, 8_000)) {
+            val layout = CycleLayout.of(CycleSpec(Mode.THIRTY_TWO, bpm = 100, breathPauseMillis = pause))
+            val pauseStart = layout.pauseStartFrame
+            val half = layout.pauseFrames / 2
+            val breaths = layout.events.filter { it.kind == EventKind.BREATH_TONE }.map { it.frame }
+            val resume = layout.events.single { it.kind == EventKind.RESUME_TONE }.frame
+            assertEquals("pause $pause", listOf(pauseStart, pauseStart + half), breaths)
+            assertEquals(listOf(pauseStart, pauseStart + half), listOf(layout.breathFrame(1), layout.breathFrame(2)))
+            assertEquals(layout.totalFrames - sr / 2, resume)
+            assertTrue(breaths[0] < breaths[1] && breaths[1] < resume && resume < layout.totalFrames)
+        }
     }
 
     @Test
@@ -66,10 +69,10 @@ class CycleLayoutTest {
         val spec = CycleSpec(Mode.THIRTY_TWO, bpm = 110, breathPauseMillis = 5_000)
         val layout = CycleLayout.of(spec)
         val p0 = layout.positionAt(layout.pauseStartFrame)
-        assertEquals(Position.BreathPause(0, 5 * sr, 0), p0)
-        val p1 = layout.positionAt(layout.pauseStartFrame + sr / 2)
+        assertEquals(Position.BreathPause(0, 5 * sr, 1), p0)
+        val p1 = layout.positionAt(layout.pauseStartFrame + 5 * sr / 2 - 1)
         assertEquals(1, (p1 as Position.BreathPause).breathsCued)
-        val p2 = layout.positionAt(layout.pauseStartFrame + 2 * sr)
+        val p2 = layout.positionAt(layout.pauseStartFrame + 5 * sr / 2)
         assertEquals(2, (p2 as Position.BreathPause).breathsCued)
         val last = layout.positionAt(layout.totalFrames - 1) as Position.BreathPause
         assertEquals(5 * sr - 1, last.elapsedFrames)

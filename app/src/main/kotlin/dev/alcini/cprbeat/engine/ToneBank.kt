@@ -88,7 +88,9 @@ data class ToneBank(
             resume = resume(1000.0),
         )
 
-        val DEFAULT = WOOD
-        val presets = listOf(WOOD, LOW, CLEAN)
+        val DEFAULT = CLEAN
+        val presets = listOf(CLEAN, WOOD, LOW)
+
+        fun byName(name: String?): ToneBank = presets.firstOrNull { it.name == name } ?: DEFAULT
     }
 }

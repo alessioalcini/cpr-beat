@@ -97,9 +97,10 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
   - The last five compressions (26–30) are the warning zone: their five ticks are longer and
     one solid red from the start of the cycle, the disk outline and the label "GET READY" turn
     red while in the zone, and the clicks use a higher pitch.
-  - Breath pause length: default 5 s, adjustable 3–8 s in Settings. Within the pause:
-    a long "breath" tone at 0.5 s, a second long "breath" tone at 2.0 s, a short "resume"
-    tone 0.5 s before the pause ends, then click 1 at the end of the pause.
+  - Breath pause length: default 5 s, adjustable 3–8 s in Settings. The pause is split into two
+    equal halves, one per breath: a "breath" tone opens each half, a short "resume" tone sounds
+    0.5 s before the pause ends, then click 1 at the end of the pause. So at 8 s the breaths are
+    paced 4 s apart, at 4 s they are 2 s apart.
 - Switching mode while running takes effect immediately; the counter restarts at 1.
 
 ### 5.4 Rescuer-switch countdown
@@ -160,7 +161,9 @@ Opened via the gear icon. Items:
 2. Default countdown: Off / 1 / 2 / 3 / 5 min (factory 2).
 3. Breath pause in 30:2: 3–8 s (factory 5).
 4. Auto max volume: on / off (factory on).
-5. About: app version, MIT license, disclaimer ("pacing aid, not training or medical advice;
+5. Click sound: Clean 1000 (factory default), Wood 880, Low 660. Three timbres that all passed
+   the owner's listening test on a Samsung A52; the choice is persistent like the other settings.
+6. About: app version, MIT license, disclaimer ("pacing aid, not training or medical advice;
    call emergency services first"), the affiliation disclaimer from section 11.4, a link to the
    source repository, and the third-party licenses as an expandable section inside About
    (text shipped in assets from `THIRD_PARTY_NOTICES.md`). No separate licenses screen:
@@ -328,3 +331,6 @@ process or wording requirements.
 | 2026-10-06 | Launcher icon v2 (heart + monitor-style pulse line, amber/black/white) | Owner choice; reads best at 32 px among four candidates |
 | 2026-10-07 | Countdown Off shows OFF in place; tapping the countdown cycles Off/1/2/3/5 per session | Layout must never shift; quick change without opening Settings |
 | 2026-10-07 | First-launch hints as non-blocking on-screen labels, dismissed by any tap; "How to use" in About | Owner: hidden taps need a tutorial; a modal would stand between the user and START in an emergency |
+| 2026-10-07 | Breath cues open each half of the pause instead of fixed 0.5 s / 2.0 s offsets | Owner: with an 8 s pause the two cues came back to back and then silence; halves pace the breaths |
+| 2026-10-07 | Click timbre is a setting (Clean 1000 default; Wood 880, Low 660) | All three passed the phone listening test; owner wants the choice persistent |
+| 2026-10-07 | Mode/rate switch: build the new track first, read the playback position last | Review measured 30–200 ms of rendering and allocation between reading the position and starting the new track, which shifted the beat grid on every Compressions → 30:2 switch |

@@ -27,7 +27,14 @@ class ClickPlayer {
     private class Session(val track: AudioTrack, val layout: CycleLayout, val entryFrame: Int)
 
     @Volatile private var session: Session? = null
+
     var bank: ToneBank = ToneBank.DEFAULT
+        set(value) { if (value != field) { field = value; pcmCache.clear() } }
+
+    /** Rendered cycles by spec, most recently used last; a switch to a cached spec skips rendering. */
+    private val pcmCache = object : LinkedHashMap<CycleSpec, ShortArray>(8, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<CycleSpec, ShortArray>?) = size > MAX_CACHED
+    }
 
     val current: CycleLayout? get() = session?.layout
     val isPlaying: Boolean get() = session?.track?.playState == AudioTrack.PLAYSTATE_PLAYING
@@ -37,10 +44,20 @@ class ClickPlayer {
         get() = AudioTrack.getNativeOutputSampleRate(AudioManager.STREAM_ALARM).takeIf { it > 0 }
             ?: CycleSpec.DEFAULT_SAMPLE_RATE_HZ
 
-    /** Starts looping the cycle described by [spec] from buffer frame [startFrameInCycle]. */
-    fun start(spec: CycleSpec, startFrameInCycle: Int = 0) {
+    /** Renders and caches the cycle for [spec] so a later switch to it costs no rendering. */
+    fun prepare(spec: CycleSpec) { pcmFor(spec) }
+
+    private fun pcmFor(spec: CycleSpec): ShortArray =
+        pcmCache.getOrPut(spec) { PcmRenderer.render(CycleLayout.of(spec), bank) }
+
+    /**
+     * Starts looping the cycle described by [spec]. [entryFrame] is evaluated at the last
+     * moment, after the new track is built and written, so the frame it returns (usually read
+     * from the track still playing) is at most a few milliseconds stale when playback begins.
+     */
+    fun start(spec: CycleSpec, entryFrame: (CycleLayout) -> Int = { 0 }) {
         val newLayout = CycleLayout.of(spec)
-        val pcm = PcmRenderer.render(newLayout, bank)
+        val pcm = pcmFor(spec)
         val newTrack = AudioTrack.Builder()
             .setAudioAttributes(
                 AudioAttributes.Builder()
@@ -64,14 +81,15 @@ class ClickPlayer {
         val written = newTrack.write(pcm, 0, pcm.size)
         check(written == pcm.size) { "AudioTrack.write returned $written of ${pcm.size} frames" }
         check(newTrack.setLoopPoints(0, pcm.size, -1) == AudioTrack.SUCCESS) { "setLoopPoints failed" }
-        val entry = startFrameInCycle.coerceIn(0, pcm.size - 1)
-        if (entry > 0) check(newTrack.setPlaybackHeadPosition(entry) == AudioTrack.SUCCESS) { "setPlaybackHeadPosition failed" }
-        Log.d(TAG, "start mode=${spec.mode} bpm=${spec.bpm} total=${pcm.size} entry=$entry")
 
+        // Everything slow is done; now read where the old track is and swap as fast as possible.
         val old = session
+        val entry = entryFrame(newLayout).coerceIn(0, pcm.size - 1)
+        if (entry > 0) check(newTrack.setPlaybackHeadPosition(entry) == AudioTrack.SUCCESS) { "setPlaybackHeadPosition failed" }
         old?.track?.let { runCatching { it.pause() } }
         session = Session(newTrack, newLayout, entry)
         newTrack.play()
+        Log.d(TAG, "start mode=${spec.mode} bpm=${spec.bpm} total=${pcm.size} entry=$entry")
         old?.let { release(it.track) }
     }
 
@@ -81,14 +99,12 @@ class ClickPlayer {
      * of the beat so the next click stays on the grid, and restarts the count at 1.
      */
     fun switchTo(spec: CycleSpec) {
-        val old = session
-        val target = CycleLayout.of(spec)
-        val startFrame = when {
-            old == null -> 0
-            old.layout.spec.mode == spec.mode -> mapFrameBetween(frameInCycle(), old.layout, target)
-            else -> entryFrameForModeChange(frameInCycle(), old.layout, target)
+        start(spec) { target ->
+            val old = session ?: return@start 0
+            val frame = frameInCycle()
+            if (old.layout.spec.mode == spec.mode) mapFrameBetween(frame, old.layout, target)
+            else entryFrameForModeChange(frame, old.layout, target)
         }
-        start(spec, startFrame)
     }
 
     /**
@@ -116,5 +132,8 @@ class ClickPlayer {
         track.release()
     }
 
-    private companion object { const val TAG = "ClickPlayer" }
+    private companion object {
+        const val TAG = "ClickPlayer"
+        const val MAX_CACHED = 6
+    }
 }
