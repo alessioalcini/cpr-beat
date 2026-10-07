@@ -7,6 +7,7 @@ import android.media.AudioTrack
 import android.util.Log
 import dev.alcini.cprbeat.engine.CycleLayout
 import dev.alcini.cprbeat.engine.CycleSpec
+import dev.alcini.cprbeat.engine.Mode
 import dev.alcini.cprbeat.engine.PcmRenderer
 import dev.alcini.cprbeat.engine.ToneBank
 import dev.alcini.cprbeat.engine.entryFrameForModeChange
@@ -117,6 +118,22 @@ class ClickPlayer {
         val s = session ?: return 0
         val head = s.track.playbackHeadPosition.toLong() and 0xFFFF_FFFFL
         return ((head + s.entryFrame) % s.layout.totalFrames).toInt()
+    }
+
+    private var preview: AudioTrack? = null
+
+    /** Plays [beats] clicks of [bank] once, for the Settings screen. Does not touch the session. */
+    fun preview(bank: ToneBank, bpm: Int, beats: Int, sampleRateHz: Int) {
+        preview?.let { release(it) }
+        val one = PcmRenderer.render(CycleLayout.of(CycleSpec(Mode.COMPRESSIONS, bpm, sampleRateHz = sampleRateHz)), bank)
+        val pcm = ShortArray(one.size * beats) { one[it % one.size] }
+        val track = AudioTrack.Builder()
+            .setAudioAttributes(AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build())
+            .setAudioFormat(AudioFormat.Builder().setEncoding(AudioFormat.ENCODING_PCM_16BIT).setSampleRate(sampleRateHz).setChannelMask(AudioFormat.CHANNEL_OUT_MONO).build())
+            .setTransferMode(AudioTrack.MODE_STATIC)
+            .setBufferSizeInBytes(pcm.size * Short.SIZE_BYTES)
+            .build()
+        if (track.write(pcm, 0, pcm.size) == pcm.size) { preview = track; track.play() } else track.release()
     }
 
     fun stop() {

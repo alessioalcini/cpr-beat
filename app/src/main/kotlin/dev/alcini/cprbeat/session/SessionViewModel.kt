@@ -9,6 +9,7 @@ import dev.alcini.cprbeat.audio.VolumeController
 import dev.alcini.cprbeat.engine.CycleSpec
 import dev.alcini.cprbeat.engine.Mode
 import dev.alcini.cprbeat.engine.Tempo
+import dev.alcini.cprbeat.engine.ToneBank
 import dev.alcini.cprbeat.settings.Settings
 import dev.alcini.cprbeat.settings.SettingsRepository
 import kotlinx.coroutines.Dispatchers
@@ -44,10 +45,15 @@ class SessionViewModel(app: Application) : AndroidViewModel(app) {
     private val _state = MutableStateFlow(SessionState())
     val state: StateFlow<SessionState> = _state.asStateFlow()
 
+    private val _settings = MutableStateFlow(Settings())
+    /** Persistent settings as shown on the Settings screen. */
+    val settingsState: StateFlow<Settings> = _settings.asStateFlow()
+
     init {
         viewModelScope.launch {
             settingsRepo.settings.collect { s ->
                 settings = s
+                _settings.value = s
                 launch(audio) { player.bank = s.toneBank }
                 if (!_state.value.running) {
                     _state.update {
@@ -145,11 +151,13 @@ class SessionViewModel(app: Application) : AndroidViewModel(app) {
 
     fun setBpm(bpm: Int) {
         require(bpm in Tempo.MIN_BPM..Tempo.MAX_BPM)
+        if (_state.value.bpm == bpm) return
         val st = _state.updateAndGet { it.copy(bpm = bpm) }
         if (st.running) viewModelScope.launch(audio) { player.switchTo(specOf(st)) }
     }
 
     fun setMode(mode: Mode) {
+        if (_state.value.mode == mode) return
         val st = _state.updateAndGet { it.copy(mode = mode) }
         if (st.running) viewModelScope.launch(audio) { player.switchTo(specOf(st)); prewarm(st) }
     }
@@ -167,6 +175,15 @@ class SessionViewModel(app: Application) : AndroidViewModel(app) {
                 bannerRemainingMillis = 0,
             )
         }
+    }
+
+    fun setDefaultBpm(bpm: Int) { viewModelScope.launch { settingsRepo.setDefaultBpm(bpm) } }
+    fun setDefaultCountdown(option: CountdownOption) { viewModelScope.launch { settingsRepo.setDefaultCountdown(option) } }
+    fun setBreathPauseMillis(millis: Int) { viewModelScope.launch { settingsRepo.setBreathPauseMillis(millis) } }
+    fun setAutoMaxVolume(on: Boolean) { viewModelScope.launch { settingsRepo.setAutoMaxVolume(on) } }
+    fun setTonePreset(name: String) {
+        viewModelScope.launch { settingsRepo.setTonePreset(name) }
+        viewModelScope.launch(audio) { player.preview(ToneBank.byName(name), Tempo.DEFAULT_BPM, beats = 4, sampleRateHz = player.nativeSampleRateHz) }
     }
 
     fun dismissHints() {

@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CPR Beat</string>
+    <string name="switch_in">SWITCH IN</string>
+    <string name="switch_timer">SWITCH TIMER</string>
+    <string name="off">OFF</string>
+    <string name="mode_compressions">Compressions</string>
+    <string name="mode_thirty_two">30:2</string>
+    <string name="start">START</string>
+    <string name="stop">STOP</string>
+    <string name="get_ready">GET READY</string>
+    <string name="breathe">BREATHE</string>
+    <string name="switch_rescuer">SWITCH RESCUER</string>
+    <string name="bpm">BPM</string>
+    <string name="cpr_elapsed">CPR</string>
+    <string name="started_at">started</string>
+    <string name="volume_low">Volume is low — turn it up</string>
+    <string name="hint_start">Tap to start</string>
+    <string name="hint_countdown">Tap to change the switch interval</string>
+    <string name="hint_rate">Compression rate</string>
+    <string name="settings">Settings</string>
+    <string name="back">Back</string>
+    <string name="default_rate">DEFAULT RATE · BPM</string>
+    <string name="default_countdown">DEFAULT COUNTDOWN</string>
+    <string name="breath_pause">BREATH PAUSE</string>
+    <string name="auto_max_volume">Auto max volume</string>
+    <string name="auto_max_volume_hint">Raise the alarm volume to maximum while running</string>
+    <string name="click_sound">CLICK SOUND</string>
+    <string name="tone_low">Low</string>
+    <string name="tone_medium">Medium</string>
+    <string name="tone_high">High</string>
+    <string name="about">About</string>
+    <string name="about_version">Version</string>
+    <string name="about_license">License</string>
+    <string name="about_source">Source code on GitHub</string>
+    <string name="about_source_url">https://github.com/alessioalcini/cpr-beat</string>
+    <string name="about_disclaimer">Pacing aid only. CPR Beat is not a medical device, does not diagnose, treat, cure or prevent any condition, and is not a substitute for certified CPR training. In an emergency, call your local emergency number first.</string>
+    <string name="about_guidelines">The 100, 110 and 120 bpm options cover the 100–120 compressions per minute recommended by current resuscitation guidelines (AHA 2025, ERC 2021). CPR Beat is an independent open-source project. It is not affiliated with, sponsored by, or endorsed by the American Heart Association or the European Resuscitation Council.</string>
+    <string name="how_to_use">HOW TO USE</string>
+    <string name="how_to_use_text">Tap the big circle or START to begin. The clicks set the compression rate; 30:2 counts thirty compressions, then pauses for two breaths. Tap the countdown to change the rescuer-switch interval for this session. Rate and mode taps last until STOP; Settings holds the defaults every start uses.</string>
+    <string name="third_party">THIRD-PARTY LICENSES</string>
+    <string name="show">Show</string>
+    <string name="hide">Hide</string>
 </resources>
