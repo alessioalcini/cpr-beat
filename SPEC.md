@@ -204,6 +204,29 @@ Monochrome layer reuses the foreground. Must stay distinctive enough not to rese
   contact information. Needed before the Play and AppGallery submissions (owner, 2026-10-07).
 - A proper first-launch tutorial. 0.1.0 ships only the non-blocking hints of 5.7; how a fuller
   tutorial should look is undecided (owner, 2026-10-07).
+- Short CPR comic: 5–6 illustrated panels on adult CPR, inside the app (owner, 2026-10-07).
+  Draft panels: (1) scene is safe, check response, shout for help; (2) not breathing normally
+  (gasping counts as not breathing): call 112 on speaker, send someone for an AED; (3) heel of
+  the hand on the centre of the chest, other hand on top, arms straight; (4) push 5–6 cm in time
+  with the app's clicks, let the chest rise fully; (5) 30:2 if trained in rescue breaths,
+  otherwise compressions only; (6) do not stop until help arrives, an AED is ready or the person
+  breathes normally; switch rescuers about every 2 minutes. Constraints:
+  - Reached from the idle screen and About as a "How to do CPR" link. Never placed between START
+    and the first click: in an emergency nobody reads a comic, the clicks come first.
+  - Content follows the guideline basis of section 3, says it is for adults, and a certified CPR
+    instructor reviews every panel before release.
+  - Own artwork under a licence compatible with MIT and F-Droid (e.g. CC BY 4.0), as vector
+    drawables. No AHA/ERC posters or course artwork (11.4). AI-generated drawings only if the
+    instructor checks hand position and posture in each panel.
+  - Captions live in `strings.xml`, not inside the images, so the comic follows the UI
+    localization (7.2). The Russian version is checked against the national first-aid rules.
+  - Framing is a quick reminder, not training. Section 11.4 keeps the app "software, never
+    training" because of the "ONE BEAT CPR" mark for training services, so the disclaimer "not a
+    substitute for certified CPR training" sits next to the comic and no store text calls it a
+    course or a lesson.
+  - Dark theme, one `contentDescription` per panel for TalkBack.
+  - The tutorial item above teaches the app, the comic teaches CPR. Decide whether first launch
+    offers both or neither.
 - Light theme or a theme switch. 0.1.0 is dark only by design (contrast outdoors, no
   surprises in an emergency); dynamic (Material You) colors are disabled for the same reason.
 
