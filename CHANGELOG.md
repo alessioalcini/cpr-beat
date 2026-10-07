@@ -13,6 +13,8 @@ matching entry at release time.
 - The SWITCH RESCUER banner now appears in the countdown block, covering the digits for
   5 seconds instead of occupying the mode selector for 10 seconds. The mode buttons stay
   on screen while the banner is shown, and the countdown keeps running underneath it.
+- About screen and store descriptions cite the ERC 2025 guidelines instead of ERC 2021;
+  the 100–120 per minute rate is unchanged.
 
 ## [0.1.0] - 2026-10-06
 

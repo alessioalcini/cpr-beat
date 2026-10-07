@@ -52,18 +52,19 @@ Features
 
 Interface language: English.
 
-The 100–120 compressions per minute range follows current resuscitation guidelines (AHA 2025, ERC 2021).
+The 100–120 compressions per minute range follows current resuscitation guidelines (AHA 2025, ERC 2025).
 
 Important: CPR Beat is a pacing aid only. It is not a medical device and does not diagnose, treat, cure or prevent any medical condition. It is not a substitute for certified CPR training. In an emergency, call your local emergency number first and follow the dispatcher's instructions. Consult a healthcare professional for medical advice.
 
 CPR Beat is an independent open-source project. It is not affiliated with, sponsored by, or endorsed by the American Heart Association or the European Resuscitation Council.
 ```
 
-**New features** (177 chars / 179 bytes, limit 500 chars)
+**New features** (241 chars / 245 bytes, limit 500 chars)
 
 ```text
 Version 0.2.0
 • The SWITCH RESCUER banner now appears over the countdown for 5 seconds instead of hiding the mode buttons for 10 seconds. Mode can be switched while it is shown.
+• About screen now cites the ERC 2025 resuscitation guidelines.
 ```
 
 ## Russian
@@ -98,16 +99,17 @@ CPR Beat задаёт правильный темп непрямого масс�
 
 Интерфейс приложения на английском языке.
 
-Диапазон 100–120 компрессий в минуту соответствует действующим рекомендациям по реанимации (AHA 2025, ERC 2021).
+Диапазон 100–120 компрессий в минуту соответствует действующим рекомендациям по реанимации (AHA 2025, ERC 2025).
 
 Важно: CPR Beat — только вспомогательный метроном. Это не медицинское изделие, приложение не диагностирует, не лечит и не предотвращает заболевания и не заменяет сертифицированное обучение СЛР. В экстренной ситуации сначала вызовите скорую помощь (112 или 103) и следуйте указаниям диспетчера. За медицинской консультацией обращайтесь к врачу.
 
 CPR Beat — независимый проект с открытым кодом. Не связан с American Heart Association и European Resuscitation Council и не поддерживается ими.
 ```
 
-**New features** (167 chars / 284 bytes, limit 500 chars)
+**New features** (225 chars / 384 bytes, limit 500 chars)
 
 ```text
 Версия 0.2.0
 • Баннер SWITCH RESCUER теперь появляется поверх таймера на 5 секунд, а не закрывает кнопки режима на 10 секунд. Режим можно переключать, пока он показан.
+• В разделе «О приложении» указаны рекомендации ERC 2025.
 ```

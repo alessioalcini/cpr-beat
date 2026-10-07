@@ -18,7 +18,7 @@ immediately and last until you press STOP, and they never change the saved setti
 CPR Beat is a pacing aid. It is not a medical device, does not diagnose, treat, cure or prevent
 any condition, and is not a substitute for certified CPR training. In an emergency call your
 local emergency number first. Its 100, 110 and 120 bpm options cover the 100–120 compressions
-per minute recommended by current resuscitation guidelines (AHA 2025, ERC 2021). CPR Beat is an
+per minute recommended by current resuscitation guidelines (AHA 2025, ERC 2025). CPR Beat is an
 independent open-source project. It is not affiliated with, sponsored by, or endorsed by the
 American Heart Association or the European Resuscitation Council.
 
