@@ -346,6 +346,7 @@ process or wording requirements.
 | 2026-10-06 | compileSdk 37, targetSdk stays 36 | Compose 1.12 / core 1.19 / lifecycle 2.11 require API 37 to compile; behaviour is still defined by targetSdk 36 (Android 16) |
 | 2026-10-06 | Only stable SDK packages; preview tokens removed | Packages under `android-sdk-preview-license` forbid shipping apps built with them |
 | 2026-10-07 | SWITCH RESCUER banner moved into the countdown block, 5 s instead of 10 s | User report: the banner hid the mode buttons; 5 s matches the guideline switch window, and the covered digits had just reset |
+| 2026-10-07 | `CHANGELOG.md` in Keep a Changelog format from 0.2.0 on; fastlane `changelogs/<versionCode>.txt` written at release from its entry | Store listings need per-version notes; one source of truth in the repo |
 | 2026-10-06 | AGP 9.4.1 with built-in Kotlin, Gradle 9.7.1, JDK 17 | Latest stable set that runs on JDK 17; Gradle 9.7.x is inside Kotlin 2.4.20's tested range |
 | 2026-10-06 | Visuals from the ChatGPT concept, behaviour and sizes from the Claude Design prototype | Owner preference; the Claude prototype encodes shape-based state changes and a 160 dp START |
 | 2026-10-06 | System font only, no bundled font | Smaller APK, no font-loading risk on odd devices |

@@ -1,0 +1,2 @@
+Version 0.2.0
+• The SWITCH RESCUER banner now appears over the countdown for 5 seconds instead of hiding the mode buttons for 10 seconds. Mode can be switched while it is shown.
