@@ -24,7 +24,16 @@ American Heart Association or the European Resuscitation Council.
 
 ## Status
 
-v0.1.0 in development. See [SPEC.md](SPEC.md) for the agreed scope and decisions.
+v0.1.0 is out as a signed APK in [GitHub Releases](https://github.com/alessioalcini/cpr-beat/releases).
+Version 0.2.0 is being prepared for the app stores. [SPEC.md](SPEC.md) holds the agreed scope and
+decisions, [Issues](https://github.com/alessioalcini/cpr-beat/issues) hold the backlog.
+
+## News and feedback
+
+- Telegram channel [@cprbeat_app](https://t.me/cprbeat_app): news, tester recruiting and
+  feedback in the comments, in English and Russian.
+- Bugs and feature ideas: [GitHub Issues](https://github.com/alessioalcini/cpr-beat/issues).
+- [Privacy policy](https://alessioalcini.github.io/cpr-beat/privacy/): the app collects no data.
 
 ## Build
 
@@ -32,7 +41,7 @@ v0.1.0 in development. See [SPEC.md](SPEC.md) for the agreed scope and decisions
 ./gradlew assembleDebug
 ```
 
-Requires JDK 17 and the Android SDK (platform 36). The APK lands in
+Requires JDK 17 and the Android SDK (platform 37). The APK lands in
 `app/build/outputs/apk/debug/`.
 
 ## License
