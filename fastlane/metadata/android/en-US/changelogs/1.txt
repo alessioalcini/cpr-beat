@@ -1,0 +1,1 @@
+First release: metronome at 100/110/120 bpm, 30:2 mode with breath pause, rescuer-switch countdown, CPR elapsed time, settings, offline.
