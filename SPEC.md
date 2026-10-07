@@ -183,7 +183,13 @@ Monochrome layer reuses the foreground. Must stay distinctive enough not to rese
 
 - Vibration with on/off toggle (planned 0.2.0; off by default because the phone may lie on
   the patient).
-- Foreground service so the metronome survives screen lock and calls.
+- "Keep running in background" setting (off by default). When on, the metronome keeps
+  clicking after the app is minimised or the screen locks, so the rescuer can dial emergency
+  services from the same phone while the ticks continue. Needs a foreground service with a
+  persistent notification (Android 14+ requires a declared service type, likely
+  `mediaPlayback`), plus a decision on what happens to the clicks during the call itself
+  (audio focus, `USAGE_ALARM` vs in-call routing, speaker vs earpiece). Research how reliably
+  this works on real phones before committing (owner, 2026-10-07).
 - Voice prompts; emergency call button (112/911 by locale); home-screen widget and
   Quick Settings tile; Wear OS; Russian and Italian localization; signed release builds
   and store listings (Google Play, F-Droid).
