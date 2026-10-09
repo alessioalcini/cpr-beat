@@ -98,3 +98,63 @@ How to help release CPR Beat on Google Play:
 
 Same as the store listings (SPEC 11.2, 11.4): no outcome claims such as "saves lives", the app
 is a pacing aid and software, never a course or training, no AHA/ERC logos.
+
+## Closed-test recruiting posts
+
+Posted on 2026-10-09 as messages 6 (English) and 7 (Russian). Two separate posts instead of one
+bilingual post, so each can be forwarded on its own (owner, 2026-10-09); the last line links the
+channel because a forwarded post has no "next post". The opt-in link
+https://play.google.com/apps/testing/dev.alcini.cprbeat goes in a follow-up post once Google
+approves the closed test. Both posts were edited the same day to open with a plain-language
+explanation of what the app does, after feedback that the first version was unclear to
+non-medical readers.
+
+### English
+
+```text
+Closed testing is open
+
+What the app is. CPR Beat helps you do CPR. When someone is unconscious and not breathing, they need chest compressions until the ambulance arrives: pushing hard on the chest 100–120 times a minute. Keeping that pace under stress is hard, and most people push too fast or too slow. The app clicks loudly like a metronome, and you push in time with it.
+
+The app also has:
+• a 30:2 mode that counts 30 compressions, then pauses for 2 breaths;
+• a timer that reminds you to swap every 2 minutes when more than one person is helping.
+
+It's free, works offline, has no ads, no sign-up and collects no data. It doesn't replace a first-aid course or calling emergency services (112/911).
+
+Why we need testers. Google will publish the app in Play only after a closed test: at least 12 people must keep it installed for 14 days. We're still a few people short. Any Android phone will do, and you don't need any medical knowledge. All you need to do is install the app and keep it for two weeks. If anything is unclear, tell us.
+
+How to join. Join the testers group with the Google account you use in Play on your phone:
+https://groups.google.com/g/cprbeat-testers
+
+Group membership is private, so no one sees your e-mail. The download link will come in the next post once Google approves the test (usually 1–3 days).
+
+Please forward this post to friends, family and colleagues.
+
+News and the download link: https://t.me/cprbeat_app
+```
+
+### Russian
+
+```text
+Открыт набор в закрытое тестирование
+
+Что это за приложение. CPR Beat помогает делать сердечно-лёгочную реанимацию. Если человек без сознания и не дышит, до приезда скорой ему нужно давить на грудь 100–120 раз в минуту. В стрессе держать такой темп трудно: обычно давят то слишком быстро, то слишком медленно. Приложение громко щёлкает, как метроном, и вы просто давите в такт.
+
+Ещё в приложении есть:
+• режим 30:2 — считает 30 нажатий и даёт паузу на 2 вдоха;
+• таймер, который каждые 2 минуты напоминает смениться, если помогают несколько человек.
+
+Приложение бесплатное, работает без интернета, в нём нет рекламы и регистрации, и оно не собирает никаких данных. Курсы первой помощи и звонок в скорую (112) оно не заменяет.
+
+Зачем нужны тестировщики. Google выпустит приложение в Play только после закрытого теста: минимум 12 человек должны держать его установленным 14 дней. Нам не хватает нескольких человек. Подойдёт любой Android-телефон, разбираться в медицине не нужно. От вас нужно установить приложение и не удалять его две недели. Если что-то окажется непонятным, напишите нам.
+
+Как записаться. Вступите в группу тестировщиков с того Google-аккаунта, под которым вы вошли в Play на телефоне:
+https://groups.google.com/g/cprbeat-testers
+
+Членство в группе скрыто, ваш e-mail никто не увидит. Ссылка на скачивание появится в следующем посте, когда Google одобрит тест (обычно через 1–3 дня).
+
+Перешлите этот пост друзьям, родным и коллегам.
+
+Новости и ссылка на скачивание: https://t.me/cprbeat_app
+```
