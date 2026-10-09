@@ -328,8 +328,11 @@ below stay for reference.
   builds are explicitly allowed. No Play Services, Firebase, ads or analytics, ever.
 - Add `fastlane/metadata/android/en-US` (title, descriptions, icon, screenshots) and tag
   releases with versionCode/versionName bumps in the tagged commit.
-- Aim for reproducible builds: pinned tool versions, deterministic R8, no baseline-profile
-  generation.
+- Reproducible builds: pinned tool versions, deterministic R8, no baseline-profile generation.
+  Verified for 0.3.0: F-Droid's build matches the signed GitHub APK byte for byte apart from the
+  signature, so F-Droid ships our signature (`Binaries` + `AllowedAPKSigningKeys` in
+  `store/fdroid/dev.alcini.cprbeat.yml`). Keep it that way: a change that breaks the match blocks
+  the F-Droid release.
 - No medical rules, no developer identity check, no fee. Submission is a merge request to
   gitlab.com/fdroid/fdroiddata (free GitLab account). Category Timer ("Interval timing,
   timekeeping, countdown"). Short descriptions without a trailing dot. APKs carry no

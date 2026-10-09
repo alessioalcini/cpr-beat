@@ -53,13 +53,21 @@ writes it without them.
 1. Free account on gitlab.com (F-Droid has no accounts of its own).
 2. Fork gitlab.com/fdroid/fdroiddata, add `metadata/dev.alcini.cprbeat.yml` from
    `store/fdroid/dev.alcini.cprbeat.yml`, open a merge request. Checklist: the tag `v0.3.0` must
-   exist on GitHub; F-Droid builds `assembleRelease` from source without our keystore and signs
-   with its own key.
+   exist on GitHub; F-Droid builds `assembleRelease` from source without our keystore.
 3. Review queue is long (about 900 open merge requests in October 2026); after the merge the app
    appears within 24–48 hours. Category Timer. No medical rules, no identity check, no fee.
-4. Signing: an F-Droid-signed APK cannot update a RuStore/GitHub install and vice versa. Shipping
-   our own signature needs reproducible builds (`Binaries` + `AllowedAPKSigningKeys`); possible
-   later.
+4. Signing: the build is reproducible, so F-Droid publishes our own signature (`Binaries` +
+   `AllowedAPKSigningKeys`) and its APK updates a RuStore/GitHub install and vice versa. F-Droid
+   builds the tag, downloads `cpr-beat-X.Y.Z.apk` from the GitHub release and publishes only if
+   the two match apart from the signature. So every release: build the APK from the tagged
+   commit and attach it under that exact name before F-Droid's updater picks up the tag;
+   otherwise that version fails there until fixed. Checked locally for 0.3.0 on 2026-10-09
+   (`fdroid lint`, `rewritemeta`, `fdroid build -l` with fdroidserver 2.4.5, Gradle 9.7.1;
+   identical on JDK 25 and on a clean JDK 17 build without the Gradle cache).
+5. Submitted 2026-10-10: https://gitlab.com/fdroid/fdroiddata/-/merge_requests/51877 from the
+   fork gitlab.com/alessio.alcini.it/fdroiddata. CI does not run for unverified new GitLab
+   accounts; per the MR template we asked the maintainers to trigger it instead of adding a phone
+   number or card.
 
 ## Huawei AppGallery
 

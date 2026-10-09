@@ -11,14 +11,17 @@ AutoName: CPR Beat
 
 RepoType: git
 Repo: https://github.com/alessioalcini/cpr-beat.git
+Binaries: https://github.com/alessioalcini/cpr-beat/releases/download/v%v/cpr-beat-%v.apk
 
 Builds:
   - versionName: 0.3.0
     versionCode: 3
-    commit: v0.3.0
+    commit: f38b1e25b5fcf58cfa260a09de19150487653a50
     subdir: app
     gradle:
       - yes
+
+AllowedAPKSigningKeys: 129f19e1ca54f179fa58e0f0601f6b8bf3aa9fa435c57d3f77f1e0f064bfc523
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
