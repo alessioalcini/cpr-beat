@@ -66,6 +66,13 @@ android {
             enableSplit = false
         }
     }
+
+    // The dependency-info block is an opaque blob encrypted for Google; F-Droid and IzzyOnDroid
+    // reject APKs that carry it.
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
 }
 
 dependencies {

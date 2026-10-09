@@ -14,6 +14,11 @@ matching entry at release time.
 - Settings → Language: Auto (the phone language), English or Русский. On Android 13 and later
   the same choice also appears in the system's per-app language settings.
 
+### Changed
+
+- APKs and app bundles no longer carry Google's dependency-info block, an encrypted blob that
+  F-Droid and IzzyOnDroid reject.
+
 ### Fixed
 
 - Status bar and navigation bar icons stay light on phones that use a light system theme; they
