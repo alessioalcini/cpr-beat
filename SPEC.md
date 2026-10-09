@@ -226,7 +226,7 @@ F-Droid and store submissions stay in section 11 and `store/STORE_GUIDE.md`, not
 | Language / UI | Kotlin, Jetpack Compose, Material 3 |
 | applicationId | `dev.alcini.cprbeat` |
 | minSdk / targetSdk / compileSdk | 26 / 36 / 37 |
-| versionName / versionCode | 0.1.0 / 1 |
+| versionName / versionCode | 0.2.0 / 2 |
 | Build | Gradle wrapper, Kotlin DSL, version catalog, JDK 17 for the Gradle daemon |
 | Persistence | DataStore Preferences |
 | Audio | `AudioTrack` looped PCM, `USAGE_ALARM` |

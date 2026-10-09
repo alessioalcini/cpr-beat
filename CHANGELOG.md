@@ -8,6 +8,8 @@ matching entry at release time.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-09
+
 ### Added
 
 - The main screen shows a short note under the rate buttons: pacing aid, not a medical device,
@@ -52,5 +54,6 @@ matching entry at release time.
   per-session overrides.
 - First-launch hints, dark theme, English only, fully offline with no permissions.
 
-[Unreleased]: https://github.com/alessioalcini/cpr-beat/compare/9579741...HEAD
+[Unreleased]: https://github.com/alessioalcini/cpr-beat/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/alessioalcini/cpr-beat/compare/9579741...v0.2.0
 [0.1.0]: https://github.com/alessioalcini/cpr-beat/tree/9579741b4fa99711d1abe26ec629907182a655fb
