@@ -2,7 +2,8 @@
 
 Console: console.rustore.ru → Приложения → Новое приложение. The card has **one language**:
 there is no "add language" control. Rules §6.2 require the description to be in Russian; the
-interface is Russian from 0.3.0 (ФЗ-168). Screenshots: the ru-RU set in fastlane (Russian UI).
+interface is Russian from 0.3.0 (ФЗ-168). Screenshots: `store/screenshots/9x16/ru-RU/` — RuStore
+crops every shot to 9:16, so the 9:20 fastlane set would lose the status bar and the rate buttons.
 
 Settings: тип — приложение; категория **Здоровье**, без дополнительной (Медицины в RuStore нет,
 первая помощь указана в примерах Здоровья; к Здоровью нельзя добавлять Образ жизни и Полезные

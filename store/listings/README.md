@@ -39,7 +39,7 @@ Language). Screenshots: `en-US` shows the English UI (Samsung A52), `ru-RU` the 
 | Keywords / tags | 5 from Google's list | 5 from RuStore's list | tags, count unpublished | none |
 | Extra text fields | none | FAQ 10 × (120 / 500) | major-change note 300 bytes | none |
 | Icon | 512 PNG, 1 MB | 512 PNG/JPG, 3 MB, opaque | 512 PNG, 1 MB | 216 or 512 PNG, 2 MB |
-| Screenshots | 2–8, 320–3840 px | 3–10, 9:16, 3 MB | 4–8, 320–3840 px, ≤2:1 | 3–8, 450×800 rec., 5 MB |
+| Screenshots | 2–8, 320–3840 px | 3–10, cropped to 9:16, 3 MB (use `store/screenshots/9x16/`) | 4–8, 320–3840 px, ≤2:1 | 3–8, 450×800 rec., 5 MB (9:16) |
 | Feature graphic | 1024×500 required | none | none (hero image games only) | none |
 | Category | Tools (Medical needs an organization account) | Здоровье (no Медицина exists) | Health | Sports & health → Health |
 | Age rating | IARC questionnaire → 3+ | 0+ self-declared | All (0) self-declared | 3+ questionnaire |

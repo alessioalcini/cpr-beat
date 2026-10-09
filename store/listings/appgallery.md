@@ -3,7 +3,8 @@
 AppGallery Connect: My apps → New app → Android; default language **English (US)**; then App
 information → Localization → Language → Add → **Russian**, fill all mandatory text for it. Visual
 assets fall back to the default language, so icon and screenshots are uploaded once (icon 216×216
-or 512×512 PNG, 3–8 screenshots 450×800 recommended, PNG rather than WebP).
+or 512×512 PNG, 3–8 screenshots 450×800 recommended, PNG rather than WebP: use
+`store/screenshots/9x16/`, which is 9:16).
 
 Settings: category **Apps → Sports & health → Health** (there is no Medical; avoid "Healthcare",
 which the guidelines treat as a controlled service for legal entities); content rating
