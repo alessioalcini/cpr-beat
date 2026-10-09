@@ -25,7 +25,7 @@ not CPR training and not medical advice.
    Keeping the screen on uses a window flag, not `WAKE_LOCK`. (AndroidX adds one app-private
    signature permission, `dev.alcini.cprbeat.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`; it
    grants the app nothing and is not shown to users.)
-5. **English only** in 0.1.0.
+5. **English only** in 0.1.0; English and Russian from 0.3.0.
 
 ## 3. Guideline basis
 
@@ -179,7 +179,11 @@ Opened via the gear icon. Items:
 4. Auto max volume: on / off (factory on).
 5. Click sound: Clean 1000 (factory default), Wood 880, Low 660. Three timbres that all passed
    the owner's listening test on a Samsung A52; the choice is persistent like the other settings.
-6. About: app version, license (GPL-3.0-or-later, linked) with the copyright and no-warranty
+6. Language: Auto / English / Русский (factory Auto = the phone language). Language names stay
+   in their own language. Android 13+ stores the choice as the system per-app language, so the
+   system screen and Settings agree; Android 8–12 keeps it in SharedPreferences and recreates
+   the activity. App bundles are not split by language, so both languages are always installed.
+7. About: app version, license (GPL-3.0-or-later, linked) with the copyright and no-warranty
    notice, disclaimer ("pacing aid, not training or medical advice;
    call emergency services first"), the affiliation disclaimer from section 11.4, a link to the
    source repository, a privacy policy link and the contact e-mail (card at the top), a short
@@ -187,7 +191,8 @@ Opened via the gear icon. Items:
    (text shipped in assets from `THIRD_PARTY_NOTICES.md`). No separate licenses screen:
    the app has three screens, Main, Settings, About.
 
-Storage: AndroidX DataStore Preferences.
+Storage: AndroidX DataStore Preferences; the language on Android 8–12 in SharedPreferences, which
+the activity reads synchronously before drawing (item 6).
 
 ### 6.1 Launcher icon
 

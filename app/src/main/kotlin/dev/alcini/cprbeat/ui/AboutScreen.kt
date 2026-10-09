@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -77,7 +78,8 @@ fun AboutScreen(onBack: () -> Unit) {
             SectionLabel(stringResource(R.string.privacy))
             Text(stringResource(R.string.privacy_text), style = MaterialTheme.typography.bodyLarge, color = CprColor.OnBackground)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                SectionLabel(stringResource(R.string.third_party))
+                // The label wraps instead of squeezing the button: longer translations do not fit one line.
+                Box(Modifier.weight(1f)) { SectionLabel(stringResource(R.string.third_party)) }
                 Text(
                     stringResource(if (showLicenses) R.string.hide else R.string.show),
                     style = MaterialTheme.typography.titleMedium, color = CprColor.Beat,

@@ -1,5 +1,6 @@
 package dev.alcini.cprbeat
 
+import android.content.Context
 import android.media.AudioManager
 import android.os.Bundle
 import android.view.WindowManager
@@ -11,11 +12,17 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.alcini.cprbeat.session.SessionViewModel
+import dev.alcini.cprbeat.settings.LanguageStore
 import dev.alcini.cprbeat.ui.CprBeatApp
 import dev.alcini.cprbeat.ui.theme.CprBeatTheme
 
 class MainActivity : ComponentActivity() {
     private val vm: SessionViewModel by viewModels()
+
+    /** Language chosen in Settings on Android 8–12; 13+ applies it by itself (SPEC 6). */
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageStore.wrap(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()

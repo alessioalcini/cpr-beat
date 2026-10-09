@@ -8,6 +8,12 @@ matching entry at release time.
 
 ## [Unreleased]
 
+### Added
+
+- Russian interface.
+- Settings → Language: Auto (the phone language), English or Русский. On Android 13 and later
+  the same choice also appears in the system's per-app language settings.
+
 ## [0.2.0] - 2026-10-09
 
 ### Added

@@ -53,6 +53,19 @@ android {
     buildFeatures {
         compose = true
     }
+
+    // Lists English and Russian under the system's per-app language setting (Android 13+).
+    androidResources {
+        generateLocaleConfig = true
+    }
+
+    // Settings switches the language at runtime, so every install needs both languages: a
+    // language split would leave an English phone without the Russian strings.
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
 }
 
 dependencies {

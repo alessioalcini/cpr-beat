@@ -7,6 +7,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -21,6 +23,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -57,6 +60,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.alcini.cprbeat.R
 import dev.alcini.cprbeat.engine.CycleSpec
 import dev.alcini.cprbeat.engine.Mode
@@ -70,6 +74,9 @@ import dev.alcini.cprbeat.ui.theme.CprSize
 import kotlinx.coroutines.launch
 
 private const val TABULAR = "tnum"
+
+/** Share of the beat disk the warning label may span: the chord below the count is narrower than the disk. */
+private const val WARNING_LABEL_WIDTH = 0.62f
 
 /** The circle never shrinks below this share of its size; past it the screen scrolls (SPEC 5.1). */
 private const val MIN_CIRCLE_FIT = 0.55f
@@ -274,8 +281,15 @@ private fun BeatArea(state: SessionState, beat: BeatSnapshot, fit: Float) {
             when (position) {
                 is Position.Compression -> if (state.mode == Mode.THIRTY_TWO) Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text("${position.number}", style = MaterialTheme.typography.displayLarge.shrink(fit).copy(fontFeatureSettings = TABULAR), color = CprColor.OnBackground)
-                    if (position.warning) Text(stringResource(R.string.get_ready), style = MaterialTheme.typography.labelLarge, color = CprColor.Warning)
-                    else Text("OF ${position.total}", style = MaterialTheme.typography.labelLarge, color = CprColor.OnMuted)
+                    if (position.warning) BasicText(
+                        stringResource(R.string.get_ready),
+                        // 13 sp at most; long translations (ПРИГОТОВИТЬСЯ) shrink further to stay inside the disk.
+                        modifier = Modifier.widthIn(max = CprSize.BeatDisk * fit * WARNING_LABEL_WIDTH),
+                        style = MaterialTheme.typography.labelLarge.copy(color = CprColor.Warning, letterSpacing = 0.5.sp),
+                        maxLines = 1,
+                        autoSize = TextAutoSize.StepBased(minFontSize = 7.sp, maxFontSize = 13.sp, stepSize = 0.5.sp),
+                    )
+                    else Text(stringResource(R.string.of_total, position.total), style = MaterialTheme.typography.labelLarge, color = CprColor.OnMuted)
                 }
                 is Position.BreathPause -> Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(stringResource(R.string.breathe), style = MaterialTheme.typography.headlineMedium.shrink(fit), color = CprColor.Breathe)

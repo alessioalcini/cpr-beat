@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import dev.alcini.cprbeat.R
 import dev.alcini.cprbeat.engine.ToneBank
 import dev.alcini.cprbeat.session.CountdownOption
+import dev.alcini.cprbeat.settings.AppLanguage
 import dev.alcini.cprbeat.settings.Settings
 import dev.alcini.cprbeat.ui.theme.CprColor
 import dev.alcini.cprbeat.ui.theme.CprSize
@@ -61,6 +62,8 @@ fun SettingsScreen(
     onBreathPause: (Int) -> Unit,
     onAutoMaxVolume: (Boolean) -> Unit,
     onTonePreset: (String) -> Unit,
+    language: AppLanguage,
+    onLanguage: (AppLanguage) -> Unit,
     onOpenAbout: () -> Unit,
 ) {
     Column(Modifier.fillMaxSize().background(CprColor.Background).safeDrawingPadding()) {
@@ -79,7 +82,7 @@ fun SettingsScreen(
                 SectionLabel(stringResource(R.string.default_countdown))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     for (o in CountdownOption.entries) {
-                        val label = if (o == CountdownOption.OFF) stringResource(R.string.off).lowercase().replaceFirstChar { it.uppercase() } else "${o.minutes} min"
+                        val label = if (o == CountdownOption.OFF) stringResource(R.string.off).lowercase().replaceFirstChar { it.uppercase() } else stringResource(R.string.minutes_short, o.minutes)
                         OptionButton(label, settings.defaultCountdown == o, { onDefaultCountdown(o) }, Modifier.weight(1f))
                     }
                 }
@@ -88,7 +91,7 @@ fun SettingsScreen(
                 var pauseSec by remember(settings.breathPauseMillis) { mutableFloatStateOf(settings.breathPauseMillis / 1000f) }
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Bottom) {
                     SectionLabel(stringResource(R.string.breath_pause))
-                    Text("${pauseSec.toInt()} s", style = MaterialTheme.typography.titleMedium, color = CprColor.OnBackground)
+                    Text(stringResource(R.string.seconds_short, pauseSec.toInt()), style = MaterialTheme.typography.titleMedium, color = CprColor.OnBackground)
                 }
                 Slider(
                     value = pauseSec,
@@ -99,8 +102,8 @@ fun SettingsScreen(
                     modifier = Modifier.height(64.dp),
                 )
                 Row(Modifier.fillMaxWidth().padding(horizontal = 6.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-                    Text("3 s", style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
-                    Text("8 s", style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
+                    Text(stringResource(R.string.seconds_short, 3), style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
+                    Text(stringResource(R.string.seconds_short, 8), style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
                 }
             }
             Row(
@@ -125,6 +128,16 @@ fun SettingsScreen(
                     for (bank in listOf(ToneBank.LOW, ToneBank.WOOD, ToneBank.CLEAN)) {
                         val label = stringResource(when (bank) { ToneBank.LOW -> R.string.tone_low; ToneBank.WOOD -> R.string.tone_medium; else -> R.string.tone_high })
                         OptionButton(label, settings.tonePreset == bank.name, { onTonePreset(bank.name) }, Modifier.weight(1f))
+                    }
+                }
+            }
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                SectionLabel(stringResource(R.string.language))
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    for (l in AppLanguage.entries) {
+                        // Language names stay in their own language so they can be found from either UI.
+                        val label = when (l) { AppLanguage.AUTO -> stringResource(R.string.language_auto); AppLanguage.ENGLISH -> "English"; AppLanguage.RUSSIAN -> "Русский" }
+                        OptionButton(label, language == l, { onLanguage(l) }, Modifier.weight(1f))
                     }
                 }
             }
