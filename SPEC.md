@@ -297,6 +297,9 @@ process or wording requirements.
 
 - Health Content and Services policy applies. Complete the Health apps declaration and declare
   "Emergency and First Aid"; do not declare "Medical Device Apps".
+- Category Tools, not Medical: since 2024-08-31 new personal accounts cannot publish health apps
+  Google treats as medical (Play Console Requirements). Rejection and next steps in
+  `store/STORE_GUIDE.md`.
 - Store description must say the app is not a medical device and does not diagnose, treat,
   cure or prevent any condition, and must tell users to consult a healthcare professional.
   No outcome claims ("saves lives", "improves survival") and no compression-measurement claims.
@@ -377,3 +380,4 @@ process or wording requirements.
 | 2026-10-07 | First-launch hints removed | Owner: the screen is obvious without them and they get in the way; the closed test will tell. The "Tap to change the switch interval" label was also clipped on 1080×2400 screens |
 | 2026-10-07 | License MIT → GPL-3.0-or-later; section 7 terms reserve the name and icon | Owner: no closed paid clones, the app stays free. GPL keeps it open source and F-Droid-eligible and forces any clone to publish its source, which rules out closed paid or ad-SDK clones; non-commercial licenses were rejected as not open source |
 | 2026-10-07 | Privacy policy on GitHub Pages (`docs/privacy/`, https://alessioalcini.github.io/cpr-beat/privacy/); About carries the statement, the link and the contact e-mail | Play Health apps policy wants policy text or link in the app; AppGallery 7.1 and 11.2 want an in-app privacy link and contact information |
+| 2026-10-09 | Play category Medical → Tools; Health apps declaration stays "Emergency and First Aid" | Play rejected the first submission: health apps from new personal accounts need an organization account. Google did not say whether the category or the declaration triggered it, and the appeal link did not work. Tools tests the category; "no health features" would be an inaccurate declaration |

@@ -41,7 +41,7 @@ drop that line from the Russian text.
 | Icon | 512 PNG, 1 MB | 512 PNG/JPG, 3 MB, opaque | 512 PNG, 1 MB | 216 or 512 PNG, 2 MB |
 | Screenshots | 2–8, 320–3840 px | 3–10, 9:16, 3 MB | 4–8, 320–3840 px, ≤2:1 | 3–8, 450×800 rec., 5 MB |
 | Feature graphic | 1024×500 required | none | none (hero image games only) | none |
-| Category | Medical | Медицина (+ Образование) | Health | Sports & health → Health |
+| Category | Tools (Medical needs an organization account) | Медицина (+ Образование) | Health | Sports & health → Health |
 | Age rating | IARC questionnaire → 3+ | 0+ self-declared | All (0) self-declared | 3+ questionnaire |
 | Health declaration | Medical → Emergency and First Aid | none | none | none |
 | Privacy policy URL | required, plus in-app statement | only if data is processed | optional, Y/N flag required, shown publicly | required, validated, plus in-app link |

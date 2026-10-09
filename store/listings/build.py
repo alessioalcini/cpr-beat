@@ -92,8 +92,9 @@ ru-RU via "Manage translations → Select languages". Users in Russia see the Ru
 everyone else the English one (or an automated Google Translate view). Graphics fall back to the
 default language, so screenshots and the feature graphic are uploaded once.
 
-Store settings: type App, category **Medical**, up to 5 tags from Google's list (candidates:
-First aid, Medical, Health, Emergency, Safety; take whatever the list offers). App content:
+Store settings: type App, category **Tools** (Medical needs an organization account: rejected
+2026-10-09, see store/STORE_GUIDE.md), up to 5 tags from Google's list (candidates: First aid,
+Health, Emergency, Safety; take whatever the list offers). App content:
 Health apps declaration → Medical → **Emergency and First Aid**; Data safety → no data collected
 or shared; Content rating → IARC questionnaire, expect Everyone / PEGI 3 / 3+; Ads → no;
 privacy policy URL https://alessioalcini.github.io/cpr-beat/privacy/ (About carries the statement and the link from 0.2.0).
