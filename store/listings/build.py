@@ -93,8 +93,9 @@ everyone else the English one (or an automated Google Translate view). Graphics 
 default language, so screenshots and the feature graphic are uploaded once.
 
 Store settings: type App, category **Tools** (Medical needs an organization account: rejected
-2026-10-09, see store/STORE_GUIDE.md), up to 5 tags from Google's list (candidates: First aid,
-Health, Emergency, Safety; take whatever the list offers). App content:
+2026-10-09, see store/STORE_GUIDE.md), one tag: **Clock, alarm and timer** (no Medical or
+Health & Fitness tags, so the organization-account check sees nothing medical in the listing
+apart from the declaration). App content:
 Health apps declaration → Medical → **Emergency and First Aid**; Data safety → no data collected
 or shared; Content rating → IARC questionnaire, expect Everyone / PEGI 3 / 3+; Ads → no;
 privacy policy URL https://alessioalcini.github.io/cpr-beat/privacy/ (About carries the statement and the link from 0.2.0).
