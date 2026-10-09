@@ -14,6 +14,11 @@ matching entry at release time.
 - Settings → Language: Auto (the phone language), English or Русский. On Android 13 and later
   the same choice also appears in the system's per-app language settings.
 
+### Fixed
+
+- Status bar and navigation bar icons stay light on phones that use a light system theme; they
+  used to be dark and nearly invisible on the app's dark background.
+
 ## [0.2.0] - 2026-10-09
 
 ### Added

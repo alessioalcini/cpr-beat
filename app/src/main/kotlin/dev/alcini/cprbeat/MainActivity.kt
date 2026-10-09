@@ -1,10 +1,12 @@
 package dev.alcini.cprbeat
 
 import android.content.Context
+import android.graphics.Color
 import android.media.AudioManager
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -25,7 +27,12 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+        // The app is always dark, so the system bars get light icons even when the phone uses
+        // a light theme; the default would draw dark icons on the dark background.
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
+        )
         super.onCreate(savedInstanceState)
         volumeControlStream = AudioManager.STREAM_ALARM
         setContent {
