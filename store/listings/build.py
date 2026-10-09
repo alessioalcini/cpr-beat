@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 META = ROOT / "fastlane" / "metadata" / "android"
 OUT = Path(__file__).resolve().parent
-VERSION_CODE = 2  # release notes file: changelogs/<versionCode>.txt
+VERSION_CODE = 3  # release notes file: changelogs/<versionCode>.txt
 
 
 def read(locale: str, name: str) -> str:

@@ -1,0 +1,3 @@
+Version 0.3.0
+• Russian interface. Settings → Language: Auto (the phone language), English or Русский.
+• Status bar icons stay visible on phones with a light system theme.

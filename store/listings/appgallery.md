@@ -63,15 +63,12 @@ Important: CPR Beat is a pacing aid only. It is not a medical device and does no
 CPR Beat is an independent open-source project. It is not affiliated with, sponsored by, or endorsed by the American Heart Association or the European Resuscitation Council.
 ```
 
-**New features** (457 chars / 467 bytes, limit 500 chars)
+**New features** (171 chars / 184 bytes, limit 500 chars)
 
 ```text
-Version 0.2.0
-• The main screen now carries a short safety note: pacing aid, not a medical device, call emergency services first.
-• The SWITCH RESCUER banner now covers the countdown for 5 seconds and no longer hides the mode buttons.
-• The main screen fits smaller screens and a larger display size or font.
-• About screen now cites the ERC 2025 resuscitation guidelines.
-• About now shows the privacy statement, a privacy policy link and a contact e-mail.
+Version 0.3.0
+• Russian interface. Settings → Language: Auto (the phone language), English or Русский.
+• Status bar icons stay visible on phones with a light system theme.
 ```
 
 ## Russian
@@ -113,13 +110,10 @@ CPR Beat задаёт правильный темп непрямого масс�
 CPR Beat — независимый проект с открытым кодом. Не связан с American Heart Association и European Resuscitation Council и не поддерживается ими.
 ```
 
-**New features** (465 chars / 822 bytes, limit 500 chars)
+**New features** (158 chars / 276 bytes, limit 500 chars)
 
 ```text
-Версия 0.2.0
-• На главном экране появилась короткая памятка: это помощник для темпа, а не медицинское изделие; сначала вызовите скорую.
-• Баннер SWITCH RESCUER теперь на 5 секунд закрывает таймер, а не кнопки режима.
-• Главный экран помещается на небольших экранах и при крупном масштабе или шрифте.
-• В разделе «О приложении» указаны рекомендации ERC 2025.
-• В разделе «О приложении» появились заявление о конфиденциальности, ссылка на политику и e-mail для связи.
+Версия 0.3.0
+• Русский интерфейс. «Настройки → Язык»: Авто (как в телефоне), English или Русский.
+• Значки строки состояния видны и при светлой теме телефона.
 ```
