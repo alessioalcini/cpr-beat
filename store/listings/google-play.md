@@ -1,5 +1,8 @@
 # Google Play listing
 
+> **Not in use.** Play is closed for this personal account since 2026-10-09: any Medical health
+> declaration needs an organization account (see store/STORE_GUIDE.md). Kept for reference.
+
 Console: Grow users → Store presence → Main store listing. Default language en-US; add
 ru-RU via "Manage translations → Select languages". Users in Russia see the Russian listing,
 everyone else the English one (or an automated Google Translate view). Graphics fall back to the
@@ -25,13 +28,13 @@ no line breaks. Release notes are not promotional. Limits per language.
 CPR Beat
 ```
 
-**Short description** (68 chars / 70 bytes, limit 80 chars)
+**Short description** (67 chars / 69 bytes, limit 80 chars)
 
 ```text
-Offline CPR metronome: 100–120 bpm, 30:2 mode, rescuer-switch timer.
+Offline CPR metronome: 100–120 bpm, 30:2 mode, rescuer-switch timer
 ```
 
-**Full description** (1708 chars / 1726 bytes, limit 4000 chars)
+**Full description** (1766 chars / 1784 bytes, limit 4000 chars)
 
 ```text
 CPR Beat keeps your chest compressions at the right pace when it matters. One big button starts a loud, steady click at 100, 110 or 120 compressions per minute. Switch to 30:2 and the app counts thirty compressions, warns before the last five, then paces two breaths. A countdown reminds the team to switch rescuers, and the elapsed CPR time with the start time stays on screen for handover to paramedics.
@@ -47,7 +50,7 @@ Features
 • Three click sounds; settings remembered between launches
 • Dark, high-contrast screen designed for gloves and daylight
 
-Interface language: English.
+Interface in English and Russian: follows the phone language, or pick one in Settings.
 
 The 100–120 compressions per minute range follows current resuscitation guidelines (AHA 2025, ERC 2025).
 
@@ -76,13 +79,13 @@ Version 0.2.0
 CPR Beat
 ```
 
-**Short description** (68 chars / 113 bytes, limit 80 chars)
+**Short description** (67 chars / 112 bytes, limit 80 chars)
 
 ```text
-Офлайн-метроном для СЛР: 100–120 в минуту, режим 30:2, таймер смены.
+Офлайн-метроном для СЛР: 100–120 в минуту, режим 30:2, таймер смены
 ```
 
-**Full description** (1741 chars / 3032 bytes, limit 4000 chars)
+**Full description** (1773 chars / 3101 bytes, limit 4000 chars)
 
 ```text
 CPR Beat задаёт правильный темп непрямого массажа сердца, когда счёт идёт на секунды. Одна большая кнопка запускает громкий ровный щелчок с частотой 100, 110 или 120 компрессий в минуту. В режиме 30:2 приложение считает тридцать компрессий, предупреждает перед последними пятью и задаёт паузу на два вдоха. Таймер напоминает команде о смене реаниматора, а время с начала СЛР и время старта остаются на экране для передачи медикам.
@@ -92,13 +95,13 @@ CPR Beat задаёт правильный темп непрямого масс�
 Возможности
 • Темп 100 / 110 / 120 в минуту, смена на ходу без сбоя ритма
 • Режим «только компрессии» или 30:2 с паузой на вдохи 3–8 секунд
-• Таймер смены реаниматора: выкл, 1, 2, 3 или 5 минут, со вспышкой и баннером SWITCH RESCUER
+• Таймер смены реаниматора: выкл, 1, 2, 3 или 5 минут, со вспышкой и баннером «СМЕНА»
 • Время с начала СЛР и время старта сохраняются после остановки
 • Звук идёт через канал будильника и слышен в беззвучном режиме; авто-максимум громкости по желанию
 • Три варианта щелчка; настройки запоминаются
 • Тёмный контрастный экран для работы в перчатках и на солнце
 
-Интерфейс приложения на английском языке.
+Интерфейс на русском и английском: по языку телефона или по выбору в настройках.
 
 Диапазон 100–120 компрессий в минуту соответствует действующим рекомендациям по реанимации (AHA 2025, ERC 2025).
 

@@ -1,0 +1,26 @@
+Categories:
+  - Timer
+License: GPL-3.0-or-later
+AuthorName: Alessio Alcini
+AuthorEmail: alessio.alcini.it@gmail.com
+SourceCode: https://github.com/alessioalcini/cpr-beat
+IssueTracker: https://github.com/alessioalcini/cpr-beat/issues
+Changelog: https://github.com/alessioalcini/cpr-beat/blob/HEAD/CHANGELOG.md
+
+AutoName: CPR Beat
+
+RepoType: git
+Repo: https://github.com/alessioalcini/cpr-beat.git
+
+Builds:
+  - versionName: 0.3.0
+    versionCode: 3
+    commit: v0.3.0
+    subdir: app
+    gradle:
+      - yes
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 0.3.0
+CurrentVersionCode: 3

@@ -300,6 +300,12 @@ process or wording requirements.
 
 ### 11.2 Google Play
 
+**Closed for this account since 2026-10-09.** Two rejections under the Play Console Requirements:
+any Medical health declaration (Emergency and First Aid, and Medical Reference and Education for a
+training framing) needs an organization account, and the owner will not create a legal entity.
+"No health features" would be an inaccurate declaration while the app paces CPR. The notes
+below stay for reference.
+
 - Health Content and Services policy applies. Complete the Health apps declaration and declare
   "Emergency and First Aid"; do not declare "Medical Device Apps".
 - Category Tools, not Medical: since 2024-08-31 new personal accounts cannot publish health apps
@@ -324,6 +330,10 @@ process or wording requirements.
   releases with versionCode/versionName bumps in the tagged commit.
 - Aim for reproducible builds: pinned tool versions, deterministic R8, no baseline-profile
   generation.
+- No medical rules, no developer identity check, no fee. Submission is a merge request to
+  gitlab.com/fdroid/fdroiddata (free GitLab account). Category Timer ("Interval timing,
+  timekeeping, countdown"). Short descriptions without a trailing dot. APKs carry no
+  dependency-info block (`dependenciesInfo` off in `app/build.gradle.kts`).
 
 ### 11.4 Brand and trademarks
 
@@ -344,6 +354,19 @@ process or wording requirements.
 - Public repositories get free Actions minutes; private ones get 2,000 minutes and 500 MB of
   artifact storage per month. Releases can host the signed APK, SHA-256 sums and changelog.
 - Keep the signing keystore and passwords out of the repository.
+
+### 11.6 RuStore, AppGallery, IzzyOnDroid, Galaxy Store (checked 2026-10-09)
+
+- RuStore: free account for individuals, no medical gate. Category Здоровье (there is no
+  Медицина; first aid is listed under Здоровье). Rules §6.4 ban third-party names on the card,
+  so the RuStore card names no AHA/ERC; About keeps them. ФЗ-168 wants a Russian interface,
+  hence 0.3.0.
+- AppGallery: individual account with ID and a bank document. Guideline 11.4 reserves
+  "healthcare services" for legal entities; a reviewer decides, the app provides no service.
+  Category Sports & health → Health. Guideline 1.2 may object to "CPR" in the name.
+- IzzyOnDroid: policy rejects LLM-generated code. The request must state the AI assistance
+  honestly (Claude co-authored commits are public); rejection is likely.
+- Galaxy Store: Android apps need a corporate seller with D-U-N-S, even free ones. Not possible.
 
 ## 12. Decision log
 
@@ -386,3 +409,7 @@ process or wording requirements.
 | 2026-10-07 | License MIT → GPL-3.0-or-later; section 7 terms reserve the name and icon | Owner: no closed paid clones, the app stays free. GPL keeps it open source and F-Droid-eligible and forces any clone to publish its source, which rules out closed paid or ad-SDK clones; non-commercial licenses were rejected as not open source |
 | 2026-10-07 | Privacy policy on GitHub Pages (`docs/privacy/`, https://alessioalcini.github.io/cpr-beat/privacy/); About carries the statement, the link and the contact e-mail | Play Health apps policy wants policy text or link in the app; AppGallery 7.1 and 11.2 want an in-app privacy link and contact information |
 | 2026-10-09 | Play category Medical → Tools; Health apps declaration stays "Emergency and First Aid" | Play rejected the first submission: health apps from new personal accounts need an organization account. Google did not say whether the category or the declaration triggered it, and the appeal link did not work. Tools tests the category; "no health features" would be an inaccurate declaration |
+| 2026-10-09 | Google Play dropped for this account | Second rejection came with category Tools, so the Emergency and First Aid declaration triggers the organization rule; Play's support assistant confirmed every Medical declaration, training framing included, needs an organization account. Owner will not create a legal entity; a metronome without CPR features would not be CPR Beat, and a disguised one would misrepresent it |
+| 2026-10-09 | Stores: RuStore, F-Droid, AppGallery, IzzyOnDroid; not Galaxy Store | Researched and cross-checked per store (section 11.6): no organization gate for this app at RuStore and F-Droid, a reviewer judgement at AppGallery, an AI-code policy at IzzyOnDroid, D-U-N-S at Galaxy Store |
+| 2026-10-09 | 0.3.0: Russian interface and Settings → Language (Auto / English / Русский) | Owner: the Russian-speaking audience is large. RuStore expects a Russian interface (ФЗ-168). Android 8–12, common in Russia, has no system per-app language, so the switch lives in Settings too |
+| 2026-10-09 | RuStore card: category Здоровье, no AHA/ERC names | RuStore no longer has Медицина and lists first aid under Здоровье; §6.4 bans third-party names on the card. About and the other stores keep the affiliation wording from 11.4 |

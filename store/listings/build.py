@@ -48,9 +48,9 @@ RUSTORE_FAQ = [
         "содержит рекламы и аналитики и не собирает данные.",
     ),
     (
-        "Почему интерфейс на английском?",
-        "В текущей версии интерфейс только на английском: несколько коротких слов (START, STOP, "
-        "30:2, SWITCH RESCUER). Русская локализация запланирована.",
+        "Как сменить язык интерфейса?",
+        "Интерфейс на русском и английском. По умолчанию приложение берёт язык телефона; в "
+        "«Настройки → Язык» можно выбрать English или Русский.",
     ),
     (
         "Будет ли щелчок слышен в беззвучном режиме?",
@@ -58,6 +58,25 @@ RUSTORE_FAQ = [
         "настройках можно включить автоматический максимум громкости на время работы метронома.",
     ),
 ]
+
+# RuStore rules §6.4 ban third-party names on the card, so its copy of the Russian description
+# drops the AHA/ERC citation and the affiliation paragraph. About and the other stores keep them.
+RUSTORE_GUIDELINES = (
+    "Диапазон 100–120 компрессий в минуту соответствует действующим рекомендациям по реанимации "
+    "(AHA 2025, ERC 2025)."
+)
+RUSTORE_AFFILIATION = (
+    "\n\nCPR Beat — независимый проект с открытым кодом. Не связан с American Heart Association и "
+    "European Resuscitation Council и не поддерживается ими."
+)
+if RUSTORE_GUIDELINES not in RU["full_description"] or RUSTORE_AFFILIATION not in RU["full_description"]:
+    sys.exit("ru-RU full_description changed: update RUSTORE_GUIDELINES / RUSTORE_AFFILIATION in build.py")
+RUSTORE_DESCRIPTION = (
+    RU["full_description"]
+    .replace(RUSTORE_GUIDELINES, "Диапазон 100–120 компрессий в минуту соответствует действующим международным "
+             "рекомендациям по реанимации.")
+    .replace(RUSTORE_AFFILIATION, "")
+)
 
 errors: list[str] = []
 
@@ -86,6 +105,9 @@ def write(name: str, body: str) -> None:
 write(
     "google-play.md",
     f"""# Google Play listing
+
+> **Not in use.** Play is closed for this personal account since 2026-10-09: any Medical health
+> declaration needs an organization account (see store/STORE_GUIDE.md). Kept for reference.
 
 Console: Grow users → Store presence → Main store listing. Default language en-US; add
 ru-RU via "Manage translations → Select languages". Users in Russia see the Russian listing,
@@ -129,17 +151,19 @@ write(
     f"""# RuStore card
 
 Console: console.rustore.ru → Приложения → Новое приложение. The card has **one language**:
-there is no "add language" control. Rules §6.2 require the description to be in Russian; an
-English-only interface is allowed if the card says so (it does). Screenshot text may be Russian
-or English, so the existing screenshots qualify.
+there is no "add language" control. Rules §6.2 require the description to be in Russian; the
+interface is Russian from 0.3.0 (ФЗ-168). Screenshots: the ru-RU set in fastlane (Russian UI).
 
-Settings: тип — приложение; категория **Медицина**, вторая (по желанию) **Образование**; возраст
-**0+**; поисковые теги — до 5 из списка RuStore; способ связи — e-mail (обязателен); политика
+Settings: тип — приложение; категория **Здоровье**, без дополнительной (Медицины в RuStore нет,
+первая помощь указана в примерах Здоровья; к Здоровью нельзя добавлять Образ жизни и Полезные
+инструменты); возраст **0+**; поисковые теги — до 5 из списка RuStore; способ связи — e-mail (обязателен); политика
 конфиденциальности — ссылка нужна только при обработке персональных данных, но раздел
 «Безопасность данных» заполняется всегда (данные не собираются, опасных разрешений нет).
 
 Policy notes (§6.4): no «лучший / единственный / самый / официальный», no emoji, no links to other
-stores, no CAPS abuse, no promises about unreleased features. App name should match the launcher
+stores, no CAPS abuse, no promises about unreleased features, no third-party names or trademarks
+(so this card cites "international resuscitation guidelines" without naming AHA/ERC; About in
+the app names them). App name should match the launcher
 label; RuStore recommends (does not require) a Russian name unless trademarked, so «CPR Beat»
 passes but a moderator may ask to add the purpose in the short description (already done).
 Full description collapses after 2000 characters; the essentials come first.
@@ -148,7 +172,7 @@ Full description collapses after 2000 characters; the essentials come first.
 
 {field("Название", RU["title"], 30, note="Console help says 30, API accepts 50; stay under 30.")}
 {field("Краткое описание", RU["short_description"], 80)}
-{field("Подробное описание", RU["full_description"], 4000)}
+{field("Подробное описание", RUSTORE_DESCRIPTION, 4000)}
 {field("Что нового", RU["whats_new"], 5000)}
 ## FAQ (вопрос — ответ, до 10 пар, виден в веб-версии карточки)
 
@@ -160,6 +184,9 @@ Full description collapses after 2000 characters; the essentials come first.
 write(
     "galaxy-store.md",
     f"""# Samsung Galaxy Store listing
+
+> **Not in use.** Android apps need a corporate seller with a D-U-N-S number, even free ones
+> (checked 2026-10-09); the owner has no legal entity. Kept for reference.
 
 Seller Portal: Apps → Add New App → Android → App Information, **Advanced mode**. Default
 language must be **English** when more than one country is selected; add **Russian** as an
@@ -216,7 +243,11 @@ questionnaire → **3+**; compatible devices → Mobile phone; price → Free; p
 Policy notes: name without special characters, price or promo words (1.1–1.5); no "official /
 authoritative" claims (1.14); no names or logos of other platforms or device brands (1.16); no
 beta/test wording unless "Version for open testing" is used; guideline 1.13 expects localized
-listings to match a localized app, so the Russian text states that the interface is English.
+listings to match a localized app: the app has a Russian interface from 0.3.0. Guideline 11.4
+reserves "healthcare services" for legal entities; in the reviewer notes say the app is an
+offline metronome and timer that provides no medical service, is not a medical device and
+collects no data. Guideline 1.2 bans professional terms in names; if "CPR" is questioned, the
+name has to change in the APK too.
 Guideline 7.1 also wants an in-app privacy policy link, and 11.2 in-app contact information: About
 has both from 0.2.0 (privacy policy https://alessioalcini.github.io/cpr-beat/privacy/).
 

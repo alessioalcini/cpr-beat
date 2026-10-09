@@ -24,14 +24,16 @@ American Heart Association or the European Resuscitation Council.
 
 ## Status
 
-Version 0.2.0 is being prepared for the app stores, starting with a closed test on Google Play;
-testers are recruited in the Telegram channel below. [SPEC.md](SPEC.md) holds the agreed scope and
-decisions, [Issues](https://github.com/alessioalcini/cpr-beat/issues) hold the backlog.
+Version 0.3.0 adds a Russian interface and is being prepared for RuStore, F-Droid, Huawei
+AppGallery, IzzyOnDroid and [GitHub Releases](https://github.com/alessioalcini/cpr-beat/releases).
+Google Play is not planned: it accepts first-aid apps only from organization accounts.
+[SPEC.md](SPEC.md) holds the agreed scope and decisions,
+[Issues](https://github.com/alessioalcini/cpr-beat/issues) hold the backlog.
 
 ## News and feedback
 
-- Telegram channel [@cprbeat_app](https://t.me/cprbeat_app): news, tester recruiting and
-  feedback in the comments, in English and Russian.
+- Telegram channel [@cprbeat_app](https://t.me/cprbeat_app): news and feedback in the comments,
+  in English and Russian.
 - Bugs and feature ideas: [GitHub Issues](https://github.com/alessioalcini/cpr-beat/issues).
 - [Privacy policy](https://alessioalcini.github.io/cpr-beat/privacy/): the app collects no data.
 

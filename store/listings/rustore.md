@@ -1,17 +1,19 @@
 # RuStore card
 
 Console: console.rustore.ru → Приложения → Новое приложение. The card has **one language**:
-there is no "add language" control. Rules §6.2 require the description to be in Russian; an
-English-only interface is allowed if the card says so (it does). Screenshot text may be Russian
-or English, so the existing screenshots qualify.
+there is no "add language" control. Rules §6.2 require the description to be in Russian; the
+interface is Russian from 0.3.0 (ФЗ-168). Screenshots: the ru-RU set in fastlane (Russian UI).
 
-Settings: тип — приложение; категория **Медицина**, вторая (по желанию) **Образование**; возраст
-**0+**; поисковые теги — до 5 из списка RuStore; способ связи — e-mail (обязателен); политика
+Settings: тип — приложение; категория **Здоровье**, без дополнительной (Медицины в RuStore нет,
+первая помощь указана в примерах Здоровья; к Здоровью нельзя добавлять Образ жизни и Полезные
+инструменты); возраст **0+**; поисковые теги — до 5 из списка RuStore; способ связи — e-mail (обязателен); политика
 конфиденциальности — ссылка нужна только при обработке персональных данных, но раздел
 «Безопасность данных» заполняется всегда (данные не собираются, опасных разрешений нет).
 
 Policy notes (§6.4): no «лучший / единственный / самый / официальный», no emoji, no links to other
-stores, no CAPS abuse, no promises about unreleased features. App name should match the launcher
+stores, no CAPS abuse, no promises about unreleased features, no third-party names or trademarks
+(so this card cites "international resuscitation guidelines" without naming AHA/ERC; About in
+the app names them). App name should match the launcher
 label; RuStore recommends (does not require) a Russian name unless trademarked, so «CPR Beat»
 passes but a moderator may ask to add the purpose in the short description (already done).
 Full description collapses after 2000 characters; the essentials come first.
@@ -25,13 +27,13 @@ _Console help says 30, API accepts 50; stay under 30._
 CPR Beat
 ```
 
-**Краткое описание** (68 chars / 113 bytes, limit 80 chars)
+**Краткое описание** (67 chars / 112 bytes, limit 80 chars)
 
 ```text
-Офлайн-метроном для СЛР: 100–120 в минуту, режим 30:2, таймер смены.
+Офлайн-метроном для СЛР: 100–120 в минуту, режим 30:2, таймер смены
 ```
 
-**Подробное описание** (1741 chars / 3032 bytes, limit 4000 chars)
+**Подробное описание** (1620 chars / 2898 bytes, limit 4000 chars)
 
 ```text
 CPR Beat задаёт правильный темп непрямого массажа сердца, когда счёт идёт на секунды. Одна большая кнопка запускает громкий ровный щелчок с частотой 100, 110 или 120 компрессий в минуту. В режиме 30:2 приложение считает тридцать компрессий, предупреждает перед последними пятью и задаёт паузу на два вдоха. Таймер напоминает команде о смене реаниматора, а время с начала СЛР и время старта остаются на экране для передачи медикам.
@@ -41,19 +43,17 @@ CPR Beat задаёт правильный темп непрямого масс�
 Возможности
 • Темп 100 / 110 / 120 в минуту, смена на ходу без сбоя ритма
 • Режим «только компрессии» или 30:2 с паузой на вдохи 3–8 секунд
-• Таймер смены реаниматора: выкл, 1, 2, 3 или 5 минут, со вспышкой и баннером SWITCH RESCUER
+• Таймер смены реаниматора: выкл, 1, 2, 3 или 5 минут, со вспышкой и баннером «СМЕНА»
 • Время с начала СЛР и время старта сохраняются после остановки
 • Звук идёт через канал будильника и слышен в беззвучном режиме; авто-максимум громкости по желанию
 • Три варианта щелчка; настройки запоминаются
 • Тёмный контрастный экран для работы в перчатках и на солнце
 
-Интерфейс приложения на английском языке.
+Интерфейс на русском и английском: по языку телефона или по выбору в настройках.
 
-Диапазон 100–120 компрессий в минуту соответствует действующим рекомендациям по реанимации (AHA 2025, ERC 2025).
+Диапазон 100–120 компрессий в минуту соответствует действующим международным рекомендациям по реанимации.
 
 Важно: CPR Beat — только вспомогательный метроном. Это не медицинское изделие, приложение не диагностирует, не лечит и не предотвращает заболевания и не заменяет сертифицированное обучение СЛР. В экстренной ситуации сначала вызовите скорую помощь (112 или 103) и следуйте указаниям диспетчера. За медицинской консультацией обращайтесь к врачу.
-
-CPR Beat — независимый проект с открытым кодом. Не связан с American Heart Association и European Resuscitation Council и не поддерживается ими.
 ```
 
 **Что нового** (465 chars / 822 bytes, limit 5000 chars)
@@ -91,15 +91,15 @@ CPR Beat — независимый проект с открытым кодом.
 Нет. Приложение работает полностью офлайн, не запрашивает разрешение на интернет, не содержит рекламы и аналитики и не собирает данные.
 ```
 
-**FAQ 3 — question** (31 chars / 58 bytes, limit 120 chars)
+**FAQ 3 — question** (28 chars / 52 bytes, limit 120 chars)
 
 ```text
-Почему интерфейс на английском?
+Как сменить язык интерфейса?
 ```
-**FAQ 3 — answer** (144 chars / 237 bytes, limit 500 chars)
+**FAQ 3 — answer** (135 chars / 242 bytes, limit 500 chars)
 
 ```text
-В текущей версии интерфейс только на английском: несколько коротких слов (START, STOP, 30:2, SWITCH RESCUER). Русская локализация запланирована.
+Интерфейс на русском и английском. По умолчанию приложение берёт язык телефона; в «Настройки → Язык» можно выбрать English или Русский.
 ```
 
 **FAQ 4 — question** (43 chars / 79 bytes, limit 120 chars)

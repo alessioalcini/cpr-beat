@@ -14,7 +14,11 @@ questionnaire → **3+**; compatible devices → Mobile phone; price → Free; p
 Policy notes: name without special characters, price or promo words (1.1–1.5); no "official /
 authoritative" claims (1.14); no names or logos of other platforms or device brands (1.16); no
 beta/test wording unless "Version for open testing" is used; guideline 1.13 expects localized
-listings to match a localized app, so the Russian text states that the interface is English.
+listings to match a localized app: the app has a Russian interface from 0.3.0. Guideline 11.4
+reserves "healthcare services" for legal entities; in the reviewer notes say the app is an
+offline metronome and timer that provides no medical service, is not a medical device and
+collects no data. Guideline 1.2 bans professional terms in names; if "CPR" is questioned, the
+name has to change in the APK too.
 Guideline 7.1 also wants an in-app privacy policy link, and 11.2 in-app contact information: About
 has both from 0.2.0 (privacy policy https://alessioalcini.github.io/cpr-beat/privacy/).
 
@@ -27,14 +31,14 @@ _Form accepts 64, Review Guidelines 1.1 cap non-Chinese names at 30._
 CPR Beat
 ```
 
-**Brief introduction** (68 chars / 70 bytes, limit 80 chars)  
+**Brief introduction** (67 chars / 69 bytes, limit 80 chars)  
 _Only the first ~35 characters show in most lists._
 
 ```text
-Offline CPR metronome: 100–120 bpm, 30:2 mode, rescuer-switch timer.
+Offline CPR metronome: 100–120 bpm, 30:2 mode, rescuer-switch timer
 ```
 
-**Full introduction** (1708 chars / 1726 bytes, limit 8000 chars)
+**Full introduction** (1766 chars / 1784 bytes, limit 8000 chars)
 
 ```text
 CPR Beat keeps your chest compressions at the right pace when it matters. One big button starts a loud, steady click at 100, 110 or 120 compressions per minute. Switch to 30:2 and the app counts thirty compressions, warns before the last five, then paces two breaths. A countdown reminds the team to switch rescuers, and the elapsed CPR time with the start time stays on screen for handover to paramedics.
@@ -50,7 +54,7 @@ Features
 • Three click sounds; settings remembered between launches
 • Dark, high-contrast screen designed for gloves and daylight
 
-Interface language: English.
+Interface in English and Russian: follows the phone language, or pick one in Settings.
 
 The 100–120 compressions per minute range follows current resuscitation guidelines (AHA 2025, ERC 2025).
 
@@ -78,13 +82,13 @@ Version 0.2.0
 CPR Beat
 ```
 
-**Brief introduction** (68 chars / 113 bytes, limit 80 chars)
+**Brief introduction** (67 chars / 112 bytes, limit 80 chars)
 
 ```text
-Офлайн-метроном для СЛР: 100–120 в минуту, режим 30:2, таймер смены.
+Офлайн-метроном для СЛР: 100–120 в минуту, режим 30:2, таймер смены
 ```
 
-**Full introduction** (1741 chars / 3032 bytes, limit 8000 chars)
+**Full introduction** (1773 chars / 3101 bytes, limit 8000 chars)
 
 ```text
 CPR Beat задаёт правильный темп непрямого массажа сердца, когда счёт идёт на секунды. Одна большая кнопка запускает громкий ровный щелчок с частотой 100, 110 или 120 компрессий в минуту. В режиме 30:2 приложение считает тридцать компрессий, предупреждает перед последними пятью и задаёт паузу на два вдоха. Таймер напоминает команде о смене реаниматора, а время с начала СЛР и время старта остаются на экране для передачи медикам.
@@ -94,13 +98,13 @@ CPR Beat задаёт правильный темп непрямого масс�
 Возможности
 • Темп 100 / 110 / 120 в минуту, смена на ходу без сбоя ритма
 • Режим «только компрессии» или 30:2 с паузой на вдохи 3–8 секунд
-• Таймер смены реаниматора: выкл, 1, 2, 3 или 5 минут, со вспышкой и баннером SWITCH RESCUER
+• Таймер смены реаниматора: выкл, 1, 2, 3 или 5 минут, со вспышкой и баннером «СМЕНА»
 • Время с начала СЛР и время старта сохраняются после остановки
 • Звук идёт через канал будильника и слышен в беззвучном режиме; авто-максимум громкости по желанию
 • Три варианта щелчка; настройки запоминаются
 • Тёмный контрастный экран для работы в перчатках и на солнце
 
-Интерфейс приложения на английском языке.
+Интерфейс на русском и английском: по языку телефона или по выбору в настройках.
 
 Диапазон 100–120 компрессий в минуту соответствует действующим рекомендациям по реанимации (AHA 2025, ERC 2025).
 

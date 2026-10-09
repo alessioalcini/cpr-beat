@@ -6,9 +6,9 @@ and the four files below are rewritten with every field measured against the sto
 
 | File | Languages on the card | Notes |
 |---|---|---|
-| `google-play.md` | English (default) + Russian | per-language fields, graphics shared |
-| `rustore.md` | Russian only | single-language card, FAQ block |
-| `galaxy-store.md` | English (default) + Russian | limits in UTF-8 bytes, 40-byte short description |
+| `google-play.md` | English (default) + Russian | **not in use**: Play closed for this account (organization rule) |
+| `rustore.md` | Russian only | single-language card, FAQ block, no AHA/ERC names (§6.4) |
+| `galaxy-store.md` | English (default) + Russian | **not in use**: Android apps need a D-U-N-S corporate seller |
 | `appgallery.md` | English US (default) + Russian | 8000-character description, 500-character release notes |
 
 ## Languages: where Russian goes
@@ -22,11 +22,11 @@ device language decides which one a user sees:
 - **Galaxy Store**: English is mandatory as the default when more than one country is selected;
   Russian is an added language tab. Russia is in the sale-country list (CIS group).
 - **AppGallery**: default English (US), Russian added under Localization. Guideline 1.13 expects
-  the app to be localized too, so the Russian text says the interface is English.
-- **RuStore**: one card, Russian by rule. English UI is allowed as long as the card says so.
+  the app to be localized too: it is, from 0.3.0.
+- **RuStore**: one card, Russian by rule. The interface is Russian from 0.3.0 (ФЗ-168).
 
-Both descriptions therefore carry one line about the interface language. When a Russian UI ships,
-drop that line from the Russian text.
+Both descriptions carry one line about the interface languages (English and Russian, Settings →
+Language). Screenshots: `en-US` shows the English UI (Samsung A52), `ru-RU` the Russian UI.
 
 ## Limits at a glance (official docs, checked 2026-10-07)
 
@@ -41,7 +41,7 @@ drop that line from the Russian text.
 | Icon | 512 PNG, 1 MB | 512 PNG/JPG, 3 MB, opaque | 512 PNG, 1 MB | 216 or 512 PNG, 2 MB |
 | Screenshots | 2–8, 320–3840 px | 3–10, 9:16, 3 MB | 4–8, 320–3840 px, ≤2:1 | 3–8, 450×800 rec., 5 MB |
 | Feature graphic | 1024×500 required | none | none (hero image games only) | none |
-| Category | Tools (Medical needs an organization account) | Медицина (+ Образование) | Health | Sports & health → Health |
+| Category | Tools (Medical needs an organization account) | Здоровье (no Медицина exists) | Health | Sports & health → Health |
 | Age rating | IARC questionnaire → 3+ | 0+ self-declared | All (0) self-declared | 3+ questionnaire |
 | Health declaration | Medical → Emergency and First Aid | none | none | none |
 | Privacy policy URL | required, plus in-app statement | only if data is processed | optional, Y/N flag required, shown publicly | required, validated, plus in-app link |
@@ -55,9 +55,10 @@ real app. The medical disclaimer paragraph stays in every language on every stor
 - Google Play: US$25 once, identity verification, personal accounts show legal name and country.
   Personal accounts created after 2023-11-13 need a closed test with 12 testers for 14 days
   before production. Free apps can be published and downloaded in Russia; paid cannot.
-- RuStore: individuals publish free apps after VK ID + passport verification; foreign developers
-  register with documents in notarised translation. Moderation is usually within 24 hours.
-- Galaxy Store: Commercial Seller status is required even for free apps (business address, ID,
+- RuStore: individuals register for free and instantly with a VK ID; no ID check unless monetization
+  is switched on, but the agreement (§12.3) lets RuStore ask for documents later. Non-residents
+  sign a separate agreement. Review within 72 hours (rules §10.2).
+- Galaxy Store (not in use): Commercial Seller status is required even for free apps (business address, ID,
   bank or PayPal, D-U-N-S or equivalent, documents in English). Seller address and phone are
   public. Pre-review about 1 business day, device test 2–4 more.
 - AppGallery: free account, real-name verification, review 3–5 working days. AAB uploads
