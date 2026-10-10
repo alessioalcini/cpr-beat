@@ -334,8 +334,9 @@ below stay for reference.
   `store/fdroid/dev.alcini.cprbeat.yml`). Keep it that way: a change that breaks the match blocks
   the F-Droid release.
 - No medical rules, no developer identity check, no fee. Submission is a merge request to
-  gitlab.com/fdroid/fdroiddata (free GitLab account). Category Timer ("Interval timing,
-  timekeeping, countdown"). Short descriptions without a trailing dot. APKs carry no
+  gitlab.com/fdroid/fdroiddata (free GitLab account). Categories Sports & Health
+  (added at the maintainer's request in the review) and Timer ("Interval timing, timekeeping,
+  countdown"). Short descriptions without a trailing dot. APKs carry no
   dependency-info block (`dependenciesInfo` off in `app/build.gradle.kts`).
 
 ### 11.4 Brand and trademarks
