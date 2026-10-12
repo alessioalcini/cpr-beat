@@ -26,7 +26,7 @@ organization (sections at the end). Per-store research: SPEC.md section 11.6.
 | Listing languages | English default + Russian added on AppGallery; RuStore is Russian only; F-Droid and IzzyOnDroid read both fastlane locales. See `store/listings/README.md`. |
 | Interface languages | English and Russian from 0.3.0; Settings → Language (Auto / English / Русский). |
 | Contact | alessio.alcini.it@gmail.com |
-| Content rating | Everyone / 3+; the only questionnaire topic is "health or medical information": answer yes, no diagnosis. |
+| Content rating | Everyone / 0+ on RuStore; AppGallery's questionnaire gave 16+. The only questionnaire topic is "health or medical information": answer yes, no diagnosis. |
 
 Disclaimers are already inside the full descriptions: not a medical device, not a substitute for
 training, call emergency services first, no AHA/ERC affiliation. Keep them in every store. The
@@ -77,7 +77,7 @@ writes it without them.
 2. My apps → New app → Android → upload the signed **APK** (an AAB needs AppGallery App Signing
    first); no HMS Core needed.
 3. App information from `store/listings/appgallery.md`: default English (US), Russian under
-   Localization; screenshots from `store/screenshots/9x16/`; category Sports & health → Health; content rating 3+; privacy policy URL
+   Localization; screenshots from `store/screenshots/9x16/`; category Sports & health → Health; content rating from the questionnaire (16+); privacy policy URL
    (validated); copyright/qualification not required outside China. Exclude mainland China.
 4. Reviewer notes: offline metronome and timer, provides no medical or healthcare service, not a
    medical device, collects no data (guideline 11.4 reserves healthcare services for legal
@@ -158,16 +158,6 @@ Result: rejected again the same day. Play left; see the top of this section.
 
 ## Closed: Samsung Galaxy Store
 
-Android apps need a corporate Commercial Seller with a D-U-N-S number, even free ones (Seller
-Portal guide and console notice, checked 2026-10-09). Kept for reference:
-
-1. Seller Portal account (seller.samsungapps.com). **Commercial Seller status is required even for
-   free apps**: business address, government ID, bank account or PayPal, D-U-N-S number or
-   equivalent documents in English, up to 10 business days each. Seller address, phone and e-mail
-   are shown publicly; a gmail address needs an explanation in the application.
-2. Add new app → binary: **APK**, signed; select "All devices" or Galaxy phones.
-3. Listing in Advanced mode from `store/listings/galaxy-store.md`: English default, Russian as an
-   added language, limits in bytes. Icon 512, 4–8 screenshots (the A52 shots qualify; one 16:9
-   image makes the app eligible for promotion), category Health, age All, privacy policy URL.
-4. Pre-review about 1 business day, then device test 2–4 business days during which the app can be
-   suspended; the first launch must not crash.
+Android apps need a corporate Commercial Distribution Seller with a D-U-N-S number, even free
+ones (Seller Portal guide and console notice, checked 2026-10-09; the Seller Portal profile said
+the same on 2026-10-12). The owner has no legal entity, so there is no Galaxy Store listing.

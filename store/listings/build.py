@@ -5,9 +5,9 @@ Source of truth: fastlane/metadata/android/{en-US,ru-RU}/*.txt. Edit those, then
 
     python3 store/listings/build.py
 
-which rewrites store/listings/{google-play,rustore,galaxy-store,appgallery}.md and checks every
+which rewrites store/listings/{google-play,rustore,appgallery}.md and checks every
 field against the store's limit (characters or UTF-8 bytes). Store-specific texts that have no
-fastlane equivalent (Galaxy Store 40-byte short description, RuStore FAQ) live in this file.
+fastlane equivalent (RuStore FAQ) live in this file.
 Limits verified against official documentation on 2026-10-07; see README.md for sources.
 """
 from __future__ import annotations
@@ -29,10 +29,6 @@ EN = {k: read("en-US", f"{k}.txt") for k in ("title", "short_description", "full
 RU = {k: read("ru-RU", f"{k}.txt") for k in ("title", "short_description", "full_description")}
 EN["whats_new"] = read("en-US", f"changelogs/{VERSION_CODE}.txt")
 RU["whats_new"] = read("ru-RU", f"changelogs/{VERSION_CODE}.txt")
-
-# Galaxy Store short description is capped at 40 UTF-8 bytes (about 20 Cyrillic letters).
-GALAXY_SHORT_EN = "CPR metronome: 100-120 bpm, 30:2 mode"
-GALAXY_SHORT_RU = "Метроном для СЛР, 30:2"
 
 # RuStore FAQ: question <= 120 chars, answer <= 500 chars, up to 10 pairs. Shown on the web card.
 RUSTORE_FAQ = [
@@ -181,50 +177,6 @@ Full description collapses after 2000 characters; the essentials come first.
 """,
 )
 
-# ---------------------------------------------------------------- Galaxy Store
-write(
-    "galaxy-store.md",
-    f"""# Samsung Galaxy Store listing
-
-> **Not in use.** Android apps need a corporate seller with a D-U-N-S number, even free ones
-> (checked 2026-10-09); the owner has no legal entity. Kept for reference.
-
-Seller Portal: Apps → Add New App → Android → App Information, **Advanced mode**. Default
-language must be **English** when more than one country is selected; add **Russian** as an
-additional language tab (title, description, what's new, optional screenshots). "Supported
-languages" is a separate field about the app UI: tick English only.
-
-Limits are in **UTF-8 bytes**: a Cyrillic letter costs 2, so the Russian description may be about
-2000 letters and the short description about 20. The short description field may or may not be
-offered per language; if the Russian tab has one, use the Russian text below.
-
-Settings: category **Health** (there is no Medical category; Tools is the alternative); age
-rating **All (0)**; paid: No; privacy policy URL optional for non-Kids apps but the Y/N flag is
-required and the URL is shown publicly, so give one; open-source URL → the GitHub repo; support
-e-mail required and public. Commercial Seller status is required even for free apps (business
-address, ID, bank or PayPal; a public-domain e-mail such as gmail needs an explanation). Only
-one 16:9 image among the screenshots makes the app eligible for store promotion.
-
-Policy notes: metadata suitable for all ages; description must say which languages the app
-supports; no mention of other stores or platforms (1.3.7); no beta/test wording; no other apps'
-names; medical information must carry an "could be inaccurate / not a substitute" notice (2.3.4),
-covered by the disclaimer paragraph. Keep the title to plain letters and digits.
-
-## English (default)
-
-{field("App title", EN["title"], 100, "bytes")}
-{field("Short description", GALAXY_SHORT_EN, 40, "bytes")}
-{field("Description", EN["full_description"], 4000, "bytes")}
-{field("New feature", EN["whats_new"], 4000, "bytes")}
-## Russian (added language)
-
-{field("App title", RU["title"], 100, "bytes")}
-{field("Short description", GALAXY_SHORT_RU, 40, "bytes", note="Only if the Russian tab offers the field.")}
-{field("Description", RU["full_description"], 4000, "bytes")}
-{field("New feature", RU["whats_new"], 4000, "bytes")}
-""",
-)
-
 # ---------------------------------------------------------------- AppGallery
 write(
     "appgallery.md",
@@ -238,7 +190,7 @@ or 512×512 PNG, 3–8 screenshots 450×800 recommended, PNG rather than WebP: u
 
 Settings: category **Apps → Sports & health → Health** (there is no Medical; avoid "Healthcare",
 which the guidelines treat as a controlled service for legal entities); content rating
-questionnaire → **3+**; compatible devices → Mobile phone; price → Free; privacy policy URL
+questionnaire → **16+** (the result on 2026-10-10); compatible devices → Mobile phone; price → Free; privacy policy URL
 (validated, must open without login); contact e-mail (rejection mails go there). Review takes
 3–5 working days. Only the app category (App vs Game) is fixed after creation.
 
@@ -271,4 +223,4 @@ has both from 0.2.0 (privacy policy https://alessioalcini.github.io/cpr-beat/pri
 if errors:
     print("LIMIT ERRORS:\n  " + "\n  ".join(errors), file=sys.stderr)
     sys.exit(1)
-print("ok: google-play.md rustore.md galaxy-store.md appgallery.md")
+print("ok: google-play.md rustore.md appgallery.md")

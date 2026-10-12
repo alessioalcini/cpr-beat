@@ -8,7 +8,7 @@ or 512×512 PNG, 3–8 screenshots 450×800 recommended, PNG rather than WebP: u
 
 Settings: category **Apps → Sports & health → Health** (there is no Medical; avoid "Healthcare",
 which the guidelines treat as a controlled service for legal entities); content rating
-questionnaire → **3+**; compatible devices → Mobile phone; price → Free; privacy policy URL
+questionnaire → **16+** (the result on 2026-10-10); compatible devices → Mobile phone; price → Free; privacy policy URL
 (validated, must open without login); contact e-mail (rejection mails go there). Review takes
 3–5 working days. Only the app category (App vs Game) is fixed after creation.
 
