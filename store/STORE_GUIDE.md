@@ -63,7 +63,8 @@ writes it without them.
    commit and attach it under that exact name before F-Droid's updater picks up the tag;
    otherwise that version fails there until fixed. Checked locally for 0.3.0 on 2026-10-09
    (`fdroid lint`, `rewritemeta`, `fdroid build -l` with fdroidserver 2.4.5, Gradle 9.7.1;
-   identical on JDK 25 and on a clean JDK 17 build without the Gradle cache).
+   identical on JDK 25 and on a clean JDK 17 build without the Gradle cache); 0.3.1 checked the
+   same way on 2026-10-12.
 5. Submitted 2026-10-10: https://gitlab.com/fdroid/fdroiddata/-/merge_requests/51877 from the
    fork gitlab.com/alessio.alcini.it/fdroiddata. CI does not run for unverified new GitLab
    accounts; per the MR template we asked the maintainers to trigger it instead of adding a phone
