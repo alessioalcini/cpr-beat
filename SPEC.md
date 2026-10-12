@@ -142,6 +142,9 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 - Rate and mode buttons and the countdown tap on the main screen are a per-session override: they take effect at
   once and last until STOP. They never change the stored Settings, so an accidental tap during
   CPR cannot alter the next launch.
+- STOP drops the overrides: rate and countdown go back to Settings, mode to compressions only.
+  A STOP during an AED analysis therefore ends 30:2 too; the rescuer taps 30:2 again (owner
+  accepted, 2026-10-12).
 - README explains this distinction to users in one paragraph.
 
 ### 5.6 Sound
@@ -417,3 +420,4 @@ below stay for reference.
 | 2026-10-09 | Stores: RuStore, F-Droid, AppGallery, IzzyOnDroid; not Galaxy Store | Researched and cross-checked per store (section 11.6): no organization gate for this app at RuStore and F-Droid, a reviewer judgement at AppGallery, an AI-code policy at IzzyOnDroid, D-U-N-S at Galaxy Store |
 | 2026-10-09 | 0.3.0: Russian interface and Settings → Language (Auto / English / Русский) | Owner: the Russian-speaking audience is large. RuStore expects a Russian interface (ФЗ-168). Android 8–12, common in Russia, has no system per-app language, so the switch lives in Settings too |
 | 2026-10-09 | RuStore card: category Здоровье, no AHA/ERC names | RuStore no longer has Медицина and lists first aid under Здоровье; §6.4 bans third-party names on the card. About and the other stores keep the affiliation wording from 11.4 |
+| 2026-10-12 | 0.3.1: STOP resets the main-screen overrides to Settings | F-Droid tester on Android 9: the overrides outlived STOP and only a full quit reset them, against 5.5, the README and the in-app help. Owner accepted that a STOP during an AED analysis also ends 30:2 |

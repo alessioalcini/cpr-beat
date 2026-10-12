@@ -1,0 +1,2 @@
+Version 0.3.1
+• STOP returns the rate, mode and rescuer-switch countdown chosen on the main screen to your Settings. They used to stay until the app was closed.

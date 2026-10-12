@@ -59,13 +59,12 @@ Important: CPR Beat is a pacing aid only. It is not a medical device and does no
 CPR Beat is an independent open-source project. It is not affiliated with, sponsored by, or endorsed by the American Heart Association or the European Resuscitation Council.
 ```
 
-**Release notes** (171 chars / 184 bytes, limit 500 chars)  
+**Release notes** (160 chars / 162 bytes, limit 500 chars)  
 _Enter inside <en-US> … </en-US> tags in the release form._
 
 ```text
-Version 0.3.0
-• Russian interface. Settings → Language: Auto (the phone language), English or Русский.
-• Status bar icons stay visible on phones with a light system theme.
+Version 0.3.1
+• STOP returns the rate, mode and rescuer-switch countdown chosen on the main screen to your Settings. They used to stay until the app was closed.
 ```
 
 ## Russian (ru-RU)
@@ -107,11 +106,10 @@ CPR Beat задаёт правильный темп непрямого масс�
 CPR Beat — независимый проект с открытым кодом. Не связан с American Heart Association и European Resuscitation Council и не поддерживается ими.
 ```
 
-**Release notes** (158 chars / 276 bytes, limit 500 chars)  
+**Release notes** (159 chars / 286 bytes, limit 500 chars)  
 _Enter inside <ru-RU> … </ru-RU> tags in the release form._
 
 ```text
-Версия 0.3.0
-• Русский интерфейс. «Настройки → Язык»: Авто (как в телефоне), English или Русский.
-• Значки строки состояния видны и при светлой теме телефона.
+Версия 0.3.1
+• СТОП возвращает темп, режим и таймер смены, выбранные на главном экране, к значениям из настроек. Раньше они сохранялись до закрытия приложения.
 ```

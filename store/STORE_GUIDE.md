@@ -13,7 +13,7 @@ organization (sections at the end). Per-store research: SPEC.md section 11.6.
 |---|---|
 | Release build | `./gradlew bundleRelease assembleRelease` with `keystore.properties` present. AAB in `app/build/outputs/bundle/release/`, APK in `app/build/outputs/apk/release/`. Also attached to the GitHub release. |
 | Signing key | `~/.cprbeat/release.jks`, alias `cprbeat`, PKCS12. Password in the password manager. **Back it up off the laptop.** Certificate SHA-256 `12:9F:19:E1:CA:54:F1:79:FA:58:E0:F0:60:1F:6B:8B:F3:AA:9F:A4:35:C5:7D:3F:77:F1:E0:F0:64:BF:C5:23`. |
-| App id / version | `dev.alcini.cprbeat`, versionCode 3, versionName 0.3.0. Bump both in `app/build.gradle.kts` for every store upload; stores reject a reused versionCode. |
+| App id / version | `dev.alcini.cprbeat`, versionCode 4, versionName 0.3.1. Bump both in `app/build.gradle.kts` for every store upload; stores reject a reused versionCode. |
 | Icon 512×512 | `store/icon-512.png` |
 | Feature graphic 1024×500 | `store/feature-graphic-1024x500.png` (Play only, others optional) |
 | Screenshots | `fastlane/metadata/android/en-US/images/phoneScreenshots/` (English UI) and `ru-RU/…` (Russian UI), both from the Samsung A52 at 0.3.0, 1080×2400 (9:20; F-Droid, IzzyOnDroid). 9:16 copies for RuStore and AppGallery in `store/screenshots/9x16/`, made by `python3 store/screenshots/pad_9x16.py` (scaled, side margins in the app background colour, nothing cropped). Hide the Samsung Edge panel handle before taking new shots. |
@@ -52,8 +52,8 @@ writes it without them.
 
 1. Free account on gitlab.com (F-Droid has no accounts of its own).
 2. Fork gitlab.com/fdroid/fdroiddata, add `metadata/dev.alcini.cprbeat.yml` from
-   `store/fdroid/dev.alcini.cprbeat.yml`, open a merge request. Checklist: the tag `v0.3.0` must
-   exist on GitHub; F-Droid builds `assembleRelease` from source without our keystore.
+   `store/fdroid/dev.alcini.cprbeat.yml`, open a merge request. Checklist: the release tag (`v0.3.1`)
+   must exist on GitHub; F-Droid builds `assembleRelease` from source without our keystore.
 3. Review queue is long (about 900 open merge requests in October 2026); after the merge the app
    appears within 24–48 hours. Categories Sports & Health and Timer. No medical rules, no identity check, no fee.
 4. Signing: the build is reproducible, so F-Droid publishes our own signature (`Binaries` +

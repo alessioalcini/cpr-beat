@@ -121,8 +121,7 @@ class SessionViewModel(app: Application) : AndroidViewModel(app) {
                 running = false,
                 elapsedMillis = now - startedElapsedMillis,
                 bannerRemainingMillis = 0,
-                countdownRemainingMillis = it.countdown.millis.takeIf { _ -> it.countdown != CountdownOption.OFF },
-            )
+            ).withDefaultsFrom(settings)
         }
         viewModelScope.launch(audio) { player.stop() }
         volume.restore()

@@ -24,7 +24,7 @@ American Heart Association or the European Resuscitation Council.
 
 ## Status
 
-Version 0.3.0 adds a Russian interface and is being prepared for RuStore, F-Droid, Huawei
+Version 0.3.1 (Russian interface since 0.3.0) is being prepared for RuStore, F-Droid, Huawei
 AppGallery, IzzyOnDroid and [GitHub Releases](https://github.com/alessioalcini/cpr-beat/releases).
 Google Play is not planned: it accepts first-aid apps only from organization accounts.
 [SPEC.md](SPEC.md) holds the agreed scope and decisions,

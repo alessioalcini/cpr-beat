@@ -3,6 +3,7 @@ package dev.alcini.cprbeat.session
 import dev.alcini.cprbeat.engine.Mode
 import dev.alcini.cprbeat.engine.Position
 import dev.alcini.cprbeat.engine.Tempo
+import dev.alcini.cprbeat.settings.Settings
 
 /** How long the SWITCH RESCUER banner covers the countdown digits after an expiry (SPEC 5.4). */
 const val BANNER_MILLIS = 5_000L
@@ -26,6 +27,17 @@ data class SessionState(
     val startedAtEpochMillis: Long? = null,
     /** Alarm volume is low and auto-max is off: show the volume warning. */
     val volumeLow: Boolean = false,
+)
+
+/**
+ * Drops the main-screen overrides of rate, mode and countdown: they last until STOP, and the next
+ * START uses [settings] again (SPEC 5.5). Mode has no setting; it goes back to compressions only.
+ */
+fun SessionState.withDefaultsFrom(settings: Settings): SessionState = copy(
+    mode = Mode.COMPRESSIONS,
+    bpm = settings.defaultBpm,
+    countdown = settings.defaultCountdown,
+    countdownRemainingMillis = settings.defaultCountdown.millis.takeIf { settings.defaultCountdown != CountdownOption.OFF },
 )
 
 /** What the UI reads at frame rate while running; cheap to produce, not part of the state flow. */

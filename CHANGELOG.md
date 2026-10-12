@@ -8,6 +8,14 @@ matching entry at release time.
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-12
+
+### Fixed
+
+- STOP returns the rate, mode and rescuer-switch countdown chosen on the main screen to the
+  values from Settings, as the in-app help and the README describe; the choices used to stay
+  until the app was closed. Reported by an F-Droid tester.
+
 ## [0.3.0] - 2026-10-09
 
 ### Added
@@ -72,7 +80,8 @@ matching entry at release time.
   per-session overrides.
 - First-launch hints, dark theme, English only, fully offline with no permissions.
 
-[Unreleased]: https://github.com/alessioalcini/cpr-beat/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/alessioalcini/cpr-beat/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/alessioalcini/cpr-beat/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/alessioalcini/cpr-beat/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/alessioalcini/cpr-beat/compare/9579741...v0.2.0
 [0.1.0]: https://github.com/alessioalcini/cpr-beat/tree/9579741b4fa99711d1abe26ec629907182a655fb
