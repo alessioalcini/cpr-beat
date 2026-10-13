@@ -46,7 +46,9 @@ writes it without them.
    rating 0+, «Безопасность данных» section (no data), e-mail contact. Countries: «Страны и
    регионы» in the console. Privacy policy URL only if data is processed.
 4. No health declaration. Review within 72 hours; moderators may ask for more data on the first
-   publication and may move the category. Appeals to support@rustore.ru.
+   publication and may move the category. Appeals to support@rustore.ru. In October 2026 support
+   said moderation temporarily takes up to seven days because of the queue (0.3.0, sent on
+   2026-10-09, was still in moderation after 88 hours).
 
 ## F-Droid
 
@@ -112,6 +114,15 @@ same reason, so the declaration triggers the organization rule. Play Console's s
 confirmed it: every Medical declaration needs an organization account, a CPR training framing
 included; only an app without any CPR feature or wording may declare "no health features". The
 owner will not create a legal entity. Steps and history below are kept for reference.
+
+Play Developer Support (case 4-8536000041600, final answer 2026-10-13) confirmed it in writing:
+apps declared under Medical, Emergency and First Aid need an organization account, and "There
+are no exceptions to this policy for individual developer accounts, even for free, offline, or
+open-source tools." The appeal link support sent opens the Policy status page, which shows no
+Appeal button for a rejected app. The declaration stays accurate ("Declare all the health
+features that your app offers"). The one route left is a partner organization that publishes
+the app under its own organization account, with us as invited Play Console users doing builds
+and releases.
 
 1. Play Console account: US$25 once, government ID and payment profile. Personal accounts show
    the legal name, country and e-mail publicly.
