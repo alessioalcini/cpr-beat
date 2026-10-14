@@ -67,7 +67,9 @@ writes it without them.
    (`fdroid lint`, `rewritemeta`, `fdroid build -l` with fdroidserver 2.4.5, Gradle 9.7.1;
    identical on JDK 25 and on a clean JDK 17 build without the Gradle cache); 0.3.1 checked the
    same way on 2026-10-12.
-5. Submitted 2026-10-10: https://gitlab.com/fdroid/fdroiddata/-/merge_requests/51877 from the
+5. Live since 2026-10-14: https://f-droid.org/packages/dev.alcini.cprbeat/ (0.3.1, merged
+   2026-10-12, so two days from merge to the published page). Submitted 2026-10-10:
+   https://gitlab.com/fdroid/fdroiddata/-/merge_requests/51877 from the
    fork gitlab.com/alessio.alcini.it/fdroiddata. CI does not run for unverified new GitLab
    accounts; per the MR template we asked the maintainers to trigger it instead of adding a phone
    number or card.
@@ -81,9 +83,15 @@ writes it without them.
 3. App information from `store/listings/appgallery.md`: default English (US), Russian under
    Localization; screenshots from `store/screenshots/9x16/`; category Sports & health → Health; content rating from the questionnaire (16+); privacy policy URL
    (validated); copyright/qualification not required outside China. Exclude mainland China.
-4. Reviewer notes: offline metronome and timer, provides no medical or healthcare service, not a
-   medical device, collects no data (guideline 11.4 reserves healthcare services for legal
-   entities). Guideline 1.2 may object to "CPR" in the name.
+4. Reviewer note from `store/listings/appgallery.md` (300 characters): lists the CPR functions,
+   says the app provides no medical or healthcare service, is not a medical device and collects
+   no data (guideline 11.4 reserves healthcare services for legal entities). Guideline 1.2 may
+   object to "CPR" in the name. 0.3.1 was rejected on 2026-10-14 under guideline 4.1 ("Your app
+   has a single feature (metronome)"), so the brief introduction and the note now lead with the
+   30:2 count, breath pacing, rescuer-switch timer and handover time instead of "metronome".
+   On 2026-10-14, after the rejection, the publishing API refused every change (204144649
+   "update record exception") and the console kept failing too; unclear whether that is a lock
+   on rejected apps or an outage.
 5. Review 1–5 working days; they check that the app runs on phones without Google services — we
    use none.
 

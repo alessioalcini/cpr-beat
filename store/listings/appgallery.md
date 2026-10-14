@@ -16,12 +16,22 @@ Policy notes: name without special characters, price or promo words (1.1–1.5);
 authoritative" claims (1.14); no names or logos of other platforms or device brands (1.16); no
 beta/test wording unless "Version for open testing" is used; guideline 1.13 expects localized
 listings to match a localized app: the app has a Russian interface from 0.3.0. Guideline 11.4
-reserves "healthcare services" for legal entities; in the reviewer notes say the app is an
-offline metronome and timer that provides no medical service, is not a medical device and
-collects no data. Guideline 1.2 bans professional terms in names; if "CPR" is questioned, the
+reserves "healthcare services" for legal entities, so the reviewer note says the app provides no
+medical service, is not a medical device and collects no data. Guideline 4.1 rejected 0.3.1 on
+2026-10-14 as "a single feature (metronome)": the brief introduction and the note list the CPR
+functions instead. Guideline 1.2 bans professional terms in names; if "CPR" is questioned, the
 name has to change in the APK too.
 Guideline 7.1 also wants an in-app privacy policy link, and 11.2 in-app contact information: About
 has both from 0.2.0 (privacy policy https://alessioalcini.github.io/cpr-beat/privacy/).
+
+## Reviewer note
+
+**Remarks for the reviewer** (279 chars / 279 bytes, limit 300 chars)  
+_English; entered in the console when submitting._
+
+```text
+CPR assistant, not a plain metronome: 100/110/120 pace, 30:2 mode counts 30 compressions then paces 2 breaths, rescuer-switch countdown, CPR start time and duration for EMS handover. Original code. No medical service, not a medical device, no data collected. No login: tap START.
+```
 
 ## English (US, default)
 
@@ -32,11 +42,11 @@ _Form accepts 64, Review Guidelines 1.1 cap non-Chinese names at 30._
 CPR Beat
 ```
 
-**Brief introduction** (67 chars / 69 bytes, limit 80 chars)  
+**Brief introduction** (75 chars / 75 bytes, limit 80 chars)  
 _Only the first ~35 characters show in most lists._
 
 ```text
-Offline CPR metronome: 100–120 bpm, 30:2 mode, rescuer-switch timer
+CPR helper: compression pace, 30:2 count with breaths, rescuer-switch timer
 ```
 
 **Full introduction** (1766 chars / 1784 bytes, limit 8000 chars)
@@ -79,10 +89,10 @@ Version 0.3.1
 CPR Beat
 ```
 
-**Brief introduction** (67 chars / 112 bytes, limit 80 chars)
+**Brief introduction** (78 chars / 138 bytes, limit 80 chars)
 
 ```text
-Офлайн-метроном для СЛР: 100–120 в минуту, режим 30:2, таймер смены
+Помощник для СЛР: темп компрессий, счёт 30:2 с вдохами, таймер смены спасателя
 ```
 
 **Full introduction** (1773 chars / 3101 bytes, limit 8000 chars)

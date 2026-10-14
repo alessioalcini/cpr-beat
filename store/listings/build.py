@@ -178,6 +178,16 @@ Full description collapses after 2000 characters; the essentials come first.
 )
 
 # ---------------------------------------------------------------- AppGallery
+# 0.3.1 was rejected on 2026-10-14 under guideline 4.1: "Your app has a single feature (metronome)".
+# The AppGallery brief introduction and reviewer note therefore lead with all the CPR functions,
+# not the word "metronome". The other stores keep the fastlane short description.
+APPGALLERY_BRIEF_EN = "CPR helper: compression pace, 30:2 count with breaths, rescuer-switch timer"
+APPGALLERY_BRIEF_RU = "Помощник для СЛР: темп компрессий, счёт 30:2 с вдохами, таймер смены спасателя"
+APPGALLERY_REVIEWER_NOTE = (
+    "CPR assistant, not a plain metronome: 100/110/120 pace, 30:2 mode counts 30 compressions then "
+    "paces 2 breaths, rescuer-switch countdown, CPR start time and duration for EMS handover. "
+    "Original code. No medical service, not a medical device, no data collected. No login: tap START."
+)
 write(
     "appgallery.md",
     f"""# Huawei AppGallery listing
@@ -198,23 +208,27 @@ Policy notes: name without special characters, price or promo words (1.1–1.5);
 authoritative" claims (1.14); no names or logos of other platforms or device brands (1.16); no
 beta/test wording unless "Version for open testing" is used; guideline 1.13 expects localized
 listings to match a localized app: the app has a Russian interface from 0.3.0. Guideline 11.4
-reserves "healthcare services" for legal entities; in the reviewer notes say the app is an
-offline metronome and timer that provides no medical service, is not a medical device and
-collects no data. Guideline 1.2 bans professional terms in names; if "CPR" is questioned, the
+reserves "healthcare services" for legal entities, so the reviewer note says the app provides no
+medical service, is not a medical device and collects no data. Guideline 4.1 rejected 0.3.1 on
+2026-10-14 as "a single feature (metronome)": the brief introduction and the note list the CPR
+functions instead. Guideline 1.2 bans professional terms in names; if "CPR" is questioned, the
 name has to change in the APK too.
 Guideline 7.1 also wants an in-app privacy policy link, and 11.2 in-app contact information: About
 has both from 0.2.0 (privacy policy https://alessioalcini.github.io/cpr-beat/privacy/).
 
+## Reviewer note
+
+{field("Remarks for the reviewer", APPGALLERY_REVIEWER_NOTE, 300, note="English; entered in the console when submitting.")}
 ## English (US, default)
 
 {field("App name", EN["title"], 30, note="Form accepts 64, Review Guidelines 1.1 cap non-Chinese names at 30.")}
-{field("Brief introduction", EN["short_description"], 80, note="Only the first ~35 characters show in most lists.")}
+{field("Brief introduction", APPGALLERY_BRIEF_EN, 80, note="Only the first ~35 characters show in most lists.")}
 {field("Full introduction", EN["full_description"], 8000)}
 {field("New features", EN["whats_new"], 500)}
 ## Russian
 
 {field("App name", RU["title"], 30)}
-{field("Brief introduction", RU["short_description"], 80)}
+{field("Brief introduction", APPGALLERY_BRIEF_RU, 80)}
 {field("Full introduction", RU["full_description"], 8000)}
 {field("New features", RU["whats_new"], 500)}
 """,
