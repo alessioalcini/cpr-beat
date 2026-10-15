@@ -13,6 +13,8 @@ Features
 
 Interface in English and Russian: follows the phone language, or pick one in Settings.
 
+Try CPR Beat once before you need it, so you don't have to figure out the buttons in an emergency.
+
 The 100–120 compressions per minute range follows current resuscitation guidelines (AHA 2025, ERC 2025).
 
 Important: CPR Beat is a pacing aid only. It is not a medical device and does not diagnose, treat, cure or prevent any medical condition. It is not a substitute for certified CPR training. In an emergency, call your local emergency number first and follow the dispatcher's instructions. Consult a healthcare professional for medical advice.

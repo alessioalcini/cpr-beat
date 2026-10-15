@@ -49,7 +49,7 @@
     <string name="contact">Contact</string>
     <string name="contact_email" translatable="false">alessio.alcini.it@gmail.com</string>
     <string name="how_to_use">HOW TO USE</string>
-    <string name="how_to_use_text">Tap the big circle or START to begin. The clicks set the compression rate; 30:2 counts thirty compressions, then pauses for two breaths. Tap the countdown to change the rescuer-switch interval for this session. Rate and mode taps last until STOP; Settings holds the defaults every start uses.</string>
+    <string name="how_to_use_text">Tap the big circle or START to begin. The clicks set the compression rate; 30:2 counts thirty compressions, then pauses for two breaths. Tap the countdown to change the rescuer-switch interval for this session. Rate and mode taps last until STOP; Settings holds the defaults every start uses. Try it once before you need it.</string>
     <string name="third_party">THIRD-PARTY LICENSES</string>
     <string name="show">Show</string>
     <string name="hide">Hide</string>

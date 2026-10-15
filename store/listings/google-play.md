@@ -34,7 +34,7 @@ CPR Beat
 Offline CPR metronome: 100–120 bpm, 30:2 mode, rescuer-switch timer
 ```
 
-**Full description** (1766 chars / 1784 bytes, limit 4000 chars)
+**Full description** (1866 chars / 1884 bytes, limit 4000 chars)
 
 ```text
 CPR Beat keeps your chest compressions at the right pace when it matters. One big button starts a loud, steady click at 100, 110 or 120 compressions per minute. Switch to 30:2 and the app counts thirty compressions, warns before the last five, then paces two breaths. A countdown reminds the team to switch rescuers, and the elapsed CPR time with the start time stays on screen for handover to paramedics.
@@ -51,6 +51,8 @@ Features
 • Dark, high-contrast screen designed for gloves and daylight
 
 Interface in English and Russian: follows the phone language, or pick one in Settings.
+
+Try CPR Beat once before you need it, so you don't have to figure out the buttons in an emergency.
 
 The 100–120 compressions per minute range follows current resuscitation guidelines (AHA 2025, ERC 2025).
 
@@ -81,7 +83,7 @@ CPR Beat
 Офлайн-метроном для СЛР: 100–120 в минуту, режим 30:2, таймер смены
 ```
 
-**Full description** (1773 chars / 3101 bytes, limit 4000 chars)
+**Full description** (1858 chars / 3249 bytes, limit 4000 chars)
 
 ```text
 CPR Beat задаёт правильный темп непрямого массажа сердца, когда счёт идёт на секунды. Одна большая кнопка запускает громкий ровный щелчок с частотой 100, 110 или 120 компрессий в минуту. В режиме 30:2 приложение считает тридцать компрессий, предупреждает перед последними пятью и задаёт паузу на два вдоха. Таймер напоминает команде о смене реаниматора, а время с начала СЛР и время старта остаются на экране для передачи медикам.
@@ -98,6 +100,8 @@ CPR Beat задаёт правильный темп непрямого масс�
 • Тёмный контрастный экран для работы в перчатках и на солнце
 
 Интерфейс на русском и английском: по языку телефона или по выбору в настройках.
+
+Попробуйте CPR Beat заранее, чтобы в экстренной ситуации не разбираться с кнопками.
 
 Диапазон 100–120 компрессий в минуту соответствует действующим рекомендациям по реанимации (AHA 2025, ERC 2025).
 
