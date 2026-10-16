@@ -110,10 +110,11 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
   - The last five compressions (26–30) are the warning zone: their five ticks are longer and
     turn solid red as each is reached (dim like the others before that), the disk outline and the label "GET READY" turn
     red while in the zone, and the clicks use a higher pitch.
-  - Breath pause length: default 5 s, adjustable 3–8 s in Settings. The pause is split into two
-    equal halves, one per breath: a "breath" tone opens each half, a short "resume" tone sounds
-    0.5 s before the pause ends, then click 1 at the end of the pause. So at 8 s the breaths are
-    paced 4 s apart, at 4 s they are 2 s apart.
+  - Breath pause length: default 7 s, adjustable 3–9 s in Settings. A "breath" tone sounds at
+    30 % and at 65 % of the pause, a short "resume" tone 0.5 s before the pause ends, then click 1
+    at the end of the pause. The first 30 % lets a lone rescuer move to the head and open the
+    airway. So at 7 s the breath tones come at 2.1 s and 4.55 s, at 4 s (two rescuers) at 1.2 s
+    and 2.6 s.
 - Switching mode while running takes effect immediately; the counter restarts at 1.
 
 ### 5.4 Rescuer-switch countdown
@@ -178,7 +179,7 @@ Opened via the gear icon. Items:
 
 1. Default rate: 100 / 110 / 120 (factory 110).
 2. Default countdown: Off / 1 / 2 / 3 / 5 min (factory 2).
-3. Breath pause in 30:2: 3–8 s (factory 5).
+3. Breath pause in 30:2: 3–9 s (factory 7).
 4. Auto max volume: on / off (factory on).
 5. Click sound: Clean 1000 (factory default), Wood 880, Low 660. Three timbres that all passed
    the owner's listening test on a Samsung A52; the choice is persistent like the other settings.
@@ -406,6 +407,7 @@ below stay for reference.
 | 2026-10-07 | Countdown Off shows OFF in place; tapping the countdown cycles Off/1/2/3/5 per session | Layout must never shift; quick change without opening Settings |
 | 2026-10-07 | First-launch hints as non-blocking on-screen labels, dismissed by any tap; "How to use" in About | Owner: hidden taps need a tutorial; a modal would stand between the user and START in an emergency |
 | 2026-10-07 | Breath cues open each half of the pause instead of fixed 0.5 s / 2.0 s offsets | Owner: with an 8 s pause the two cues came back to back and then silence; halves pace the breaths |
+| 2026-10-16 | Breath pause 7 s default, 3–9 s range; breath tones at 30 % and 65 % of the pause | Instructor review (#18): the first breath tone came about one beat after compression 30; the instructor puts the move to the head at 1.5–2 s, and 7 s × 30 % plus the beat before the pause gives about 2.6 s. 9 s plus that beat stays under the 10 s hands-off limit; 3 s stays for two trained rescuers |
 | 2026-10-07 | Click timbre is a setting (Clean 1000 default; Wood 880, Low 660) | All three passed the phone listening test; owner wants the choice persistent |
 | 2026-10-07 | Mode/rate switch: build the new track first, read the playback position last | Review measured 30–200 ms of rendering and allocation between reading the position and starting the new track, which shifted the beat grid on every Compressions → 30:2 switch |
 | 2026-10-07 | Release signing: PKCS12 keystore outside the repo (`~/.cprbeat/release.jks`), `keystore.properties` git-ignored, same key for every store; Play App Signing on top | One certificate for RuStore, Galaxy Store and AppGallery; losing the key would orphan the app id |

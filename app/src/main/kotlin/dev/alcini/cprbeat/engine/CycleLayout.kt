@@ -24,8 +24,9 @@ sealed interface Position {
  * COMPRESSIONS: one beat per cycle, a click at frame 0.
  * THIRTY_TWO: 30 beats, click n at (n - 1) * beatFrames; the pause starts one beat after the
  * 30th click (when the 31st would have come) and lasts [CycleSpec.breathPauseMillis]; the next
- * cycle's first click follows immediately. Breath tones sound at 0.5 s and 2.0 s into the
- * pause, a resume tone 0.5 s before it ends.
+ * cycle's first click follows immediately. Breath tones sound at 30 % and 65 % of the pause, so a
+ * lone rescuer has time to reach the head before the first one; a resume tone sounds 0.5 s
+ * before the pause ends.
  */
 class CycleLayout private constructor(
     val spec: CycleSpec,
@@ -59,12 +60,16 @@ class CycleLayout private constructor(
         )
     }
 
-    /** Frame of the n-th breath tone (1 or 2): the start of the n-th half of the pause. */
-    fun breathFrame(n: Int): Int = pauseStartFrame + (n - 1) * (pauseFrames / BREATHS_PER_PAUSE)
+    /** Frame of the n-th breath tone (1 or 2). */
+    fun breathFrame(n: Int): Int = breathFrame(n, pauseStartFrame, pauseFrames)
 
     companion object {
-        const val BREATHS_PER_PAUSE = 2
+        /** Where each breath tone sounds, as a fraction of the pause. */
+        val BREATH_TONE_AT = listOf(0.30, 0.65)
         const val RESUME_BEFORE_END_MILLIS = 500
+
+        private fun breathFrame(n: Int, pauseStart: Int, pauseFrames: Int): Int =
+            pauseStart + Math.round(pauseFrames * BREATH_TONE_AT[n - 1]).toInt()
 
         fun of(spec: CycleSpec): CycleLayout {
             val beat = spec.beatFrames
@@ -83,10 +88,9 @@ class CycleLayout private constructor(
                         val kind = if (c > n - CycleSpec.WARNING_ZONE_SIZE) EventKind.WARNING_CLICK else EventKind.CLICK
                         CycleEvent(kind, frame = (c - 1) * beat, compression = c)
                     }
-                    val half = spec.pauseFrames / BREATHS_PER_PAUSE
                     val cues = listOf(
-                        CycleEvent(EventKind.BREATH_TONE, frame = pauseStart),
-                        CycleEvent(EventKind.BREATH_TONE, frame = pauseStart + half),
+                        CycleEvent(EventKind.BREATH_TONE, frame = breathFrame(1, pauseStart, spec.pauseFrames)),
+                        CycleEvent(EventKind.BREATH_TONE, frame = breathFrame(2, pauseStart, spec.pauseFrames)),
                         CycleEvent(EventKind.RESUME_TONE, frame = total - spec.millisToFrames(RESUME_BEFORE_END_MILLIS)),
                     )
                     CycleLayout(spec = spec, events = clicks + cues, totalFrames = total, pauseStartFrame = pauseStart)

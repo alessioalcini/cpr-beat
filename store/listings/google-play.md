@@ -43,7 +43,7 @@ Works fully offline. No account, no ads, no analytics, no network permission, no
 
 Features
 • Rates 100 / 110 / 120 bpm, changeable mid-session without losing the beat
-• Compressions-only or 30:2 mode with a breath pause of 3–8 seconds
+• Compressions-only or 30:2 mode with a breath pause of 3–9 seconds
 • Rescuer-switch countdown: off, 1, 2, 3 or 5 minutes, with a flash and SWITCH RESCUER banner
 • CPR elapsed time and start time, kept after STOP
 • Plays through the alarm channel, so it is heard in silent mode; optional automatic maximum volume
@@ -92,7 +92,7 @@ CPR Beat задаёт правильный темп непрямого масс�
 
 Возможности
 • Темп 100 / 110 / 120 в минуту, смена на ходу без сбоя ритма
-• Режим «только компрессии» или 30:2 с паузой на вдохи 3–8 секунд
+• Режим «только компрессии» или 30:2 с паузой на вдохи 3–9 секунд
 • Таймер смены реаниматора: выкл, 1, 2, 3 или 5 минут, со вспышкой и баннером «СМЕНА»
 • Время с начала СЛР и время старта сохраняются после остановки
 • Звук идёт через канал будильника и слышен в беззвучном режиме; авто-максимум громкости по желанию

@@ -36,6 +36,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.alcini.cprbeat.R
+import dev.alcini.cprbeat.engine.CycleSpec
 import dev.alcini.cprbeat.engine.ToneBank
 import dev.alcini.cprbeat.session.CountdownOption
 import dev.alcini.cprbeat.settings.AppLanguage
@@ -89,6 +90,8 @@ fun SettingsScreen(
             }
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 var pauseSec by remember(settings.breathPauseMillis) { mutableFloatStateOf(settings.breathPauseMillis / 1000f) }
+                val minPauseSec = CycleSpec.MIN_BREATH_PAUSE_MILLIS / 1000
+                val maxPauseSec = CycleSpec.MAX_BREATH_PAUSE_MILLIS / 1000
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Bottom) {
                     SectionLabel(stringResource(R.string.breath_pause))
                     Text(stringResource(R.string.seconds_short, pauseSec.toInt()), style = MaterialTheme.typography.titleMedium, color = CprColor.OnBackground)
@@ -97,13 +100,13 @@ fun SettingsScreen(
                     value = pauseSec,
                     onValueChange = { pauseSec = it },
                     onValueChangeFinished = { onBreathPause(pauseSec.toInt() * 1000) },
-                    valueRange = 3f..8f,
-                    steps = 4,
+                    valueRange = minPauseSec.toFloat()..maxPauseSec.toFloat(),
+                    steps = maxPauseSec - minPauseSec - 1,
                     modifier = Modifier.height(64.dp),
                 )
                 Row(Modifier.fillMaxWidth().padding(horizontal = 6.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-                    Text(stringResource(R.string.seconds_short, 3), style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
-                    Text(stringResource(R.string.seconds_short, 8), style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
+                    Text(stringResource(R.string.seconds_short, minPauseSec), style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
+                    Text(stringResource(R.string.seconds_short, maxPauseSec), style = MaterialTheme.typography.bodyMedium, color = CprColor.OnMuted)
                 }
             }
             Row(

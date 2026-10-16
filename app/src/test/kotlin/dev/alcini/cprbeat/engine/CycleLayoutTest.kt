@@ -39,18 +39,26 @@ class CycleLayoutTest {
     }
 
     @Test
-    fun `breath tones open each half of the pause and the resume tone precedes its end`() {
-        for (pause in listOf(3_000, 4_000, 5_000, 8_000)) {
+    fun `breath tones sound at 30 and 65 percent of the pause and the resume tone precedes its end`() {
+        for (pause in 3_000..9_000 step 1_000) {
             val layout = CycleLayout.of(CycleSpec(Mode.THIRTY_TWO, bpm = 100, breathPauseMillis = pause))
             val pauseStart = layout.pauseStartFrame
-            val half = layout.pauseFrames / 2
+            val expected = listOf(pauseStart + pause * 48 * 30 / 100, pauseStart + pause * 48 * 65 / 100)
             val breaths = layout.events.filter { it.kind == EventKind.BREATH_TONE }.map { it.frame }
             val resume = layout.events.single { it.kind == EventKind.RESUME_TONE }.frame
-            assertEquals("pause $pause", listOf(pauseStart, pauseStart + half), breaths)
-            assertEquals(listOf(pauseStart, pauseStart + half), listOf(layout.breathFrame(1), layout.breathFrame(2)))
+            assertEquals("pause $pause", expected, breaths)
+            assertEquals(expected, listOf(layout.breathFrame(1), layout.breathFrame(2)))
             assertEquals(layout.totalFrames - sr / 2, resume)
-            assertTrue(breaths[0] < breaths[1] && breaths[1] < resume && resume < layout.totalFrames)
+            assertTrue(pauseStart < breaths[0] && breaths[0] < breaths[1] && breaths[1] < resume && resume < layout.totalFrames)
         }
+    }
+
+    @Test
+    fun `default pause gives a lone rescuer over two seconds before the first breath tone`() {
+        val layout = CycleLayout.of(CycleSpec(Mode.THIRTY_TWO, bpm = 110))
+        assertEquals(7 * sr, layout.pauseFrames)
+        assertEquals(layout.pauseStartFrame + 2_100 * 48, layout.breathFrame(1))
+        assertEquals(layout.pauseStartFrame + 4_550 * 48, layout.breathFrame(2))
     }
 
     @Test
@@ -69,11 +77,13 @@ class CycleLayoutTest {
         val spec = CycleSpec(Mode.THIRTY_TWO, bpm = 110, breathPauseMillis = 5_000)
         val layout = CycleLayout.of(spec)
         val p0 = layout.positionAt(layout.pauseStartFrame)
-        assertEquals(Position.BreathPause(0, 5 * sr, 1), p0)
-        val p1 = layout.positionAt(layout.pauseStartFrame + 5 * sr / 2 - 1)
-        assertEquals(1, (p1 as Position.BreathPause).breathsCued)
-        val p2 = layout.positionAt(layout.pauseStartFrame + 5 * sr / 2)
-        assertEquals(2, (p2 as Position.BreathPause).breathsCued)
+        assertEquals(Position.BreathPause(0, 5 * sr, 0), p0)
+        val first = layout.pauseStartFrame + 5 * sr * 30 / 100
+        val second = layout.pauseStartFrame + 5 * sr * 65 / 100
+        assertEquals(0, (layout.positionAt(first - 1) as Position.BreathPause).breathsCued)
+        assertEquals(1, (layout.positionAt(first) as Position.BreathPause).breathsCued)
+        assertEquals(1, (layout.positionAt(second - 1) as Position.BreathPause).breathsCued)
+        assertEquals(2, (layout.positionAt(second) as Position.BreathPause).breathsCued)
         val last = layout.positionAt(layout.totalFrames - 1) as Position.BreathPause
         assertEquals(5 * sr - 1, last.elapsedFrames)
     }
@@ -97,13 +107,18 @@ class CycleLayoutTest {
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun `breath pause outside the supported range is rejected`() {
-        CycleSpec(Mode.THIRTY_TWO, bpm = 110, breathPauseMillis = 9_000)
+    fun `breath pause above the supported range is rejected`() {
+        CycleSpec(Mode.THIRTY_TWO, bpm = 110, breathPauseMillis = 10_000)
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `breath pause below the supported range is rejected`() {
+        CycleSpec(Mode.THIRTY_TWO, bpm = 110, breathPauseMillis = 2_000)
     }
 
     @Test
     fun `cycle lengths for every supported tempo and pause stay within the static buffer budget`() {
-        for (bpm in listOf(100, 110, 120)) for (pause in 3_000..8_000 step 1_000) {
+        for (bpm in listOf(100, 110, 120)) for (pause in 3_000..9_000 step 1_000) {
             val layout = CycleLayout.of(CycleSpec(Mode.THIRTY_TWO, bpm, pause))
             val bytes = layout.totalFrames * 2L
             assertTrue("bpm=$bpm pause=$pause bytes=$bytes", bytes < 3_000_000L)

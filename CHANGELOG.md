@@ -8,6 +8,13 @@ matching entry at release time.
 
 ## [Unreleased]
 
+### Changed
+
+- 30:2: the first breath tone now sounds at 30 % of the breath pause and the second at 65 %,
+  instead of right after compression 30 and at half the pause, so a lone rescuer has time to
+  move to the head and open the airway. The breath pause is 7 s by default and adjustable
+  3–9 s (was 5 s, 3–8 s).
+
 ## [0.3.1] - 2026-10-12
 
 ### Fixed

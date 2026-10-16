@@ -34,9 +34,10 @@ data class CycleSpec(
 
     companion object {
         const val DEFAULT_SAMPLE_RATE_HZ = 48_000
-        const val DEFAULT_BREATH_PAUSE_MILLIS = 5_000
+        const val DEFAULT_BREATH_PAUSE_MILLIS = 7_000
         const val MIN_BREATH_PAUSE_MILLIS = 3_000
-        const val MAX_BREATH_PAUSE_MILLIS = 8_000
+        /** With the one beat before the pause, hands-off time stays under the guideline 10 s. */
+        const val MAX_BREATH_PAUSE_MILLIS = 9_000
         const val COMPRESSIONS_PER_CYCLE = 30
         /** Compressions 26..30 are the warning zone before the breath pause. */
         const val WARNING_ZONE_SIZE = 5
