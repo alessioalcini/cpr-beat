@@ -3,8 +3,9 @@
 Everything the stores ask for, and where it lives in this repo. Facts verified in October
 2026; re-check the consoles, they change often.
 
-From 2026-10-09 the targets are **RuStore, F-Droid, AppGallery, IzzyOnDroid and GitHub
-Releases**. Google Play and Galaxy Store are closed to this personal account: both need an
+From 2026-10-09 the targets are **RuStore, F-Droid, IzzyOnDroid and GitHub Releases**.
+AppGallery is paused since 2026-10-16 after two rejections under guideline 4.1 (see its section).
+Google Play and Galaxy Store are closed to this personal account: both need an
 organization (sections at the end). Per-store research: SPEC.md section 11.6.
 
 ## What every store gets
@@ -91,7 +92,10 @@ writes it without them.
    30:2 count, breath pacing, rescuer-switch timer and handover time instead of "metronome".
    On 2026-10-14, after the rejection, the publishing API refused every change (204144649
    "update record exception") and the console kept failing too; unclear whether that is a lock
-   on rejected apps or an outage.
+   on rejected apps or an outage. The resubmit with those texts was rejected again on
+   2026-10-16 under 4.1 ("Your app has a single feature"), so AppGallery is paused until the
+   app has more to show, such as new languages or features users ask for. RuStore runs on
+   Huawei phones in the meantime.
 5. Review 1–5 working days; they check that the app runs on phones without Google services — we
    use none.
 
