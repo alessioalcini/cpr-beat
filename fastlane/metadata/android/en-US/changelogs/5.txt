@@ -1,0 +1,4 @@
+Version 0.4.0
+• 30:2: the breath cue comes later, so there is time to move to the head and open the airway. The breath pause is 7 s by default, adjustable from 3 to 9 s. Thanks to the first aid instructors who sent feedback.
+• The rescuer-switch timer now looks like a button: an outline, a ⟳ icon and a "tap to change" hint.
+• STOP returns the rate, mode and rescuer-switch countdown chosen on the main screen to your Settings (since 0.3.1).

@@ -8,12 +8,13 @@ matching entry at release time.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-18
+
 ### Changed
 
 - The rescuer-switch countdown now looks like a button: it has an outline and a ⟳ icon, and
   "tap to change" is shown under it while the metronome is stopped. Tapping it still cycles the
   interval Off, 1, 2, 3, 5 minutes.
-
 - 30:2: the first breath tone now sounds at 30 % of the breath pause and the second at 65 %,
   instead of right after compression 30 and at half the pause, so a lone rescuer has time to
   move to the head and open the airway. The breath pause is 7 s by default and adjustable
@@ -91,7 +92,8 @@ matching entry at release time.
   per-session overrides.
 - First-launch hints, dark theme, English only, fully offline with no permissions.
 
-[Unreleased]: https://github.com/alessioalcini/cpr-beat/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/alessioalcini/cpr-beat/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/alessioalcini/cpr-beat/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/alessioalcini/cpr-beat/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/alessioalcini/cpr-beat/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/alessioalcini/cpr-beat/compare/9579741...v0.2.0

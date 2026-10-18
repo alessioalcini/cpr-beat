@@ -4,8 +4,8 @@ Works fully offline. No account, no ads, no analytics, no network permission, no
 
 Features
 • Rates 100 / 110 / 120 bpm, changeable mid-session without losing the beat
-• Compressions-only or 30:2 mode with a breath pause of 3–9 seconds
-• Rescuer-switch countdown: off, 1, 2, 3 or 5 minutes, with a flash and SWITCH RESCUER banner
+• Compressions-only or 30:2 mode with a breath pause of 3–9 seconds; the breath cue waits until you have had time to move to the head
+• Rescuer-switch countdown: off, 1, 2, 3 or 5 minutes, with a flash and SWITCH RESCUER banner; tap the countdown to change the interval
 • CPR elapsed time and start time, kept after STOP
 • Plays through the alarm channel, so it is heard in silent mode; optional automatic maximum volume
 • Three click sounds; settings remembered between launches

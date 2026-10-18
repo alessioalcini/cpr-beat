@@ -34,7 +34,7 @@ CPR Beat
 Offline CPR metronome: 100–120 bpm, 30:2 mode, rescuer-switch timer
 ```
 
-**Full description** (1866 chars / 1884 bytes, limit 4000 chars)
+**Full description** (1974 chars / 1992 bytes, limit 4000 chars)
 
 ```text
 CPR Beat keeps your chest compressions at the right pace when it matters. One big button starts a loud, steady click at 100, 110 or 120 compressions per minute. Switch to 30:2 and the app counts thirty compressions, warns before the last five, then paces two breaths. A countdown reminds the team to switch rescuers, and the elapsed CPR time with the start time stays on screen for handover to paramedics.
@@ -43,8 +43,8 @@ Works fully offline. No account, no ads, no analytics, no network permission, no
 
 Features
 • Rates 100 / 110 / 120 bpm, changeable mid-session without losing the beat
-• Compressions-only or 30:2 mode with a breath pause of 3–9 seconds
-• Rescuer-switch countdown: off, 1, 2, 3 or 5 minutes, with a flash and SWITCH RESCUER banner
+• Compressions-only or 30:2 mode with a breath pause of 3–9 seconds; the breath cue waits until you have had time to move to the head
+• Rescuer-switch countdown: off, 1, 2, 3 or 5 minutes, with a flash and SWITCH RESCUER banner; tap the countdown to change the interval
 • CPR elapsed time and start time, kept after STOP
 • Plays through the alarm channel, so it is heard in silent mode; optional automatic maximum volume
 • Three click sounds; settings remembered between launches
@@ -61,12 +61,14 @@ Important: CPR Beat is a pacing aid only. It is not a medical device and does no
 CPR Beat is an independent open-source project. It is not affiliated with, sponsored by, or endorsed by the American Heart Association or the European Resuscitation Council.
 ```
 
-**Release notes** (160 chars / 162 bytes, limit 500 chars)  
+**Release notes** (442 chars / 450 bytes, limit 500 chars)  
 _Enter inside <en-US> … </en-US> tags in the release form._
 
 ```text
-Version 0.3.1
-• STOP returns the rate, mode and rescuer-switch countdown chosen on the main screen to your Settings. They used to stay until the app was closed.
+Version 0.4.0
+• 30:2: the breath cue comes later, so there is time to move to the head and open the airway. The breath pause is 7 s by default, adjustable from 3 to 9 s. Thanks to the first aid instructors who sent feedback.
+• The rescuer-switch timer now looks like a button: an outline, a ⟳ icon and a "tap to change" hint.
+• STOP returns the rate, mode and rescuer-switch countdown chosen on the main screen to your Settings (since 0.3.1).
 ```
 
 ## Russian (ru-RU)
@@ -83,7 +85,7 @@ CPR Beat
 Офлайн-метроном для СЛР: 100–120 в минуту, режим 30:2, таймер смены
 ```
 
-**Full description** (1858 chars / 3249 bytes, limit 4000 chars)
+**Full description** (1962 chars / 3437 bytes, limit 4000 chars)
 
 ```text
 CPR Beat задаёт правильный темп непрямого массажа сердца, когда счёт идёт на секунды. Одна большая кнопка запускает громкий ровный щелчок с частотой 100, 110 или 120 компрессий в минуту. В режиме 30:2 приложение считает тридцать компрессий, предупреждает перед последними пятью и задаёт паузу на два вдоха. Таймер напоминает команде о смене реаниматора, а время с начала СЛР и время старта остаются на экране для передачи медикам.
@@ -92,8 +94,8 @@ CPR Beat задаёт правильный темп непрямого масс�
 
 Возможности
 • Темп 100 / 110 / 120 в минуту, смена на ходу без сбоя ритма
-• Режим «только компрессии» или 30:2 с паузой на вдохи 3–9 секунд
-• Таймер смены реаниматора: выкл, 1, 2, 3 или 5 минут, со вспышкой и баннером «СМЕНА»
+• Режим «только компрессии» или 30:2 с паузой на вдохи 3–9 секунд; сигнал вдоха звучит не сразу, а когда вы успели перейти к голове
+• Таймер смены реаниматора: выкл, 1, 2, 3 или 5 минут, со вспышкой и баннером «СМЕНА»; интервал меняется нажатием на таймер
 • Время с начала СЛР и время старта сохраняются после остановки
 • Звук идёт через канал будильника и слышен в беззвучном режиме; авто-максимум громкости по желанию
 • Три варианта щелчка; настройки запоминаются
@@ -110,10 +112,12 @@ CPR Beat задаёт правильный темп непрямого масс�
 CPR Beat — независимый проект с открытым кодом. Не связан с American Heart Association и European Resuscitation Council и не поддерживается ими.
 ```
 
-**Release notes** (159 chars / 286 bytes, limit 500 chars)  
+**Release notes** (416 chars / 735 bytes, limit 500 chars)  
 _Enter inside <ru-RU> … </ru-RU> tags in the release form._
 
 ```text
-Версия 0.3.1
-• СТОП возвращает темп, режим и таймер смены, выбранные на главном экране, к значениям из настроек. Раньше они сохранялись до закрытия приложения.
+Версия 0.4.0
+• 30:2: сигнал вдоха звучит позже, чтобы успеть перейти к голове и запрокинуть её. Пауза на вдохи по умолчанию 7 с, настраивается от 3 до 9 с. Спасибо инструкторам первой помощи за отзывы.
+• Таймер смены теперь выглядит как кнопка: рамка, значок ⟳ и подсказка «нажмите, чтобы изменить».
+• СТОП возвращает темп, режим и таймер смены, выбранные на главном экране, к значениям из настроек (с версии 0.3.1).
 ```
