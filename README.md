@@ -33,10 +33,8 @@ partner organization to publish it there.
 [SPEC.md](SPEC.md) holds the agreed scope and decisions,
 [Issues](https://github.com/alessioalcini/cpr-beat/issues) hold the backlog.
 
-## News and feedback
+## Feedback
 
-- Telegram channel [@cprbeat_app](https://t.me/cprbeat_app): news and feedback in the comments,
-  in English and Russian.
 - Bugs and feature ideas: [GitHub Issues](https://github.com/alessioalcini/cpr-beat/issues).
 - [Privacy policy](https://alessioalcini.github.io/cpr-beat/privacy/): the app collects no data.
 
