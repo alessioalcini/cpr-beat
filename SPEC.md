@@ -51,8 +51,9 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 ┌──────────────────────────────┐
 │ CPR Beat                 ⚙  │  ← settings gear, small, top-right
 │                              │
-│          02:00               │  ← rescuer-switch countdown
-│                              │
+│       ╭ SWITCH IN ⟳ ╮        │  ← rescuer-switch countdown, outlined:
+│       ╰    02:00    ╯        │     it is a button (tap cycles 5.4)
+│        tap to change         │  ← idle only, amber
 │ [ Compressions ] [  30:2  ]  │  ← mode selector
 │                              │
 │        ╭──────╮              │  ← idle: big amber START circle
@@ -122,6 +123,11 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 - Counts down from the default set in Settings. Options: Off, 1, 2, 3, 5 minutes.
   Factory default 2 minutes. With Off, the digits are replaced by the word OFF; the block keeps
   its place so the layout never shifts.
+- The countdown sits in an outlined block like the other buttons, with an amber ⟳ icon next to
+  the label, idle and running, so it reads as a button. Below it an amber "tap to change" line
+  shows while idle; its slot stays reserved while running so nothing moves on START (issue #15,
+  owner 2026-10-17). It is the only main-screen control that did not look like one. The outline
+  has a fixed size; OFF uses a smaller type so the Russian ВЫКЛ fits inside it.
 - Tapping the countdown block cycles Off → 1 → 2 → 3 → 5 → Off. This is a per-session override
   like rate and mode (section 5.5). While running, the new value applies at once and the
   countdown restarts from it.
@@ -165,6 +171,8 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 - 0.1.0 showed three yellow labels on the first launch ("Tap to start", "Tap to change the
   switch interval", "Compression rate"). Removed in 0.2.0: the owner finds the screen obvious
   without them, and the closed test will show whether that holds. A fuller tutorial is issue #3.
+- 0.4.0 brings back one of them as a permanent idle line under the countdown (5.4): short,
+  in its own slot, and it does not disappear after the first tap.
 - About keeps the short "How to use" section.
 - No modal onboarding, no multi-step wizard: the first launch may be the emergency itself.
 
@@ -423,3 +431,4 @@ below stay for reference.
 | 2026-10-09 | 0.3.0: Russian interface and Settings → Language (Auto / English / Русский) | Owner: the Russian-speaking audience is large. RuStore expects a Russian interface (ФЗ-168). Android 8–12, common in Russia, has no system per-app language, so the switch lives in Settings too |
 | 2026-10-09 | RuStore card: category Здоровье, no AHA/ERC names | RuStore no longer has Медицина and lists first aid under Здоровье; §6.4 bans third-party names on the card. About and the other stores keep the affiliation wording from 11.4 |
 | 2026-10-12 | 0.3.1: STOP resets the main-screen overrides to Settings | F-Droid tester on Android 9: the overrides outlived STOP and only a full quit reset them, against 5.5, the README and the in-app help. Owner accepted that a STOP during an AED analysis also ends 30:2 |
+| 2026-10-17 | 0.4.0: countdown block outlined with an amber ⟳ icon; amber "tap to change" under it while idle | Issue #15: the countdown was the one hidden tap. Owner picked outline plus label from mockups; the outline stays while running, the label only idle so text does not compete with the beat; the outline is grey because an amber one competes with START and the beat disk. Unlike the 0.1.0 hint the label is short, has its own slot and never shifts the layout |

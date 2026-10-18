@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
@@ -29,6 +30,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -86,6 +88,9 @@ private val MinGap = 8.dp
 private val UnderCircle = 18.dp
 private val UnderStop = 14.dp
 private val AboveDisclaimer = 12.dp
+/** Side room the countdown outline leaves: the gear icon (not its whole touch box) stays outside. */
+private val FrameSide = 48.dp
+private val GearIcon = 28.dp
 
 @Composable
 fun MainScreen(
@@ -173,13 +178,14 @@ private fun rememberMainFit(volumeLow: Boolean, maxWidth: Dp, maxHeight: Dp): Ma
     val type = MaterialTheme.typography
     val disclaimer = stringResource(R.string.main_disclaimer)
     val warning = stringResource(R.string.volume_low)
-    return remember(volumeLow, maxWidth, maxHeight, density, disclaimer) {
+    val hint = stringResource(R.string.tap_to_change)
+    return remember(volumeLow, maxWidth, maxHeight, density, disclaimer, hint) {
         with(density) {
             val width = maxWidth - CprSize.Edge * 2
             fun textHeight(text: String, style: TextStyle) =
                 measurer.measure(text, style, constraints = Constraints(maxWidth = width.roundToPx())).size.height.toDp()
             val handoverHeight = textHeight("00:00", type.titleLarge)
-            val fixed = PadTop + CprSize.TimerBlock + CprSize.Segmented + CprSize.RateButton + AboveDisclaimer +
+            val fixed = PadTop + CprSize.TimerBlock + textHeight(hint, type.bodySmall) + CprSize.Segmented + CprSize.RateButton + AboveDisclaimer +
                 textHeight(disclaimer, type.bodySmall) + PadBottom + MinGap * 3
             val below = UnderCircle + CprSize.StopHeight + UnderStop + handoverHeight +
                 (if (volumeLow) textHeight(warning, type.bodyMedium) else 0.dp)
@@ -192,25 +198,48 @@ private fun rememberMainFit(volumeLow: Boolean, maxWidth: Dp, maxHeight: Dp): Ma
 @Composable
 private fun CountdownBlock(state: SessionState, onTap: () -> Unit, onOpenSettings: () -> Unit) {
     val off = state.countdown == CountdownOption.OFF
-    Box(Modifier.fillMaxWidth().height(CprSize.TimerBlock)) {
-        // The banner covers the digits for BANNER_MILLIS; the countdown keeps running underneath
-        // and taps are ignored so the interval cannot be changed by accident (SPEC 5.4).
-        if (state.bannerRemainingMillis > 0) SwitchBanner(state.bannerRemainingMillis, Modifier.align(Alignment.Center))
-        else Column(
-            modifier = Modifier.fillMaxSize().clickable(interactionSource = remember { MutableInteractionSource() }, indication = null, onClick = onTap),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Text(stringResource(if (off) R.string.switch_timer else R.string.switch_in), style = MaterialTheme.typography.labelLarge, color = CprColor.OnMuted)
-            Text(
-                text = if (off) stringResource(R.string.off) else formatCountdown(state.countdownRemainingMillis ?: state.countdown.millis),
-                style = MaterialTheme.typography.displayMedium.copy(fontFeatureSettings = TABULAR),
-                color = if (off) CprColor.OnMuted else CprColor.OnBackground,
-            )
+    val hint = stringResource(R.string.tap_to_change)
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Box(Modifier.fillMaxWidth().height(CprSize.TimerBlock)) {
+            // The banner covers the digits for BANNER_MILLIS; the countdown keeps running underneath
+            // and taps are ignored so the interval cannot be changed by accident (SPEC 5.4).
+            if (state.bannerRemainingMillis > 0) SwitchBanner(state.bannerRemainingMillis, Modifier.align(Alignment.Center))
+            else Column(
+                modifier = Modifier.fillMaxSize().clickable(
+                    interactionSource = remember { MutableInteractionSource() }, indication = null, onClickLabel = hint, onClick = onTap,
+                ),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+            ) {
+                // The outline marks the block as a button, running too; the whole block stays the tap target.
+                // Fixed size, so it does not change between digits and OFF, and clear of the gear icon on both
+                // sides (SPEC 5.4, issue #15).
+                val shape = RoundedCornerShape(20.dp)
+                Column(
+                    Modifier.fillMaxSize().padding(horizontal = FrameSide).border(BorderStroke(2.dp, CprColor.Outline), shape),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(stringResource(if (off) R.string.switch_timer else R.string.switch_in), style = MaterialTheme.typography.labelLarge, color = CprColor.OnMuted)
+                        Icon(Icons.Filled.Refresh, contentDescription = null, tint = CprColor.Beat, modifier = Modifier.padding(start = 6.dp).size(18.dp))
+                    }
+                    Text(
+                        text = if (off) stringResource(R.string.off) else formatCountdown(state.countdownRemainingMillis ?: state.countdown.millis),
+                        // OFF is a word, longer than the digits in Russian (ВЫКЛ): a smaller size keeps it inside the outline.
+                        style = if (off) MaterialTheme.typography.displaySmall else MaterialTheme.typography.displayMedium.copy(fontFeatureSettings = TABULAR),
+                        color = if (off) CprColor.OnMuted else CprColor.OnBackground,
+                        maxLines = 1,
+                    )
+                }
+            }
+            // Shifted right so the icon itself, not its touch box, lines up with the right edge of the buttons below.
+            IconButton(onClick = onOpenSettings, modifier = Modifier.align(Alignment.TopEnd).offset(x = (CprSize.Gear - GearIcon) / 2).size(CprSize.Gear)) {
+                Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings), tint = CprColor.OnMuted, modifier = Modifier.size(GearIcon))
+            }
         }
-        IconButton(onClick = onOpenSettings, modifier = Modifier.align(Alignment.TopEnd).size(CprSize.Gear)) {
-            Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings), tint = CprColor.OnMuted, modifier = Modifier.size(28.dp))
-        }
+        // Idle only, in a slot that stays reserved while running so nothing moves on START (SPEC 5.1, 5.4).
+        Text(hint, style = MaterialTheme.typography.bodySmall, color = CprColor.Beat, modifier = Modifier.alpha(if (state.running) 0f else 1f))
     }
 }
 

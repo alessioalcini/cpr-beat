@@ -10,6 +10,10 @@ matching entry at release time.
 
 ### Changed
 
+- The rescuer-switch countdown now looks like a button: it has an outline and a ⟳ icon, and
+  "tap to change" is shown under it while the metronome is stopped. Tapping it still cycles the
+  interval Off, 1, 2, 3, 5 minutes.
+
 - 30:2: the first breath tone now sounds at 30 % of the breath pause and the second at 65 %,
   instead of right after compression 30 and at half the pause, so a lone rescuer has time to
   move to the head and open the airway. The breath pause is 7 s by default and adjustable

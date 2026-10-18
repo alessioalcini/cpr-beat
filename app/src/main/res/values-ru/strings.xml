@@ -2,6 +2,7 @@
 <resources>
     <string name="switch_in">СМЕНА ЧЕРЕЗ</string>
     <string name="switch_timer">ТАЙМЕР СМЕНЫ</string>
+    <string name="tap_to_change">нажмите, чтобы изменить</string>
     <string name="off">ВЫКЛ</string>
     <string name="mode_compressions">Компрессии</string>
     <string name="start">СТАРТ</string>

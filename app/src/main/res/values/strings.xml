@@ -3,6 +3,7 @@
     <string name="app_name" translatable="false">CPR Beat</string>
     <string name="switch_in">SWITCH IN</string>
     <string name="switch_timer">SWITCH TIMER</string>
+    <string name="tap_to_change">tap to change</string>
     <string name="off">OFF</string>
     <string name="mode_compressions">Compressions</string>
     <string name="mode_thirty_two" translatable="false">30:2</string>
