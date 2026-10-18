@@ -37,6 +37,10 @@ android {
     }
 
     buildTypes {
+        // Installs next to the store build on a test phone (different signature, same package otherwise).
+        debug {
+            applicationIdSuffix = ".debug"
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
