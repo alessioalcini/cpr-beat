@@ -186,7 +186,8 @@ Typography: system font (Roboto), no bundled fonts; digits use tabular figures.
 Opened via the gear icon. Items:
 
 1. Default rate: 100 / 110 / 120 (factory 110).
-2. Default countdown: Off / 1 / 2 / 3 / 5 min (factory 2).
+2. Default countdown: Off / 1 / 2 / 3 / 5 (factory 2); the unit sits in the section label,
+   "· min", like the rate.
 3. Breath pause in 30:2: 3–9 s (factory 7).
 4. Auto max volume: on / off (factory on).
 5. Click sound: Clean 1000 (factory default), Wood 880, Low 660. Three timbres that all passed
@@ -432,3 +433,4 @@ below stay for reference.
 | 2026-10-09 | RuStore card: category Здоровье, no AHA/ERC names | RuStore no longer has Медицина and lists first aid under Здоровье; §6.4 bans third-party names on the card. About and the other stores keep the affiliation wording from 11.4 |
 | 2026-10-12 | 0.3.1: STOP resets the main-screen overrides to Settings | F-Droid tester on Android 9: the overrides outlived STOP and only a full quit reset them, against 5.5, the README and the in-app help. Owner accepted that a STOP during an AED analysis also ends 30:2 |
 | 2026-10-17 | 0.4.0: countdown block outlined with an amber ⟳ icon; amber "tap to change" under it while idle | Issue #15: the countdown was the one hidden tap. Owner picked outline plus label from mockups; the outline stays while running, the label only idle so text does not compete with the beat; the outline is grey because an amber one competes with START and the beat disk. Unlike the 0.1.0 hint the label is short, has its own slot and never shifts the layout |
+| 2026-10-23 | 0.4.1: countdown digits and option-chip labels auto-size down to their frame; countdown chips show only the number, the unit moves into the section label | Owner's Samsung S25 (360 dp wide): «02:0» and Settings chips wider than their outlines (issues #22, #23). The 0.4.0 fix sized the frame for the A52's 411 dp; text that shrinks fits every width and font scale, and five «N мин» chips cannot fit 360 dp at 20 sp |

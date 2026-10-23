@@ -24,9 +24,9 @@ American Heart Association or the European Resuscitation Council.
 
 ## Status
 
-Version 0.4.0 is on [GitHub Releases](https://github.com/alessioalcini/cpr-beat/releases),
+Version 0.4.1 is on [GitHub Releases](https://github.com/alessioalcini/cpr-beat/releases);
 [F-Droid](https://f-droid.org/packages/dev.alcini.cprbeat/) and
-[RuStore](https://www.rustore.ru/catalog/app/dev.alcini.cprbeat).
+[RuStore](https://www.rustore.ru/catalog/app/dev.alcini.cprbeat) have 0.4.0, with 0.4.1 to follow.
 Huawei AppGallery is paused; IzzyOnDroid is next.
 Google Play accepts first-aid apps only from organization accounts, so we are looking for a
 partner organization to publish it there.

@@ -1,0 +1,2 @@
+Version 0.4.1
+• Fixes the layout on narrower screens such as the Samsung Galaxy S25: the rescuer-switch countdown no longer shows "02:0", and the countdown chips in Settings stay inside their outlines. Text now shrinks to fit at larger system font sizes too.

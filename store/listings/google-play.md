@@ -61,14 +61,12 @@ Important: CPR Beat is a pacing aid only. It is not a medical device and does no
 CPR Beat is an independent open-source project. It is not affiliated with, sponsored by, or endorsed by the American Heart Association or the European Resuscitation Council.
 ```
 
-**Release notes** (442 chars / 450 bytes, limit 500 chars)  
+**Release notes** (258 chars / 260 bytes, limit 500 chars)  
 _Enter inside <en-US> … </en-US> tags in the release form._
 
 ```text
-Version 0.4.0
-• 30:2: the breath cue comes later, so there is time to move to the head and open the airway. The breath pause is 7 s by default, adjustable from 3 to 9 s. Thanks to the first aid instructors who sent feedback.
-• The rescuer-switch timer now looks like a button: an outline, a ⟳ icon and a "tap to change" hint.
-• STOP returns the rate, mode and rescuer-switch countdown chosen on the main screen to your Settings (since 0.3.1).
+Version 0.4.1
+• Fixes the layout on narrower screens such as the Samsung Galaxy S25: the rescuer-switch countdown no longer shows "02:0", and the countdown chips in Settings stay inside their outlines. Text now shrinks to fit at larger system font sizes too.
 ```
 
 ## Russian (ru-RU)
@@ -112,12 +110,10 @@ CPR Beat задаёт правильный темп непрямого масс�
 CPR Beat — независимый проект с открытым кодом. Не связан с American Heart Association и European Resuscitation Council и не поддерживается ими.
 ```
 
-**Release notes** (416 chars / 735 bytes, limit 500 chars)  
+**Release notes** (227 chars / 392 bytes, limit 500 chars)  
 _Enter inside <ru-RU> … </ru-RU> tags in the release form._
 
 ```text
-Версия 0.4.0
-• 30:2: сигнал вдоха звучит позже, чтобы успеть перейти к голове и запрокинуть её. Пауза на вдохи по умолчанию 7 с, настраивается от 3 до 9 с. Спасибо инструкторам первой помощи за отзывы.
-• Таймер смены теперь выглядит как кнопка: рамка, значок ⟳ и подсказка «нажмите, чтобы изменить».
-• СТОП возвращает темп, режим и таймер смены, выбранные на главном экране, к значениям из настроек (с версии 0.3.1).
+Версия 0.4.1
+• Исправлена вёрстка на узких экранах, например Samsung Galaxy S25: таймер смены больше не показывает «02:0», кнопки таймера в настройках не вылезают за рамки. Текст теперь ужимается и при крупном системном шрифте.
 ```

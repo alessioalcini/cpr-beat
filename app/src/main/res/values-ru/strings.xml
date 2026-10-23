@@ -19,8 +19,7 @@
     <string name="settings">Настройки</string>
     <string name="back">Назад</string>
     <string name="default_rate">ТЕМП ПО УМОЛЧАНИЮ · В МИН</string>
-    <string name="default_countdown">ТАЙМЕР СМЕНЫ ПО УМОЛЧАНИЮ</string>
-    <string name="minutes_short">%1$d мин</string>
+    <string name="default_countdown">СМЕНА ПО УМОЛЧАНИЮ · МИН</string>
     <string name="seconds_short">%1$d с</string>
     <string name="breath_pause">ПАУЗА НА ВДОХИ</string>
     <string name="auto_max_volume">Максимальная громкость</string>

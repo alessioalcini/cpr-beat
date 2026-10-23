@@ -8,6 +8,17 @@ matching entry at release time.
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-10-23
+
+### Fixed
+
+- The rescuer-switch countdown digits and the option chips (rate, countdown, click sound,
+  language) shrink to fit their frames instead of being clipped. On 360 dp wide screens such as
+  the Samsung Galaxy S25 the countdown showed "02:0" and the Settings chips "1 мин … 5 мин" ran
+  over their outlines; a larger system font had the same effect. (#22, #23)
+- Settings: the countdown chips read Off / 1 / 2 / 3 / 5 and the unit moved into the section
+  label ("Default countdown · min"), the way the rate section already did.
+
 ## [0.4.0] - 2026-10-18
 
 ### Changed

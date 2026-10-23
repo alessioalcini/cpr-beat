@@ -83,7 +83,7 @@ fun SettingsScreen(
                 SectionLabel(stringResource(R.string.default_countdown))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     for (o in CountdownOption.entries) {
-                        val label = if (o == CountdownOption.OFF) stringResource(R.string.off).lowercase().replaceFirstChar { it.uppercase() } else stringResource(R.string.minutes_short, o.minutes)
+                        val label = if (o == CountdownOption.OFF) stringResource(R.string.off).lowercase().replaceFirstChar { it.uppercase() } else "${o.minutes}"
                         OptionButton(label, settings.defaultCountdown == o, { onDefaultCountdown(o) }, Modifier.weight(1f))
                     }
                 }

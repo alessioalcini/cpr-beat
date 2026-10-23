@@ -90,6 +90,8 @@ private val UnderStop = 14.dp
 private val AboveDisclaimer = 12.dp
 /** Side room the countdown outline leaves: the gear icon (not its whole touch box) stays outside. */
 private val FrameSide = 48.dp
+/** Room between the countdown outline and the digits. */
+private val DigitsInset = 12.dp
 private val GearIcon = 28.dp
 
 @Composable
@@ -224,12 +226,17 @@ private fun CountdownBlock(state: SessionState, onTap: () -> Unit, onOpenSetting
                         Text(stringResource(if (off) R.string.switch_timer else R.string.switch_in), style = MaterialTheme.typography.labelLarge, color = CprColor.OnMuted)
                         Icon(Icons.Filled.Refresh, contentDescription = null, tint = CprColor.Beat, modifier = Modifier.padding(start = 6.dp).size(18.dp))
                     }
-                    Text(
+                    // The digits start at displayMedium and shrink to the frame: 02:00 at 88 sp is wider than the frame
+                    // on a 360 dp screen (Samsung S25, issue #22), and a larger system font needs the same.
+                    // OFF is a word, longer than the digits in Russian (ВЫКЛ): it starts smaller, from displaySmall.
+                    val digits = if (off) MaterialTheme.typography.displaySmall.copy(color = CprColor.OnMuted)
+                    else MaterialTheme.typography.displayMedium.copy(color = CprColor.OnBackground, fontFeatureSettings = TABULAR)
+                    BasicText(
                         text = if (off) stringResource(R.string.off) else formatCountdown(state.countdownRemainingMillis ?: state.countdown.millis),
-                        // OFF is a word, longer than the digits in Russian (ВЫКЛ): a smaller size keeps it inside the outline.
-                        style = if (off) MaterialTheme.typography.displaySmall else MaterialTheme.typography.displayMedium.copy(fontFeatureSettings = TABULAR),
-                        color = if (off) CprColor.OnMuted else CprColor.OnBackground,
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = DigitsInset),
+                        style = digits.copy(textAlign = TextAlign.Center),
                         maxLines = 1,
+                        autoSize = TextAutoSize.StepBased(minFontSize = 24.sp, maxFontSize = digits.fontSize, stepSize = 1.sp),
                     )
                 }
             }
